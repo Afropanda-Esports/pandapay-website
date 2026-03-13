@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* ─── Satoshi ──────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/satoshi/Satoshi-BlackItalic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
+@theme {
+  /* Fonts */
+  --font-heading: "Satoshi", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+
+  /* ── Colors: Primary (orange-red, base #CC3500) */
+  --color-primary-100: #fbe4d8;
+  --color-primary-200: #f5b8a0;
+  --color-primary-300: #ee8a68;
+  --color-primary-400: #e05830;
+  --color-primary-500: #cc3500;
+  --color-primary-600: #aa2d00;
+  --color-primary-700: #8a2200;
+  --color-primary-800: #5c1800;
+
+  /* ── Colors: Secondary (teal, base #27A589) */
+  --color-secondary-100: #d4f5ed;
+  --color-secondary-200: #aaebd8;
+  --color-secondary-300: #72d8c0;
+  --color-secondary-400: #42c0a4;
+  --color-secondary-500: #27a589;
+  --color-secondary-600: #1d7d64;
+  --color-secondary-700: #145949;
+  --color-secondary-800: #0d3d32;
+
+  /* ── Colors: Neutral (base #141415) */
+  --color-neutral-50:   #f0f0f2;
+  --color-neutral-100:  #e1e1e3;
+  --color-neutral-200:  #c3c3c5;
+  --color-neutral-300:  #9a9a9c;
+  --color-neutral-400:  #737375;
+  --color-neutral-500:  #565658;
+  --color-neutral-600:  #3d3d3f;
+  --color-neutral-700:  #2a2a2b;
+  --color-neutral-800:  #1c1c1d;
+  --color-neutral-900:  #141415;
+  --color-neutral-1000: #0a0a0a;
+  --color-neutral-1100: #080808;
+
+  /* ── Colors: Semantic surfaces */
+  --color-background:    #0a0a0a;
+  --color-surface:       #121212;
+  --color-border:        #2a2a2a;
+
+  /* ── Colors: Success (base #35976B) */
+  --color-success-100: #d6f1e5;
+  --color-success-200: #aae3cb;
+  --color-success-300: #7ccfaa;
+  --color-success-400: #52b587;
+  --color-success-500: #35976b;
+  --color-success-600: #297558;
+  --color-success-700: #1c5240;
+  --color-success-800: #123628;
+
+  /* ── Colors: Error (base #A73125) */
+  --color-error-100: #f6dedd;
+  --color-error-200: #edbbba;
+  --color-error-300: #dc8a87;
+  --color-error-400: #c55550;
+  --color-error-500: #a73125;
+  --color-error-600: #861b17;
+  --color-error-700: #5f1410;
+  --color-error-800: #3d0d08;
+
+  /* ── Colors: Warning (base #F7B30B) */
+  --color-warning-100: #fef6e0;
+  --color-warning-200: #fdedb8;
+  --color-warning-300: #fbda7c;
+  --color-warning-400: #f9c844;
+  --color-warning-500: #f7b30b;
+  --color-warning-600: #c08905;
+  --color-warning-700: #8a6103;
+  --color-warning-800: #5c4002;
+
+  /* ── Colors: Info (base #1F72AD) */
+  --color-info-100: #d4e9f5;
+  --color-info-200: #aacfeb;
+  --color-info-300: #70b5de;
+  --color-info-400: #3a92cc;
+  --color-info-500: #1f72ad;
+  --color-info-600: #175887;
+  --color-info-700: #103e62;
+  --color-info-800: #0a2840;
+
+  /* ── Typography: sizes */
+  --text-h1: 40px;
+  --text-h2: 32px;
+  --text-h3: 24px;
+  --text-h4: 20px;
+  --text-h5: 18px;
+  --text-h6: 16px;
+  --text-body-2xl: 24px;
+  --text-body-xl:  20px;
+  --text-body-lg:  18px;
+  --text-body-md:  16px;
+  --text-body-sm:  14px;
+  --text-label:    14px;
+  --text-caption:  12px;
+
+  /* ── Typography: line heights */
+  --leading-h1: 130%;
+  --leading-h2: 130%;
+  --leading-h3: 140%;
+  --leading-h4: 140%;
+  --leading-h5: 140%;
+  --leading-h6: 140%;
+  --leading-body-2xl: 150%;
+  --leading-body-xl:  150%;
+  --leading-body-lg:  160%;
+  --leading-body-md:  160%;
+  --leading-body-sm:  160%;
+  --leading-label:    140%;
+  --leading-caption:  150%;
+
+  /* ── Spacing */
+  --spacing-xxs: 4px;
+  --spacing-xs:  8px;
+  --spacing-sm:  16px;
+  --spacing-md:  24px;
+  --spacing-l:   32px;
+  --spacing-xl:  40px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 56px;
+  --spacing-4xl: 64px;
+  --spacing-5xl: 72px;
+  --spacing-6xl: 80px;
+
+  /* ── Border radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-pill: 999px;
+
+  /* ── Shadows (elevation) */
+  --shadow-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-elevation-2: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-elevation-3: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-elevation-4: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* ── Layout */
+  --width-layout: 1440px;
+}
+
+/* ─── Animations ────────────────────────────────────────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-y-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(calc(-50% - 0.75rem)); }
+}
+
+@keyframes marquee-y-down {
+  0% { transform: translateY(calc(-50% - 0.75rem)); }
+  100% { transform: translateY(0); }
+}
+
+@utility animate-marquee {
+  animation: marquee 75s linear infinite;
+}
+
+@utility animate-marquee-slow {
+  animation: marquee 100s linear infinite;
+}
+
+@utility animate-marquee-y-up {
+  animation: marquee-y-up 60s linear infinite;
+}
+
+@utility animate-marquee-y-down {
+  animation: marquee-y-down 60s linear infinite;
+}
+
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-neutral-100);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
