@@ -9,7 +9,7 @@ const testimonials = [
     author: "Tunde",
     location: "Lagos, Nairobi",
     avatar: avatar01,
-    bgColor: "bg-[#FCA065]", // Orange-ish
+    bgColor: "bg-testimonial-1", // Orange-ish
     rotation: "-rotate-[12deg]",
     zIndex: "z-10",
     translate: "-translate-x-[520px] translate-y-12"
@@ -19,7 +19,7 @@ const testimonials = [
     author: "Ama",
     location: "Accra",
     avatar: avatar01,
-    bgColor: "bg-[#FFDBB5]", // Peach
+    bgColor: "bg-testimonial-2", // Peach
     rotation: "-rotate-[6deg]",
     zIndex: "z-20",
     translate: "-translate-x-[260px] translate-y-6"
@@ -29,7 +29,7 @@ const testimonials = [
     author: "Olu",
     location: "Ibadan",
     avatar: avatar01,
-    bgColor: "bg-[#FFFFFF]", // White
+    bgColor: "bg-testimonial-3", // White
     rotation: "rotate-0",
     zIndex: "z-30",
     translate: "translate-x-0 translate-y-0"
@@ -39,7 +39,7 @@ const testimonials = [
     author: "Kofi",
     location: "Kumasi",
     avatar: avatar01,
-    bgColor: "bg-[#FFD1AF]", // Tan/Peach
+    bgColor: "bg-testimonial-4", // Tan/Peach
     rotation: "rotate-[6deg]",
     zIndex: "z-20",
     translate: "translate-x-[260px] translate-y-6"
@@ -49,7 +49,7 @@ const testimonials = [
     author: "Ahmed",
     location: "Nairobi",
     avatar: avatar01,
-    bgColor: "bg-[#FFAD73]", // Lighter Orange
+    bgColor: "bg-testimonial-5", // Lighter Orange
     rotation: "rotate-[12deg]",
     zIndex: "z-10",
     translate: "translate-x-[520px] translate-y-12"
@@ -145,7 +145,7 @@ const Testimonial: React.FC = () => {
     <section 
       id="testimonial" 
       ref={sectionRef}
-      className="w-full bg-background py-16 lg:py-32 border-b border-neutral-900 overflow-hidden"
+      className="w-full bg-background py-16 lg:py-32 border-b border-border overflow-hidden"
     >
       <div className="mx-auto w-full max-w-7xl px-4 lg:px-20 flex flex-col items-center">
         
@@ -178,7 +178,7 @@ const Testimonial: React.FC = () => {
 
         {/* Refined Heading - Top on Mobile, Bottom on Desktop */}
         <div className="text-center w-full mx-auto mb-16 lg:mb-0 order-1 lg:order-2">
-          <h2 className="font-heading text-3xl md:text-5xl lg:text-[56px] font-medium text-neutral-100 leading-tight">
+          <h2 className="font-heading text-3xl md:text-5xl lg:text-[56px] font-medium text-text-primary leading-tight">
             Trusted by thousands of gamers across <br className="hidden md:block" />
             <span className="relative inline-block mt-2">
               Africa
@@ -210,14 +210,14 @@ const Testimonial: React.FC = () => {
           <div className="flex items-center gap-4">
             <button 
               onClick={handlePrevious}
-              className="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-neutral-100 transition-colors"
+              className="w-16 h-16 rounded-full bg-surface border border-border flex items-center justify-center text-text-muted hover:text-text-primary transition-colors"
               aria-label="Previous testimonial"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             <button 
               onClick={handleNext}
-              className="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 hover:text-neutral-100 transition-colors"
+              className="w-16 h-16 rounded-full bg-surface border border-border flex items-center justify-center text-text-muted hover:text-text-primary transition-colors"
               aria-label="Next testimonial"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>

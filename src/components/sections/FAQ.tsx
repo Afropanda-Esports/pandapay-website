@@ -41,13 +41,13 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="min-h-screen flex items-center justify-center border-b border-neutral-900 py-10">
+    <section id="faq" className="min-h-screen flex items-center justify-center border-b border-border py-10">
       <div className="mx-auto w-full max-w-360 px-4 py-12 lg:px-20 lg:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           
           {/* Left: Heading */}
           <div className="flex flex-col">
-            <h2 className="font-heading text-4xl font-bold text-neutral-100 leading-tight">
+            <h2 className="font-heading text-4xl font-bold text-text-primary leading-tight">
               WHAT.<br />
               THE.<br />
               FREQUENTLY ASKED.<br />
@@ -61,16 +61,16 @@ const FAQ = () => {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="border-b border-neutral-800 pb-4"
+                className="border-b border-border pb-4"
               >
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="w-full flex items-start justify-between gap-4 text-left group"
                 >
-                  <span className="font-sans text-base md:text-lg text-neutral-200 group-hover:text-neutral-100 transition-colors">
+                  <span className="font-sans text-base md:text-lg text-text-secondary group-hover:text-text-primary transition-colors">
                     {faq.question}
                   </span>
-                  <span className="text-neutral-400 flex-shrink-0 mt-1">
+                  <span className="text-text-muted flex-shrink-0 mt-1">
                     {openIndex === index ? (
                       <Minus size={20} />
                     ) : (
@@ -81,7 +81,7 @@ const FAQ = () => {
                 
                 {openIndex === index && (
                   <div className="mt-4 pr-8">
-                    <p className="font-sans text-sm md:text-base text-neutral-400 leading-relaxed">
+                    <p className="font-sans text-sm md:text-base text-text-muted leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>

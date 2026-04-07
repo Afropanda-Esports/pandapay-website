@@ -7,7 +7,7 @@ import Marquee from './Marquee';
 
 const Hero: React.FC = () => {
     return (
-        <section id="hero" className="relative min-h-screen flex flex-col border-b border-neutral-900 overflow-hidden">
+        <section id="hero" className="relative min-h-screen flex flex-col border-b border-border overflow-hidden">
 
             {/* Background image — behind everything including the navbar */}
             <img
@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
 
 
             {/* Dark overlay so content stays readable */}
-            <div className="absolute inset-0 bg-[#0A0A0A]/50" />
+            <div className="absolute inset-0" style={{ backgroundColor: 'var(--color-overlay)' }} />
 
             {/* Navbar — normal flow at the top, background bleeds behind it */}
             <div className="relative z-10">
@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
 
                     {/* Heading */}
                     <h1
-                        className="font-heading font-bold text-neutral-100 text-left max-w-[693px] w-full"
+                        className="font-heading font-bold text-text-primary text-left max-w-[693px] w-full"
                         style={{ fontSize: 'clamp(2rem, 5vw, 64px)', lineHeight: '130%' }}
                     >
                         Paying for your favorite{' '}
@@ -59,20 +59,20 @@ const Hero: React.FC = () => {
                                     {[...Array(4)].map((_, i) => (
                                         <div
                                             key={i}
-                                            className="w-10 h-10 rounded-full border-2 border-background bg-neutral-700"
+                                            className="w-10 h-10 rounded-full border-2 border-background bg-surface-raised"
                                         />
                                     ))}
                                 </div>
                                 <span className="font-heading font-bold text-primary-500 text-4xl">+5000</span>
                             </div>
-                            <p className="font-sans text-sm text-neutral-400">
+                            <p className="font-sans text-sm text-text-muted">
                                 • gamers powered by seamless payments.
                             </p>
                         </div>
 
                         {/* Right: copy + CTA */}
                         <div className="flex flex-col gap-6 flex-1 ">
-                            <p className="font-sans text-sm text-neutral-300 leading-relaxed">
+                            <p className="font-sans text-sm text-text-secondary leading-relaxed">
                                 Gamers shouldn't struggle to renew PlayStation, Xbox, or FIFA passes or
                                 juggle multiple cards and currencies. PandaPay makes it seamless to pay
                                 with bank transfers, crypto, and gift cards instantly.

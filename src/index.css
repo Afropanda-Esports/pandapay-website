@@ -104,10 +104,33 @@
   --color-neutral-1000: #0a0a0a;
   --color-neutral-1100: #080808;
 
-  /* ── Colors: Semantic surfaces */
-  --color-background:    #0a0a0a;
-  --color-surface:       #121212;
-  --color-border:        #2a2a2a;
+  /* ── Colors: Semantic surfaces (values set in :root / html.dark) */
+  --color-background:     initial;
+  --color-surface:        initial;
+  --color-surface-raised: initial;
+  --color-border:         initial;
+  --color-border-subtle:  initial;
+
+  /* ── Colors: Semantic text */
+  --color-text-primary:   initial;
+  --color-text-secondary: initial;
+  --color-text-muted:     initial;
+  --color-text-inverse:   initial;
+
+  /* ── Colors: Semantic overlay / nav */
+  --color-overlay:  initial;
+  --color-nav-bg:   initial;
+
+  /* ── Shadows: Primary glow (values set in :root / html.dark) */
+  --shadow-primary-glow-sm: initial;
+  --shadow-primary-glow-md: initial;
+
+  /* ── Colors: Testimonial card palette (fixed, not theme-sensitive) */
+  --color-testimonial-1: #fca065;
+  --color-testimonial-2: #ffdbb5;
+  --color-testimonial-3: #ffffff;
+  --color-testimonial-4: #ffd1af;
+  --color-testimonial-5: #ffad73;
 
   /* ── Colors: Success (base #35976B) */
   --color-success-100: #d6f1e5;
@@ -209,6 +232,40 @@
   --width-layout: 1440px;
 }
 
+/* ─── Theme: Light mode (default) ──────────────────────────────────────────── */
+:root {
+  --color-background:       #ffffff;
+  --color-surface:          #f5f5f5;
+  --color-surface-raised:   #ebebeb;
+  --color-border:           #d4d4d6;
+  --color-border-subtle:    #e8e8ea;
+  --color-text-primary:     #0a0a0a;
+  --color-text-secondary:   #3d3d3f;
+  --color-text-muted:       #737375;
+  --color-text-inverse:     #ffffff;
+  --color-overlay:          rgba(255, 255, 255, 0.5);
+  --color-nav-bg:           rgba(255, 255, 255, 0.95);
+  --shadow-primary-glow-sm: 0 0 16px 0 rgba(204, 53, 0, 0.20);
+  --shadow-primary-glow-md: 0 0 24px 0 rgba(204, 53, 0, 0.25);
+}
+
+/* ─── Theme: Dark mode ─────────────────────────────────────────────────────── */
+html.dark {
+  --color-background:       #0a0a0a;
+  --color-surface:          #121212;
+  --color-surface-raised:   #1c1c1d;
+  --color-border:           #2a2a2a;
+  --color-border-subtle:    #1c1c1d;
+  --color-text-primary:     #e1e1e3;
+  --color-text-secondary:   #9a9a9c;
+  --color-text-muted:       #737375;
+  --color-text-inverse:     #0a0a0a;
+  --color-overlay:          rgba(10, 10, 10, 0.5);
+  --color-nav-bg:           rgba(0, 0, 0, 1);
+  --shadow-primary-glow-sm: 0 0 16px 0 rgba(204, 53, 0, 0.25);
+  --shadow-primary-glow-md: 0 0 24px 0 rgba(204, 53, 0, 0.35);
+}
+
 /* ─── Animations ────────────────────────────────────────────────────────────── */
 @keyframes marquee {
   0% { transform: translateX(0); }
@@ -246,7 +303,7 @@
 body {
   font-family: var(--font-body);
   background-color: var(--color-background);
-  color: var(--color-neutral-100);
+  color: var(--color-text-primary);
 }
 
 h1, h2, h3, h4, h5, h6 {

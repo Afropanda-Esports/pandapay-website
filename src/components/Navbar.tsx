@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import pandaIcon from '../assets/panda-icon.svg';
 import hamburgerIcon from '../assets/hamburger-icon.svg';
+import ThemeToggle from './ThemeToggle';
 
 const NAV_LINKS = ['About', 'Games', 'Blog', 'Community'];
 
@@ -30,13 +31,13 @@ const Navbar = () => {
         {/* ── MOBILE: panda icon inline with wordmark ── */}
         <div className="flex lg:hidden items-center gap-2">
           <img src={pandaIcon} alt="PandaPay icon" className="w-8 h-8" />
-          <span className="font-heading font-bold text-2xl text-neutral-100 tracking-tight">
+          <span className="font-heading font-bold text-2xl text-text-primary tracking-tight">
             PandaPay
           </span>
         </div>
 
         {/* ── DESKTOP: wordmark left ── */}
-        <span className="hidden lg:inline font-heading font-bold text-2xl text-neutral-100 tracking-tight">
+        <span className="hidden lg:inline font-heading font-bold text-2xl text-text-primary tracking-tight">
           PandaPay
         </span>
 
@@ -47,16 +48,17 @@ const Navbar = () => {
               <a
                 key={link}
                 href="#"
-                className="font-sans text-base text-neutral-300 hover:text-neutral-100 transition-colors leading-tight"
+                className="font-sans text-base text-text-secondary hover:text-text-primary transition-colors leading-tight"
               >
                 {link}
               </a>
             ))}
           </div>
+          <ThemeToggle />
           <a
             href="#"
-            className="font-sans text-sm font-medium text-neutral-100 px-5 py-2 rounded-full border-2 border-primary-500 hover:bg-primary-500/10 transition-colors whitespace-nowrap"
-            style={{ boxShadow: '0 0 16px 0 rgba(204,53,0,0.25)' }}
+            className="font-sans text-sm font-medium text-text-primary px-5 py-2 rounded-full border-2 border-primary-500 hover:bg-primary-500/10 transition-colors whitespace-nowrap"
+            style={{ boxShadow: 'var(--shadow-primary-glow-sm)' }}
           >
             Shop now
           </a>
@@ -74,7 +76,7 @@ const Navbar = () => {
 
       {/* ── Mobile full-screen overlay — portalled to body to escape stacking context ── */}
       {isOpen && createPortal(
-        <div className="fixed inset-0 z-50 bg-black flex flex-col overflow-hidden">
+        <div className="fixed inset-0 z-50 flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--color-nav-bg)' }}>
 
 
           <div className="relative flex flex-col h-full px-6 py-6">
@@ -83,13 +85,13 @@ const Navbar = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <img src={pandaIcon} alt="PandaPay icon" className="w-8 h-8" />
-                <span className="font-heading font-bold text-2xl text-neutral-100 tracking-tight">
+                <span className="font-heading font-bold text-2xl text-text-primary tracking-tight">
                   PandaPay
                 </span>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 text-neutral-300 hover:text-neutral-100 transition-colors"
+                className="p-1 text-text-secondary hover:text-text-primary transition-colors"
                 aria-label="Close menu"
               >
                 <X size={28} />
@@ -103,19 +105,20 @@ const Navbar = () => {
                   key={link}
                   href="#"
                   onClick={() => setIsOpen(false)}
-                  className="font-heading font-bold text-3xl text-neutral-100 hover:text-primary-400 transition-colors"
+                  className="font-heading font-bold text-3xl text-text-primary hover:text-primary-400 transition-colors"
                 >
                   {link}
                 </a>
               ))}
             </nav>
 
-            {/* Shop now — pinned to bottom */}
-            <div className="mt-auto">
+            {/* Theme toggle + Shop now — pinned to bottom */}
+            <div className="mt-auto flex flex-col gap-4">
+              <ThemeToggle />
               <a
                 href="#"
-                className="block w-full text-center font-sans text-base font-medium text-neutral-100 py-4 rounded-full border-2 border-primary-500 hover:bg-primary-500/10 transition-colors"
-                style={{ boxShadow: '0 0 24px 0 rgba(204,53,0,0.35)' }}
+                className="block w-full text-center font-sans text-base font-medium text-text-primary py-4 rounded-full border-2 border-primary-500 hover:bg-primary-500/10 transition-colors"
+                style={{ boxShadow: 'var(--shadow-primary-glow-md)' }}
               >
                 Shop now
               </a>

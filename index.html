@@ -16,6 +16,17 @@
     <meta name="author" content="PandaPay" />
     <meta name="theme-color" content="#0a0a0a" />
 
+    <!-- FOUT prevention: apply dark class before React loads -->
+    <script>
+      (function() {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pandapay.com/" />
