@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface FAQItem {
   question: string;
@@ -44,24 +45,33 @@ const FAQ = () => {
     <section id="faq" className="min-h-screen flex items-center justify-center border-b border-border py-10">
       <div className="mx-auto w-full max-w-360 px-4 py-12 lg:px-20 lg:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          
+
           {/* Left: Heading */}
-          <div className="flex flex-col">
+          <motion.div
+            className="flex flex-col"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+          >
             <h2 className="font-heading text-4xl font-bold text-text-primary leading-tight">
               WHAT.<br />
               THE.<br />
               FREQUENTLY ASKED.<br />
               QUESTIONS.
             </h2>
-          </div>
-
+          </motion.div>
 
           {/* Right: FAQ Items */}
           <div className="flex flex-col gap-4">
             {faqs.map((faq, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="border-b border-border pb-4"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.08 }}
               >
                 <button
                   onClick={() => toggleFAQ(index)}
@@ -70,23 +80,37 @@ const FAQ = () => {
                   <span className="font-sans text-base md:text-lg text-text-secondary group-hover:text-text-primary transition-colors">
                     {faq.question}
                   </span>
-                  <span className="text-text-muted flex-shrink-0 mt-1">
+                  <motion.span
+                    className="text-text-muted flex-shrink-0 mt-1"
+                    animate={{ rotate: openIndex === index ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     {openIndex === index ? (
                       <Minus size={20} />
                     ) : (
                       <Plus size={20} />
                     )}
-                  </span>
+                  </motion.span>
                 </button>
-                
-                {openIndex === index && (
-                  <div className="mt-4 pr-8">
-                    <p className="font-sans text-sm md:text-base text-text-muted leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
-                )}
-              </div>
+
+                <AnimatePresence initial={false}>
+                  {openIndex === index && (
+                    <motion.div
+                      className="overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    >
+                      <div className="mt-4 pr-8">
+                        <p className="font-sans text-sm md:text-base text-text-muted leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
           </div>
 

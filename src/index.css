@@ -244,7 +244,7 @@
   --color-text-muted:       #737375;
   --color-text-inverse:     #ffffff;
   --color-overlay:          rgba(255, 255, 255, 0.5);
-  --color-nav-bg:           rgba(255, 255, 255, 0.95);
+  --color-nav-bg:           #ffffff;
   --shadow-primary-glow-sm: 0 0 16px 0 rgba(204, 53, 0, 0.20);
   --shadow-primary-glow-md: 0 0 24px 0 rgba(204, 53, 0, 0.25);
 }

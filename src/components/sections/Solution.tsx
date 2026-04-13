@@ -15,7 +15,7 @@ const features = [
 ];
 
 const Solution = () => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   return (
     <section id="solution" className="flex items-center  border-b border-border py-12 lg:py-20">
@@ -29,12 +29,12 @@ const Solution = () => {
 
           {/* Desktop image */}
           <div className="hidden lg:flex w-full justify-center">
-            <img src={theme === 'dark' ? desktopSvg : desktopLightSvg} alt="PandaPay solution overview" className="w-full  h-auto" />
+            <img src={resolvedTheme === 'dark' ? desktopSvg : desktopLightSvg} alt="PandaPay solution overview" className="w-full  h-auto" />
           </div>
 
           {/* Mobile image + cards */}
           <div className="lg:hidden flex flex-col items-center gap-6 w-full">
-            <img src={theme === 'dark' ? wrapperSvg : wrapperLightSvg} alt="PandaPay solution overview" className="w-full h-auto" />
+            <img src={resolvedTheme === 'dark' ? wrapperSvg : wrapperLightSvg} alt="PandaPay solution overview" className="w-full h-auto" />
 
             <div className="flex flex-col gap-4 w-full">
               {features.map((feature) => (

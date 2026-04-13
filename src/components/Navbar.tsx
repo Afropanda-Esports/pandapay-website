@@ -76,7 +76,7 @@ const Navbar = () => {
 
       {/* ── Mobile full-screen overlay — portalled to body to escape stacking context ── */}
       {isOpen && createPortal(
-        <div className="fixed inset-0 z-50 flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--color-nav-bg)' }}>
+        <div className="fixed inset-0 z-50 flex flex-col" style={{ backgroundColor: 'var(--color-nav-bg)' }}>
 
 
           <div className="relative flex flex-col h-full px-6 py-6">
@@ -114,7 +114,7 @@ const Navbar = () => {
 
             {/* Theme toggle + Shop now — pinned to bottom */}
             <div className="mt-auto flex flex-col gap-4">
-              <ThemeToggle />
+              <ThemeToggle dropDirection="up" />
               <a
                 href="#"
                 className="block w-full text-center font-sans text-base font-medium text-text-primary py-4 rounded-full border-2 border-primary-500 hover:bg-primary-500/10 transition-colors"

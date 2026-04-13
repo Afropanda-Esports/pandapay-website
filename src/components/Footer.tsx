@@ -23,7 +23,7 @@ const XIcon = () => (
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
-    const { theme } = useTheme();
+    const { resolvedTheme } = useTheme();
 
     return (
         <footer className="w-full bg-background">
@@ -66,7 +66,7 @@ const Footer = () => {
                 {/* Middle Section: Image Graphic */}
                 <div className="w-full flex justify-center py-8">
                     <img
-                        src={theme === 'dark' ? footerImg : footerImgLight}
+                        src={resolvedTheme === 'dark' ? footerImg : footerImgLight}
                         alt="PandaPay Graphic"
                         className="w-full h-auto opacity-20 transition-opacity duration-500"
                     />
