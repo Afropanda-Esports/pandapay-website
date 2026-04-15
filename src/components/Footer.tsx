@@ -1,7 +1,7 @@
 import { Instagram, Facebook } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
-import footerImg from '../assets/footer-img.svg';
-import footerImgLight from '../assets/footer-image-light.svg';
+import logoTextDark from '../assets/logo/logo-text-dark.png';
+import logoTextLight from '../assets/logo/logo-text-light.png';
 
 // Custom X (Twitter) icon matching the design roughly since standard Lucide X is basic
 const XIcon = () => (
@@ -66,7 +66,7 @@ const Footer = () => {
                 {/* Middle Section: Image Graphic */}
                 <div className="w-full flex justify-center py-8">
                     <img
-                        src={resolvedTheme === 'dark' ? footerImg : footerImgLight}
+                        src={resolvedTheme === 'dark' ? logoTextDark : logoTextLight}
                         alt="PandaPay Graphic"
                         className="w-full h-auto opacity-20 transition-opacity duration-500"
                     />

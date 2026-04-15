@@ -1,14 +1,24 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
-import pandaIcon from '../assets/panda-icon.svg';
-import hamburgerIcon from '../assets/hamburger-icon.svg';
+import { useTheme } from '../context/ThemeContext';
+import iconDark from '../assets/logo/icon-dark.png';
+import iconLight from '../assets/logo/icon-light.png';
+import logoTextDark from '../assets/logo/logo-text-dark.png';
+import logoTextLight from '../assets/logo/logo-text-light.png';
+import hamburgerIconDark from '../assets/hamburger-icon.svg';
+import hamburgerIconLight from '../assets/hamurger-icon-light.svg';
 import ThemeToggle from './ThemeToggle';
 
 const NAV_LINKS = ['About', 'Games', 'Blog', 'Community'];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  const icon = resolvedTheme === 'dark' ? iconDark : iconLight;
+  const logoText = resolvedTheme === 'dark' ? logoTextDark : logoTextLight;
+  const hamburgerIcon = resolvedTheme === 'dark' ? hamburgerIconDark : hamburgerIconLight;
 
   // Scroll lock when mobile menu is open
   useEffect(() => {
@@ -23,23 +33,18 @@ const Navbar = () => {
 
         {/* ── DESKTOP: panda icon absolutely centered ── */}
         <img
-          src={pandaIcon}
+          src={icon}
           alt="PandaPay icon"
           className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-6 w-10 h-10"
         />
 
-        {/* ── MOBILE: panda icon inline with wordmark ── */}
-        <div className="flex lg:hidden items-center gap-2">
-          <img src={pandaIcon} alt="PandaPay icon" className="w-8 h-8" />
-          <span className="font-heading font-bold text-2xl text-text-primary tracking-tight">
-            PandaPay
-          </span>
+        {/* ── MOBILE: logo text only (no icon) ── */}
+        <div className="flex lg:hidden items-center">
+          <img src={logoText} alt="PandaPay" className="h-12" />
         </div>
 
-        {/* ── DESKTOP: wordmark left ── */}
-        <span className="hidden lg:inline font-heading font-bold text-2xl text-text-primary tracking-tight">
-          PandaPay
-        </span>
+        {/* ── DESKTOP: logo text left ── */}
+        <img src={logoText} alt="PandaPay" className="hidden lg:inline h-12" />
 
         {/* ── DESKTOP: nav links + Shop now right ── */}
         <div className="hidden lg:flex ml-auto items-start gap-6">
@@ -83,12 +88,7 @@ const Navbar = () => {
 
             {/* Top row: logo + close */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <img src={pandaIcon} alt="PandaPay icon" className="w-8 h-8" />
-                <span className="font-heading font-bold text-2xl text-text-primary tracking-tight">
-                  PandaPay
-                </span>
-              </div>
+              <img src={logoText} alt="PandaPay" className="h-6" />
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-1 text-text-secondary hover:text-text-primary transition-colors"
