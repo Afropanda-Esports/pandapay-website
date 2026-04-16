@@ -1,19 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
 /* ─── Satoshi ──────────────────────────────────────────────────────────────── */
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-Light.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-LightItalic.otf") format("opentype");
-  font-weight: 300;
-  font-style: italic;
-}
 @font-face {
   font-family: "Satoshi";
   src: url("./assets/satoshi/Satoshi-Regular.otf") format("opentype");
@@ -28,18 +15,6 @@
 }
 @font-face {
   font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-MediumItalic.otf") format("opentype");
-  font-weight: 500;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Satoshi";
   src: url("./assets/satoshi/Satoshi-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
@@ -50,25 +25,13 @@
   font-weight: 700;
   font-style: italic;
 }
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-Black.otf") format("opentype");
-  font-weight: 900;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-BlackItalic.otf") format("opentype");
-  font-weight: 900;
-  font-style: italic;
-}
 
 /* ─── Design Tokens ────────────────────────────────────────────────────────── */
 @theme {
   /* Fonts */
   --font-heading: "Satoshi", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-sans: "Inter", sans-serif;
+  --font-body: "Satoshi", sans-serif;
+  --font-sans: "Satoshi", sans-serif;
 
   /* ── Colors: Primary (orange-red, base #CC3500) */
   --color-primary-100: #fbe4d8;
@@ -300,10 +263,27 @@ html.dark {
 
 
 /* ─── Base ──────────────────────────────────────────────────────────────────── */
+/* Full-width chain: prevents flex items collapsing to min-content (Safari + nested flex). */
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-body);
   background-color: var(--color-background);
   color: var(--color-text-primary);
+}
+
+#root {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6 {

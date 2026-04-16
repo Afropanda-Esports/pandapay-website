@@ -1,95 +1,79 @@
 import { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Minus, Plus } from 'lucide-react';
+import { cardHoverBordered } from '../../cardHover';
+import FadeReveal from '../FadeReveal';
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+const faqs: FAQItem[] = [
+  {
+    question: 'What payment methods does PandaPay support?',
+    answer:
+      'PandaPay is designed around bank transfers, crypto, and other practical checkout options that work for gamers across multiple markets.',
+  },
+  {
+    question: 'How long does payment confirmation take?',
+    answer:
+      'Most confirmations should feel fast. The exact timing still depends on the payment rail you use, but the goal is a clearer and shorter wait.',
+  },
+  {
+    question: 'When will I receive my game code or credit?',
+    answer:
+      'Delivery is intended to happen as soon as payment is confirmed, with fewer back-and-forth checks and less uncertainty.',
+  },
+  {
+    question: 'Can I pay in my local currency?',
+    answer:
+      'Yes. PandaPay is built to reduce the friction between local currency, account region, and the product you are trying to buy.',
+  },
+];
 
-  const faqs: FAQItem[] = [
-    {
-      question: 'What payment methods does PandaPay support?',
-      answer: 'PandaPay supports various payment methods including credit cards, debit cards, PayPal, and cryptocurrency payments.',
-    },
-    {
-      question: 'How long does payment confirmation take?',
-      answer: 'Payment confirmations are typically instant. In some cases, it may take up to 5 minutes depending on your payment method.',
-    },
-    {
-      question: 'When will I receive my game code or credit?',
-      answer: 'Game codes and credits are delivered immediately after payment confirmation to your registered email address.',
-    },
-    {
-      question: 'Is PandaPay secure?',
-      answer: 'Yes, PandaPay uses industry-standard encryption and security measures to protect your payment information and personal data.',
-    },
-    {
-      question: 'Can I pay in my local currency?',
-      answer: 'Yes, PandaPay supports multiple currencies. Your payment will be automatically converted to your local currency at checkout.',
-    },
-    {
-      question: 'Is there a Panda Pay mobile app?',
-      answer: 'Yes, PandaPay is available on both iOS and Android. Download it from the App Store or Google Play Store.',
-    },
-  ];
+const FAQ = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndex((current) => (current === index ? null : index));
   };
 
   return (
-    <section id="faq" className="min-h-screen flex items-center justify-center border-b border-border py-10">
-      <div className="mx-auto w-full max-w-360 px-4 py-12 lg:px-20 lg:py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-
-          {/* Left: Heading */}
-          <motion.div
-            className="flex flex-col"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
-            <h2 className="font-heading text-4xl font-bold text-text-primary leading-tight">
-              WHAT.<br />
-              THE.<br />
-              FREQUENTLY ASKED.<br />
-              QUESTIONS.
+    <section id="faq" className="w-full min-w-0 border-b border-border py-16 lg:py-24">
+      <div className="mx-auto grid w-full min-w-0 max-w-[1440px] grid-cols-1 gap-14 px-4 lg:grid-cols-[minmax(340px,0.9fr)_minmax(0,1.1fr)] lg:gap-20 lg:px-20">
+        <FadeReveal className="w-full min-w-0">
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <p className="w-full min-w-0 font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
+              FAQ
+            </p>
+            <h2 className="w-full min-w-0 font-heading text-4xl font-bold leading-tight text-text-primary md:text-5xl">
+              Answers that should feel as clear as the checkout.
             </h2>
-          </motion.div>
+            <p className="w-full min-w-0 max-w-xl font-sans text-base leading-8 text-text-muted">
+              A simpler product needs simpler explanations. These are the core questions
+              users should be able to answer at a glance.
+            </p>
+          </div>
+        </FadeReveal>
 
-          {/* Right: FAQ Items */}
-          <div className="flex flex-col gap-4">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                className="border-b border-border pb-4"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.08 }}
-              >
+        <div className="flex flex-col gap-4">
+          {faqs.map((faq, index) => (
+            <FadeReveal key={faq.question} className="min-w-0 w-full" delay={index * 0.06}>
+              <div className={`rounded-3xl border border-border bg-surface px-5 py-4 ${cardHoverBordered}`}>
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full flex items-start justify-between gap-4 text-left group"
+                  className="flex w-full items-start justify-between gap-4 text-left"
                 >
-                  <span className="font-sans text-base md:text-lg text-text-secondary group-hover:text-text-primary transition-colors">
+                  <span className="font-sans text-base font-medium text-text-primary md:text-lg">
                     {faq.question}
                   </span>
                   <motion.span
-                    className="text-text-muted flex-shrink-0 mt-1"
+                    className="mt-1 shrink-0 text-text-muted"
                     animate={{ rotate: openIndex === index ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    {openIndex === index ? (
-                      <Minus size={20} />
-                    ) : (
-                      <Plus size={20} />
-                    )}
+                    {openIndex === index ? <Minus size={18} /> : <Plus size={18} />}
                   </motion.span>
                 </button>
 
@@ -100,20 +84,17 @@ const FAQ = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      transition={{ duration: 0.24, ease: 'easeInOut' }}
                     >
-                      <div className="mt-4 pr-8">
-                        <p className="font-sans text-sm md:text-base text-text-muted leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </div>
+                      <p className="pt-4 pr-8 font-sans text-sm leading-7 text-text-muted md:text-base">
+                        {faq.answer}
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
-            ))}
-          </div>
-
+              </div>
+            </FadeReveal>
+          ))}
         </div>
       </div>
     </section>

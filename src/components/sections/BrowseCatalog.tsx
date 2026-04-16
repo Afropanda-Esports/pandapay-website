@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import FadeReveal from '../FadeReveal';
 
 // Use import.meta.glob to dynamically import all images in the browse folder
 // const images = import.meta.glob('../../assets/browse/*.png', { eager: true, import: 'default' });
@@ -7,33 +8,33 @@ import { ArrowUpRight } from 'lucide-react';
 
 const BrowseCatalog: React.FC = () => {
     return (
-        <section id="browse-catalog" className="w-full bg-background py-12 lg:py-20 border-b border-border">
-            <div className="mx-auto w-full max-w-360 px-4 py-12 lg:px-20 lg:py-0">
-                {/* Header Row */}
-                <div className="flex flex-col lg:flex-row justify-between items-start gap-12 w-full mb-12">
-                    {/* Left: Title */}
-                    <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-[1.1] font-bold text-text-primary  tracking-tight">
-                        Your favorite <span className="text-primary-500">platforms,</span><br/> unlocked!
+        <section id="browse-catalog" className="w-full min-w-0 border-b border-border bg-background py-12 lg:py-20">
+            <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 py-12 lg:px-20 lg:py-0">
+                <FadeReveal className="mb-12 w-full min-w-0">
+                    <div className="flex w-full min-w-0 flex-col items-stretch justify-between gap-12 lg:flex-row lg:items-start">
+                    <h2 className="w-full min-w-0 font-heading text-4xl font-bold leading-[1.1] tracking-tight text-text-primary md:text-5xl lg:text-6xl">
+                        Your favorite <span className="text-primary-500">platforms,</span><br /> unlocked!
                     </h2>
 
-                    {/* Right: Info + CTA */}
-                    <div className="flex flex-col items-start lg:items-end gap-6 max-w-[320px] shrink-0 lg:pt-2">
-                        <p className="font-sans text-text-muted text-sm md:text-base leading-relaxed lg:text-right">
-                            Browse over 100+ digital SKUs. Localized pricing in USD, NGN, GHS, and more.
+                    <div className="flex w-full min-w-0 max-w-[320px] shrink-0 flex-col items-stretch gap-6 lg:items-end lg:pt-2">
+                        <p className="w-full min-w-0 font-sans text-sm leading-8 text-text-muted md:text-base lg:text-right">
+                            Browse over 100 digital products with cleaner pricing and a
+                            checkout flow that feels easier to trust.
                         </p>
                         <a
-                            href="#"
-                            className="inline-flex items-center gap-3 bg-white hover:bg-neutral-200 transition-colors rounded-full pl-5 pr-1.5 py-1.5"
+                            href="#explore-shop"
+                            className="inline-flex items-center gap-3 self-start rounded-full bg-white pl-5 pr-1.5 py-1.5 transition-colors hover:bg-neutral-200 lg:self-auto"
                         >
-                            <span className="font-sans font-semibold text-neutral-900 text-sm">
+                            <span className="font-sans text-sm font-semibold text-neutral-900">
                                 Browse catalog
                             </span>
-                            <span className="w-7 h-7 rounded-full bg-surface flex items-center justify-center shrink-0">
+                            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface">
                                 <ArrowUpRight size={16} className="text-white" />
                             </span>
                         </a>
                     </div>
-                </div>
+                    </div>
+                </FadeReveal>
 
                 {/* Animated Horizontal Card Carousel */}
                 {/* <div 

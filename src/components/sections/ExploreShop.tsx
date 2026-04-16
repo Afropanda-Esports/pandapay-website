@@ -1,171 +1,130 @@
 import React from 'react';
-import { ArrowUpRight, Gamepad2, CreditCard, Zap } from 'lucide-react';
+import { ArrowUpRight, CreditCard, Gamepad2, Zap } from 'lucide-react';
+import { cardHoverShadow } from '../../cardHover';
+import FadeReveal from '../FadeReveal';
 
-// import xboxImg from '../../assets/explore/xbox.png';
-// import codImg from '../../assets/explore/cod.png';
-// import robloxImg from '../../assets/explore/roblox.png';
-
-// const OldExploreShop: React.FC = () => {
-//     return (
-//         <section id="explore-shop" className="w-full bg-background py-20">
-//             <div className="mx-auto w-full max-w-360 px-4 py-12 lg:px-20 lg:py-0">
-//                 <div className="bg-surface border border-border rounded-[32px] p-8 md:p-12 lg:p-16 flex flex-col gap-12">
-//                     <div className="flex flex-col items-center text-center gap-6 w-full">
-//                         <h2 className="font-heading text-4xl md:text-5xl font-bold text-text-primary leading-tight">
-//                             Play More. Less Stress.
-//                         </h2>
-//                         <p className="font-sans text-text-muted text-sm md:text-base leading-relaxed">
-//                             Buy gift cards, credits, and game passes for your favorite platforms, all in one checkout, powered by bank transfers, crypto, or gift cards.
-//                         </p>
-//                         <button className="inline-flex items-center justify-center px-8 py-3 rounded-full border-2 border-primary-500 text-text-primary text-sm font-semibold hover:bg-primary-500/10 transition-all">
-//                             Explore our shop
-//                         </button>
-//                     </div>
-//                     <div className="flex flex-col gap-6">
-//                         <div className="relative rounded-2xl overflow-hidden group cursor-pointer h-[300px] md:h-auto">
-//                             <img src={xboxImg} alt="Xbox Game Pass" className="w-full h-full object-cover" />
-//                             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-//                                 <div className="flex items-end justify-between">
-//                                     <div>
-//                                         <h3 className="font-heading text-lg font-bold text-neutral-100 mb-1">Xbox Game Pass</h3>
-//                                         <p className="font-sans text-sm text-neutral-300">Get Xbox game pass</p>
-//                                     </div>
-//                                     <button className="px-5 py-2 bg-white hover:bg-neutral-200 text-neutral-900 rounded-full text-sm font-semibold transition-colors">Buy now</button>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//                             <div className="relative rounded-2xl overflow-hidden group cursor-pointer h-[300px] md:h-auto">
-//                                 <img src={codImg} alt="Call of Duty Mobile" className="w-full h-full object-cover" />
-//                                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-//                                     <div className="flex items-end justify-between">
-//                                         <div>
-//                                             <h3 className="font-heading text-lg font-bold text-neutral-100 mb-1">Call of Duty Mobile</h3>
-//                                             <p className="font-sans text-sm text-neutral-300">Top CODM credit</p>
-//                                         </div>
-//                                         <button className="px-5 py-2 bg-white hover:bg-neutral-200 text-neutral-900 rounded-full text-sm font-semibold transition-colors">Buy now</button>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                             <div className="relative rounded-2xl overflow-hidden group cursor-pointer h-[300px] md:h-auto">
-//                                 <img src={robloxImg} alt="Roblox" className="w-full h-full object-cover" />
-//                                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-//                                     <div className="flex items-end justify-between">
-//                                         <div>
-//                                             <h3 className="font-heading text-lg font-bold text-neutral-100 mb-1">Roblox</h3>
-//                                             <p className="font-sans text-sm text-neutral-300">Get Roblox gift cards</p>
-//                                         </div>
-//                                         <button className="px-5 py-2 bg-white hover:bg-neutral-200 text-neutral-900 rounded-full text-sm font-semibold transition-colors">Buy now</button>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </section>
-//     );
-// };
+/** Warm palette on first two cards; third matches testimonial white (`testimonial-3`). */
+const exploreCardThemes = [
+  {
+    shell: 'bg-testimonial-1 shadow-elevation-2',
+    badge: 'bg-white/90 text-primary-600',
+    iconWrap: 'bg-white/55 text-primary-600',
+    title: 'text-neutral-900',
+    body: 'text-neutral-700',
+    divider: 'border-neutral-900/10',
+    link: 'text-primary-600',
+  },
+  {
+    shell: 'bg-testimonial-2 shadow-elevation-2',
+    badge: 'bg-white/75 text-primary-500',
+    iconWrap: 'bg-white/55 text-primary-500',
+    title: 'text-neutral-900',
+    body: 'text-neutral-700',
+    divider: 'border-neutral-900/10',
+    link: 'text-primary-600',
+  },
+  {
+    shell: 'bg-testimonial-3 shadow-elevation-2',
+    badge: 'bg-primary-500/10 text-primary-500',
+    iconWrap: 'bg-surface-raised text-primary-500',
+    title: 'text-neutral-900',
+    body: 'text-neutral-700',
+    divider: 'border-border-subtle',
+    link: 'text-primary-600',
+  },
+] as const;
 
 const products = [
-    {
-        title: 'Xbox Game Pass',
-        description: 'Unlock 100+ games with a single pass. Play on console, PC, and cloud.',
-        tag: 'Popular',
-        icon: Gamepad2,
-    },
-    {
-        title: 'Call of Duty Mobile',
-        description: 'Top up your CODM credits instantly. Get CP packs at the best rates.',
-        tag: 'Hot',
-        icon: Zap,
-    },
-    {
-        title: 'Roblox Gift Cards',
-        description: 'Gift Robux to yourself or friends. Redeem across all Roblox platforms.',
-        tag: 'Gift Ready',
-        icon: CreditCard,
-    },
+  {
+    title: 'Xbox Game Pass',
+    description: 'Unlock 100+ games with a single pass. Play on console, PC, and cloud.',
+    tag: 'Popular',
+    icon: Gamepad2,
+  },
+  {
+    title: 'Call of Duty Mobile',
+    description: 'Top up your CODM credits instantly. Get CP packs at the best rates.',
+    tag: 'Hot',
+    icon: Zap,
+  },
+  {
+    title: 'Roblox Gift Cards',
+    description: 'Gift Robux to yourself or friends. Redeem across all Roblox platforms.',
+    tag: 'Gift Ready',
+    icon: CreditCard,
+  },
 ];
 
 const ExploreShop: React.FC = () => {
-    return (
-        <section id="explore-shop" className="w-full bg-background py-20">
-            <div className="mx-auto w-full max-w-360 px-4 py-12 lg:px-20 lg:py-0">
-                <div className="bg-surface border border-border rounded-[32px] p-8 md:p-12 lg:p-16 flex flex-col gap-14">
+  return (
+    <section id="explore-shop" className="w-full min-w-0 bg-background py-20">
+      <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 py-12 lg:px-20 lg:py-0">
+        <div className="flex w-full min-w-0 flex-col gap-14 rounded-[32px] bg-surface p-8 shadow-elevation-2 transition-all duration-300 ease-out hover:shadow-elevation-3 md:p-12 lg:p-16">
+          <FadeReveal className="w-full min-w-0">
+            <div className="w-full min-w-0 max-w-4xl">
+              <h2 className="w-full min-w-0 font-heading text-4xl font-bold leading-tight text-text-primary md:text-5xl">
+                Play more. Less stress.
+              </h2>
+              <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-sm leading-8 text-text-muted md:text-base">
+                Buy gift cards, credits, and game passes for your favorite platforms in
+                one clean checkout powered by bank transfers, crypto, or gift cards.
+              </p>
+              <a
+                href="#hero"
+                className="mt-6 inline-flex items-center justify-center self-start whitespace-nowrap rounded-full border-2 border-primary-500 px-8 py-3 text-sm font-semibold text-text-primary transition-all hover:bg-primary-500/10"
+              >
+                Explore our shop
+              </a>
+            </div>
+          </FadeReveal>
 
-                    {/* Header */}
-                    {/* <div className="flex flex-col items-center text-center gap-6  mx-auto">
-                        <h2 className="font-heading text-4xl md:text-5xl font-bold text-text-primary leading-tight">
-                            Play More. Less Stress.
-                        </h2>
-                        <p className="font-sans text-text-muted text-sm md:text-base leading-relaxed">
-                            Buy gift cards, credits, and game passes for your favorite platforms — all in one checkout, powered by bank transfers, crypto, or gift cards.
-                        </p>
-                        <a
-                            href="#"
-                            className="inline-flex items-center gap-2 px-7 py-3 rounded-full border-2 border-primary-500 text-text-primary text-sm font-semibold hover:bg-primary-500/10 transition-all"
-                        >
-                            Explore our shop
-                            <ArrowUpRight size={16} />
-                        </a>
-                    </div> */}
-                      <div className="flex flex-col items-center text-center gap-6 w-full">
-                         <h2 className="font-heading text-4xl md:text-5xl font-bold text-text-primary leading-tight">
-                             Play More. Less Stress.
-                         </h2>
-                         <p className="font-sans text-text-muted text-sm md:text-base leading-relaxed">
-                             Buy gift cards, credits, and game passes for your favorite platforms, all in one checkout, powered by bank transfers, crypto, or gift cards.
-                         </p>
-                         <button className="inline-flex items-center justify-center px-8 py-3 rounded-full border-2 border-primary-500 text-text-primary text-sm font-semibold hover:bg-primary-500/10 transition-all">
-                             Explore our shop
-                         </button>
-                     </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {products.map((product, index) => {
+              const Icon = product.icon;
+              const theme = exploreCardThemes[index] ?? exploreCardThemes[0];
 
-                    {/* Product cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {products.map((product) => {
-                            const Icon = product.icon;
-                            return (
-                                <div
-                                    key={product.title}
-                                    className="group relative flex flex-col gap-6 p-6 md:p-8 rounded-2xl border border-border bg-background hover:border-primary-500/40 transition-colors cursor-pointer"
-                                >
-                                    {/* Tag */}
-                                    <span className="self-start px-3 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold tracking-wide">
-                                        {product.tag}
-                                    </span>
+              return (
+                <FadeReveal key={product.title} delay={index * 0.08}>
+                  <div
+                    className={`group relative flex cursor-pointer flex-col gap-6 rounded-[28px] p-6 md:p-8 ${theme.shell} ${cardHoverShadow}`}
+                  >
+                    <span
+                      className={`self-start rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${theme.badge}`}
+                    >
+                      {product.tag}
+                    </span>
 
-                                    {/* Icon */}
-                                    <div className="w-12 h-12 rounded-xl bg-surface-raised flex items-center justify-center text-text-secondary group-hover:text-primary-500 transition-colors">
-                                        <Icon size={24} />
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="flex flex-col gap-2 flex-1">
-                                        <h3 className="font-heading text-lg font-bold text-text-primary">
-                                            {product.title}
-                                        </h3>
-                                        <p className="font-sans text-sm text-text-muted leading-relaxed">
-                                            {product.description}
-                                        </p>
-                                    </div>
-
-                                    {/* Footer */}
-                                    <div className="flex items-center justify-end pt-4 border-t border-border-subtle">
-                                        <span className="inline-flex items-center gap-1 text-sm font-medium text-primary-500 group-hover:gap-2 transition-all">
-                                            Learn more <ArrowUpRight size={14} />
-                                        </span>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                    <div
+                      className={`flex h-11 w-11 items-center justify-center rounded-2xl ${theme.iconWrap}`}
+                    >
+                      <Icon size={20} />
                     </div>
 
-                </div>
-            </div>
-        </section>
-    );
+                    <div className="flex flex-1 flex-col gap-2">
+                      <h3 className={`font-heading text-lg font-bold ${theme.title}`}>
+                        {product.title}
+                      </h3>
+                      <p className={`font-sans text-sm leading-relaxed ${theme.body}`}>
+                        {product.description}
+                      </p>
+                    </div>
+
+                    <div className={`flex items-center justify-end border-t pt-4 ${theme.divider}`}>
+                      <span
+                        className={`inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2 ${theme.link}`}
+                      >
+                        Learn more <ArrowUpRight size={14} />
+                      </span>
+                    </div>
+                  </div>
+                </FadeReveal>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default ExploreShop;

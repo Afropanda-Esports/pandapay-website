@@ -27,7 +27,7 @@ const Footer = () => {
 
     return (
         <footer className="w-full bg-background">
-            <div className="mx-auto w-full max-w-360 px-4 lg:px-20 pt-16 pb-8 flex flex-col gap-12">
+            <div className="mx-auto w-full max-w-[1440px] px-4 pt-16 pb-8 lg:px-20 flex flex-col gap-12">
 
                 {/* Top Section */}
                 <div className="flex flex-col md:flex-row justify-between items-start gap-12">

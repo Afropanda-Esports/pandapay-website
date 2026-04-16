@@ -1,5 +1,6 @@
 import React from 'react';
 import quoteIcon from '../assets/quote.svg';
+import { lightCardSurface } from '../cardHover';
 
 interface TestimonialCardProps {
   quote: string;
@@ -18,8 +19,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   bgColor,
 }) => {
   return (
-    <div 
-      className={`relative p-8 md:p-10 rounded-[32px] flex flex-col gap-8 h-full min-h-[400px] justify-between transition-transform duration-300 hover:scale-[1.02] ${bgColor}`}
+    <div
+      className={`relative flex h-full min-h-[400px] flex-col justify-between gap-8 rounded-[32px] p-8 md:p-10 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] ${bgColor} ${bgColor === 'bg-testimonial-3' ? lightCardSurface : 'hover:shadow-elevation-4'}`}
     >
       {/* Top Section: Avatar & Quote Icon */}
       <div className="flex justify-between items-start">

@@ -1,27 +1,30 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+import { layoutFullWidth } from '../layoutStyles';
 import Footer from '../components/Footer';
 import Hero from '../components/sections/Hero';
-import Painpoint from '../components/sections/Painpoint';
-import Solution from '../components/sections/Solution';
-import BrowseCatalog from '../components/sections/BrowseCatalog';
-import MicroStory from '../components/sections/MicroStory';
-import Testimonial from '../components/sections/Testimonial';
-import FAQ from '../components/sections/FAQ';
-import ExploreShop from '../components/sections/ExploreShop';
+
+const Painpoint = lazy(() => import('../components/sections/Painpoint'));
+const Solution = lazy(() => import('../components/sections/Solution'));
+const BrowseCatalog = lazy(() => import('../components/sections/BrowseCatalog'));
+const MicroStory = lazy(() => import('../components/sections/MicroStory'));
+const Testimonial = lazy(() => import('../components/sections/Testimonial'));
+const FAQ = lazy(() => import('../components/sections/FAQ'));
+const ExploreShop = lazy(() => import('../components/sections/ExploreShop'));
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-
-      <main className="flex-grow flex flex-col overflow-x-hidden">
+    <div className="flex min-h-screen min-w-0 flex-col bg-background" style={layoutFullWidth}>
+      <main className="flex min-w-0 w-full flex-1 flex-col items-stretch overflow-x-hidden">
         <Hero />
-        <Painpoint />
-        <Solution />
-        <BrowseCatalog />
-        <MicroStory />
-        <Testimonial />
-        <FAQ />
-        <ExploreShop />
+        <Suspense fallback={null}>
+          <Painpoint />
+          <Solution />
+          <BrowseCatalog />
+          <MicroStory />
+          <Testimonial />
+          <FAQ />
+          <ExploreShop />
+        </Suspense>
       </main>
 
       <Footer />
