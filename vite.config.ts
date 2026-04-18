@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [tailwindcss(), react()],
   server: {
     host: true,
+    allowedHosts: true,
     headers: {
       // Avoid Safari / Docker bind-mount dev setups serving a cached stale index or module graph
       'Cache-Control': 'no-store',

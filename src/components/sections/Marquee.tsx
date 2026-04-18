@@ -13,7 +13,7 @@ const Marquee: React.FC = () => {
     return (
         <div className="relative w-full overflow-hidden flex flex-col justify-center items-center pb-4 pt-10">
             {/* The Slanted Banner Container */}
-            <div className="group w-[110vw] -ml-[5vw] bg-surface/60 backdrop-blur-md border-y border-border py-4 -rotate-2 transform-gpu">
+            <div className="group w-[110vw] -ml-[5vw] bg-surface/60 py-4 shadow-[var(--shadow-marquee-edge)] backdrop-blur-md -rotate-2 transform-gpu">
                 {/* The Scrolling Element */}
                 <div className="flex w-fit whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused]">
                     {/* Render the list multiple times for seamless infinite scrolling on all screens */}

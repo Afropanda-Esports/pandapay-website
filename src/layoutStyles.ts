@@ -7,3 +7,12 @@ export const layoutFullWidth: CSSProperties = {
   maxWidth: '100%',
   boxSizing: 'border-box',
 };
+
+/** Replaces full-width `border-b border-border` between landing sections. */
+export const sectionSeparatorShadow = 'shadow-[var(--shadow-section-separate)]';
+
+/** Replaces `border-y` on the marquee ribbon. */
+export const marqueeEdgeShadow = 'shadow-[var(--shadow-marquee-edge)]';
+
+/** Replaces `border-t` above the footer legal row. */
+export const footerRuleShadow = 'shadow-[var(--shadow-footer-rule)]';

@@ -19,7 +19,7 @@ function getSystemTheme(): ResolvedTheme {
 function getInitialPreference(): ThemePreference {
   const stored = localStorage.getItem('theme');
   if (stored === 'light' || stored === 'dark' || stored === 'system') return stored;
-  return 'system';
+  return 'light';
 }
 
 function resolve(pref: ThemePreference): ResolvedTheme {

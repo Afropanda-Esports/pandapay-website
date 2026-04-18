@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowUpRight, CreditCard, Gamepad2, Zap } from 'lucide-react';
-import { cardHoverShadow } from '../../cardHover';
+import { cardFooterInsetRule, cardHoverShadow, primaryOutlinePill } from '../../cardHover';
 import FadeReveal from '../FadeReveal';
 
 /** Warm palette on first two cards; third matches testimonial white (`testimonial-3`). */
@@ -11,7 +11,6 @@ const exploreCardThemes = [
     iconWrap: 'bg-white/55 text-primary-600',
     title: 'text-neutral-900',
     body: 'text-neutral-700',
-    divider: 'border-neutral-900/10',
     link: 'text-primary-600',
   },
   {
@@ -20,7 +19,6 @@ const exploreCardThemes = [
     iconWrap: 'bg-white/55 text-primary-500',
     title: 'text-neutral-900',
     body: 'text-neutral-700',
-    divider: 'border-neutral-900/10',
     link: 'text-primary-600',
   },
   {
@@ -29,7 +27,6 @@ const exploreCardThemes = [
     iconWrap: 'bg-surface-raised text-primary-500',
     title: 'text-neutral-900',
     body: 'text-neutral-700',
-    divider: 'border-border-subtle',
     link: 'text-primary-600',
   },
 ] as const;
@@ -60,23 +57,23 @@ const ExploreShop: React.FC = () => {
     <section id="explore-shop" className="w-full min-w-0 bg-background py-20">
       <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 py-12 lg:px-20 lg:py-0">
         <div className="flex w-full min-w-0 flex-col gap-14 rounded-[32px] bg-surface p-8 shadow-elevation-2 transition-all duration-300 ease-out hover:shadow-elevation-3 md:p-12 lg:p-16">
-          <FadeReveal className="w-full min-w-0">
-            <div className="w-full min-w-0 max-w-4xl">
-              <h2 className="w-full min-w-0 font-heading text-4xl font-bold leading-tight text-text-primary md:text-5xl">
-                Play more. Less stress.
-              </h2>
-              <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-sm leading-8 text-text-muted md:text-base">
-                Buy gift cards, credits, and game passes for your favorite platforms in
-                one clean checkout powered by bank transfers, crypto, or gift cards.
-              </p>
-              <a
-                href="#hero"
-                className="mt-6 inline-flex items-center justify-center self-start whitespace-nowrap rounded-full border-2 border-primary-500 px-8 py-3 text-sm font-semibold text-text-primary transition-all hover:bg-primary-500/10"
-              >
-                Explore our shop
-              </a>
-            </div>
-          </FadeReveal>
+          {/* Intro is not wrapped in FadeReveal: Framer motion + nested flex was resolving this column to
+              min-content width in the card flex context. Block layout + max-width is stable. */}
+          <div className="mx-auto w-full min-w-0 max-w-4xl text-center">
+            <h2 className="font-heading text-4xl font-bold leading-tight text-text-primary md:text-5xl">
+              Play more. Less stress.
+            </h2>
+            <p className="mx-auto mt-5 max-w-3xl font-sans text-sm leading-8 text-text-muted md:text-base">
+              Buy gift cards, credits, and game passes for your favorite platforms in
+              one clean checkout powered by bank transfers, crypto, or gift cards.
+            </p>
+            <a
+              href="#hero"
+              className={`mx-auto mt-6 inline-flex items-center justify-center whitespace-nowrap rounded-full px-8 py-3 text-sm font-semibold text-text-primary transition-all hover:bg-primary-500/10 ${primaryOutlinePill}`}
+            >
+              Explore our shop
+            </a>
+          </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {products.map((product, index) => {
@@ -109,7 +106,9 @@ const ExploreShop: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className={`flex items-center justify-end border-t pt-4 ${theme.divider}`}>
+                    <div
+                      className={`flex items-center justify-end pt-4 ${cardFooterInsetRule}`}
+                    >
                       <span
                         className={`inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2 ${theme.link}`}
                       >

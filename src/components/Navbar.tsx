@@ -10,6 +10,7 @@ import logoTextLight from '../assets/logo/logo-text-light.png';
 import hamburgerIconDark from '../assets/hamburger-icon.svg';
 import hamburgerIconLight from '../assets/hamurger-icon-light.svg';
 import ThemeToggle from './ThemeToggle';
+import { primaryOutlinePill } from '../cardHover';
 
 const NAV_LINKS = [
   { label: 'About', href: '#solution' },
@@ -49,13 +50,13 @@ const Navbar = () => {
 
         <img src={logoText} alt="PandaPay" className="hidden h-12 lg:inline" />
 
-        <div className="ml-auto hidden items-start gap-6 lg:flex">
-          <div className="flex flex-col gap-4">
+        <div className="ml-auto hidden items-center gap-6 lg:flex">
+          <div className="flex flex-row flex-wrap items-center gap-x-8 gap-y-2">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="font-sans text-base leading-tight text-text-secondary transition-colors hover:text-text-primary"
+                className="rounded-md px-2 py-1 font-sans text-base leading-tight text-text-secondary transition-colors hover:bg-primary-500/10 hover:text-primary-500"
               >
                 {link.label}
               </a>
@@ -64,8 +65,7 @@ const Navbar = () => {
           <ThemeToggle />
           <a
             href="#explore-shop"
-            className="whitespace-nowrap rounded-full border-2 border-primary-500 px-5 py-2 font-sans text-sm font-medium text-text-primary transition-colors hover:bg-primary-500/10"
-            style={{ boxShadow: 'var(--shadow-primary-glow-sm)' }}
+            className={`whitespace-nowrap rounded-full px-5 py-2 font-sans text-sm font-medium text-text-primary transition-colors hover:bg-primary-500/10 ${primaryOutlinePill}`}
           >
             Shop now
           </a>
@@ -130,8 +130,7 @@ const Navbar = () => {
                   <ThemeToggle dropDirection="up" />
                   <a
                     href="#explore-shop"
-                    className="block w-full rounded-full border-2 border-primary-500 py-4 text-center font-sans text-base font-medium text-text-primary transition-colors hover:bg-primary-500/10"
-                    style={{ boxShadow: 'var(--shadow-primary-glow-md)' }}
+                    className={`block w-full rounded-full py-4 text-center font-sans text-base font-medium text-text-primary transition-colors hover:bg-primary-500/10 ${primaryOutlinePill}`}
                   >
                     Shop now
                   </a>

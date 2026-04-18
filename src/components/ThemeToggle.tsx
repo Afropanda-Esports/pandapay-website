@@ -6,6 +6,9 @@ import type { ReactNode } from 'react';
 
 type ThemePreference = 'system' | 'light' | 'dark';
 
+/** Delay before closing when pointer leaves trigger, so cursor can cross the gap to the portaled panel. */
+const HOVER_CLOSE_MS = 280;
+
 const options: { value: ThemePreference; label: string; icon: ReactNode }[] = [
   { value: 'system', label: 'System', icon: <Monitor size={16} /> },
   { value: 'light', label: 'Light', icon: <Sun size={16} /> },
@@ -21,7 +24,23 @@ const ThemeToggle = ({ dropDirection = 'down' }: ThemeToggleProps) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [pos, setPos] = useState({ top: 0, left: 0 });
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const scheduleClose = useCallback(() => {
+    clearCloseTimer();
+    closeTimerRef.current = window.setTimeout(() => {
+      closeTimerRef.current = null;
+      setOpen(false);
+    }, HOVER_CLOSE_MS);
+  }, [clearCloseTimer]);
 
   const updatePosition = useCallback(() => {
     if (!buttonRef.current) return;
@@ -33,6 +52,8 @@ const ThemeToggle = ({ dropDirection = 'down' }: ThemeToggleProps) => {
     }
   }, [dropDirection]);
 
+  useEffect(() => () => clearCloseTimer(), [clearCloseTimer]);
+
   useEffect(() => {
     if (!open) return;
     updatePosition();
@@ -41,7 +62,8 @@ const ThemeToggle = ({ dropDirection = 'down' }: ThemeToggleProps) => {
       if (
         buttonRef.current?.contains(e.target as Node) ||
         panelRef.current?.contains(e.target as Node)
-      ) return;
+      )
+        return;
       setOpen(false);
     };
 
@@ -60,21 +82,32 @@ const ThemeToggle = ({ dropDirection = 'down' }: ThemeToggleProps) => {
   const panel = open ? createPortal(
     <div
       ref={panelRef}
-      className="fixed w-40 rounded-xl border border-border bg-surface shadow-elevation-3 overflow-hidden z-[9999]"
+      role="listbox"
+      aria-label="Theme"
+      className="fixed z-[9999] w-40 overflow-hidden rounded-xl bg-surface shadow-elevation-4"
       style={{
         top: dropDirection === 'up' ? undefined : pos.top,
         bottom: dropDirection === 'up' ? `calc(100vh - ${pos.top}px)` : undefined,
         left: pos.left,
       }}
+      onMouseEnter={clearCloseTimer}
+      onMouseLeave={() => {
+        clearCloseTimer();
+        setOpen(false);
+      }}
     >
       {options.map((option) => (
         <button
           key={option.value}
-          onClick={() => { setTheme(option.value); setOpen(false); }}
-          className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors ${
+          type="button"
+          onClick={() => {
+            setTheme(option.value);
+            setOpen(false);
+          }}
+          className={`flex w-full items-center gap-3 px-4 py-3 text-sm transition-colors ${
             theme === option.value
-              ? 'text-primary-500 bg-primary-500/5'
-              : 'text-text-secondary hover:text-text-primary hover:bg-surface-raised'
+              ? 'bg-primary-500/5 text-primary-500'
+              : 'text-text-secondary hover:bg-surface-raised hover:text-text-primary'
           }`}
         >
           {option.icon}
@@ -89,13 +122,20 @@ const ThemeToggle = ({ dropDirection = 'down' }: ThemeToggleProps) => {
     <>
       <button
         ref={buttonRef}
-        onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-3 py-2 rounded-full text-text-secondary hover:text-text-primary transition-colors"
+        type="button"
+        onMouseEnter={() => {
+          clearCloseTimer();
+          setOpen(true);
+        }}
+        onMouseLeave={scheduleClose}
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-2 rounded-full px-3 py-2 text-text-secondary transition-colors hover:text-text-primary"
         aria-label="Theme preference"
         aria-expanded={open}
+        aria-haspopup="listbox"
       >
         {current.icon}
-        <span className="text-sm font-medium hidden sm:inline">{current.label}</span>
+        <span className="hidden text-sm font-medium sm:inline">{current.label}</span>
         <ChevronDown size={14} className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
       {panel}

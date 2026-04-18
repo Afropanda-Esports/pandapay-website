@@ -1,5 +1,5 @@
 import { Check, CreditCard, Landmark, ShieldCheck } from 'lucide-react';
-import { cardHoverBordered } from '../../cardHover';
+import { cardHoverShadow } from '../../cardHover';
 import FadeReveal from '../FadeReveal';
 
 const storyPoints = [
@@ -30,12 +30,12 @@ const MicroStory = () => {
   return (
     <section
       id="micro-story"
-      className="border-b border-border px-6 py-20 md:px-12 lg:px-20"
+      className="px-6 py-20 shadow-[var(--shadow-section-separate)] md:px-12 lg:px-20"
     >
       <div className="mx-auto flex w-full min-w-0 max-w-[1440px] flex-col gap-12">
         <FadeReveal className="w-full min-w-0 max-w-4xl">
           <div className="w-full min-w-0">
-            <div className="inline-flex rounded-full border border-primary-500/30 bg-primary-500/8 px-4 py-2">
+            <div className="inline-flex rounded-full bg-primary-500/8 px-4 py-2 shadow-[0_0_0_1px_rgba(204,53,0,0.14),0_6px_18px_-6px_rgba(204,53,0,0.14)]">
               <span className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
                 Built for gamers, by gamers
               </span>
@@ -52,7 +52,7 @@ const MicroStory = () => {
 
         <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
           <FadeReveal
-            className={`min-w-0 w-full rounded-[32px] border border-border bg-surface p-8 ${cardHoverBordered}`}
+            className={`min-w-0 w-full rounded-[32px] bg-[var(--color-card-soft)] p-8 shadow-elevation-2 ${cardHoverShadow}`}
             delay={0.06}
           >
           <div className="flex flex-col gap-5">
@@ -80,8 +80,10 @@ const MicroStory = () => {
 
               return (
                 <FadeReveal key={item.title} className="min-w-0 w-full" delay={0.1 + index * 0.06}>
-                  <div className={`rounded-[28px] border border-border bg-background p-6 ${cardHoverBordered}`}>
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-surface-raised text-primary-500">
+                  <div
+                    className={`rounded-[28px] bg-[var(--color-card-soft)] p-6 shadow-elevation-2 ${cardHoverShadow}`}
+                  >
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black/[0.06] text-primary-500 dark:bg-white/10">
                       <Icon size={20} />
                     </div>
                     <h3 className="mt-5 font-heading text-xl font-bold text-text-primary">

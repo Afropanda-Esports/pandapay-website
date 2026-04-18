@@ -1,5 +1,5 @@
 import { useTheme } from '../../context/ThemeContext';
-import { cardHoverBordered } from '../../cardHover';
+import { cardHoverShadow } from '../../cardHover';
 import FadeReveal from '../FadeReveal';
 import desktopSvg from '../../assets/desktop.svg';
 import desktopLightSvg from '../../assets/desktop-light.svg';
@@ -23,7 +23,7 @@ const Solution = () => {
   return (
     <section
       id="solution"
-      className="w-full min-w-0 border-b border-border py-12 lg:py-20"
+      className="w-full min-w-0 py-12 shadow-[var(--shadow-section-separate)] lg:py-20"
     >
       <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 py-12 lg:px-20 lg:py-0">
         <div className="flex w-full min-w-0 flex-col gap-16">
@@ -62,7 +62,7 @@ const Solution = () => {
                 {features.map((feature) => (
                   <div
                     key={feature.title}
-                    className={`flex flex-col items-center gap-3 rounded-2xl border border-border bg-surface p-5 text-center ${cardHoverBordered}`}
+                    className={`flex flex-col items-center gap-3 rounded-2xl bg-[var(--color-card-soft)] p-5 text-center shadow-elevation-2 ${cardHoverShadow}`}
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-raised">
                       <img src={feature.icon} alt={feature.title} className="h-6 w-6" />

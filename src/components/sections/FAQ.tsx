@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus } from 'lucide-react';
-import { cardHoverBordered } from '../../cardHover';
+import { cardHoverShadow } from '../../cardHover';
 import FadeReveal from '../FadeReveal';
 
 interface FAQItem {
@@ -40,7 +40,7 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="w-full min-w-0 border-b border-border py-16 lg:py-24">
+    <section id="faq" className="w-full min-w-0 py-16 shadow-[var(--shadow-section-separate)] lg:py-24">
       <div className="mx-auto grid w-full min-w-0 max-w-[1440px] grid-cols-1 gap-14 px-4 lg:grid-cols-[minmax(340px,0.9fr)_minmax(0,1.1fr)] lg:gap-20 lg:px-20">
         <FadeReveal className="w-full min-w-0">
           <div className="flex w-full min-w-0 flex-col gap-5">
@@ -60,7 +60,9 @@ const FAQ = () => {
         <div className="flex flex-col gap-4">
           {faqs.map((faq, index) => (
             <FadeReveal key={faq.question} className="min-w-0 w-full" delay={index * 0.06}>
-              <div className={`rounded-3xl border border-border bg-surface px-5 py-4 ${cardHoverBordered}`}>
+              <div
+                className={`rounded-3xl bg-[var(--color-card-soft)] px-5 py-4 shadow-elevation-2 ${cardHoverShadow}`}
+              >
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="flex w-full items-start justify-between gap-4 text-left"

@@ -1,5 +1,6 @@
 import { Instagram, Facebook } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { footerRuleShadow } from '../layoutStyles';
 import logoTextDark from '../assets/logo/logo-text-dark.png';
 import logoTextLight from '../assets/logo/logo-text-light.png';
 
@@ -73,7 +74,9 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Section: Legal & Copyright lines */}
-                <div className="w-full pt-8 border-t border-border flex flex-col md:flex-row justify-between gap-4 font-sans text-xs text-text-muted">
+                <div
+                    className={`flex w-full flex-col justify-between gap-4 pt-8 font-sans text-xs text-text-muted md:flex-row ${footerRuleShadow}`}
+                >
                     <p>© {currentYear} PandaPay. All rights reserved.</p>
                     <div className="flex gap-6">
                         <a href="#" className="hover:text-text-secondary underline underline-offset-4 decoration-border">Terms of service</a>

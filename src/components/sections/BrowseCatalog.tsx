@@ -8,7 +8,10 @@ import FadeReveal from '../FadeReveal';
 
 const BrowseCatalog: React.FC = () => {
     return (
-        <section id="browse-catalog" className="w-full min-w-0 border-b border-border bg-background py-12 lg:py-20">
+        <section
+            id="browse-catalog"
+            className="w-full min-w-0 bg-background py-12 shadow-[var(--shadow-section-separate)] lg:py-20"
+        >
             <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 py-12 lg:px-20 lg:py-0">
                 <FadeReveal className="mb-12 w-full min-w-0">
                     <div className="flex w-full min-w-0 flex-col items-stretch justify-between gap-12 lg:flex-row lg:items-start">
