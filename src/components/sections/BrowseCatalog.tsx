@@ -26,13 +26,13 @@ const BrowseCatalog: React.FC = () => {
                         </p>
                         <a
                             href="#explore-shop"
-                            className="inline-flex items-center gap-3 self-start rounded-full bg-white pl-5 pr-1.5 py-1.5 transition-colors hover:bg-neutral-200 lg:self-auto"
+                            className="inline-flex self-start rounded-full bg-primary-500 pl-5 pr-1 py-1 text-white transition-colors hover:bg-primary-600 lg:self-auto"
                         >
-                            <span className="font-sans text-sm font-semibold text-neutral-900">
-                                Browse catalog
-                            </span>
-                            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface">
-                                <ArrowUpRight size={16} className="text-white" />
+                            <span className="inline-flex items-center gap-2">
+                                <span className="font-sans text-sm font-semibold">Browse catalog</span>
+                                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white">
+                                    <ArrowUpRight size={15} className="text-primary-500" />
+                                </span>
                             </span>
                         </a>
                     </div>
