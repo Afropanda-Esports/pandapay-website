@@ -58,7 +58,7 @@ const Painpoint = () => {
     >
       <div className="mx-auto box-border w-full min-w-0 max-w-[1440px]">
         {/* Block flow only (no flex column + min-height): nested flex + % width was collapsing this stack to min-content in Chrome. */}
-        <header className="mx-auto box-border w-full min-w-0 max-w-5xl py-20 text-center md:py-24 lg:min-h-[min(56vh,720px)] lg:py-28 lg:pt-32">
+        <header className="mx-auto box-border w-full min-w-0 max-w-5xl py-20 text-center md:py-24 lg:min-h-[720px] lg:py-28 lg:pt-32">
           <div className="mb-4 flex justify-center md:mb-5">
             <span className="inline-flex items-center rounded-full bg-primary-500/10 px-3 py-1.5 font-sans text-xs font-semibold uppercase tracking-[0.22em] text-primary-500">
               The problem

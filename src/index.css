@@ -168,18 +168,21 @@
   --leading-label:    140%;
   --leading-caption:  150%;
 
-  /* ── Spacing */
-  --spacing-xxs: 4px;
-  --spacing-xs:  8px;
-  --spacing-sm:  16px;
-  --spacing-md:  24px;
-  --spacing-l:   32px;
-  --spacing-xl:  40px;
-  --spacing-2xl: 48px;
-  --spacing-3xl: 56px;
-  --spacing-4xl: 64px;
-  --spacing-5xl: 72px;
-  --spacing-6xl: 80px;
+  /* ── Layout spacing scale (design tokens)
+   * Do NOT use the --spacing-* prefix here: in Tailwind v4, utilities like max-w-5xl and max-w-xl
+   * resolve to var(--spacing-5xl), var(--spacing-xl), etc. Overriding those tokens shrinks max-width
+   * to pixel values (e.g. 72px) and breaks prose columns site-wide. */
+  --layout-space-xxs: 4px;
+  --layout-space-xs: 8px;
+  --layout-space-sm: 16px;
+  --layout-space-md: 24px;
+  --layout-space-l: 32px;
+  --layout-space-xl: 40px;
+  --layout-space-2xl: 48px;
+  --layout-space-3xl: 56px;
+  --layout-space-4xl: 64px;
+  --layout-space-5xl: 72px;
+  --layout-space-6xl: 80px;
 
   /* ── Border radius */
   --radius-sm:   4px;

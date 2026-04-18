@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
       <div className="absolute right-[12%] top-[20%] h-32 w-32 rounded-full bg-secondary-500/10 blur-3xl" />
       <div className="absolute bottom-[16%] left-[40%] h-28 w-28 rounded-full bg-white/[0.02] blur-2xl" />
 
-      <div className="relative z-10 w-full min-w-0">
+      <div className="relative z-20 w-full min-w-0">
         <Navbar />
       </div>
 

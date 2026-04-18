@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="relative flex h-20 w-full min-w-0 items-start px-6 pt-6 md:px-12 lg:h-24 lg:px-20">
+      <nav className="relative z-30 flex h-20 w-full min-w-0 items-start px-6 pt-6 md:px-12 lg:h-24 lg:px-20">
         <img
           src={icon}
           alt="PandaPay icon"
@@ -72,74 +72,80 @@ const Navbar = () => {
         </div>
 
         <button
+          type="button"
           onClick={() => setIsOpen(true)}
-          className="ml-auto p-1 lg:hidden"
+          className="relative z-10 ml-auto min-h-11 min-w-11 touch-manipulation p-1 lg:hidden"
           aria-label="Open menu"
+          aria-expanded={isOpen}
         >
-          <img src={hamburgerIcon} alt="" className="h-7 w-7" />
+          <img src={hamburgerIcon} alt="" className="pointer-events-none h-7 w-7 select-none" />
         </button>
       </nav>
 
-      <AnimatePresence>
-        {isOpen &&
-          createPortal(
-            <motion.div
-              className="fixed inset-0 z-50 flex flex-col"
-              style={{ backgroundColor: 'var(--color-nav-bg)' }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-            >
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {isOpen ? (
               <motion.div
-                className="relative flex h-full flex-col px-6 py-6"
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 18 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
+                key="mobile-nav-overlay"
+                className="fixed inset-0 z-[100] flex flex-col touch-manipulation"
+                style={{ backgroundColor: 'var(--color-nav-bg)' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
               >
-                <div className="flex items-center justify-between">
-                  <img src={logoText} alt="PandaPay" className="h-6" />
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="p-1 text-text-secondary transition-colors hover:text-text-primary"
-                    aria-label="Close menu"
-                  >
-                    <X size={28} />
-                  </button>
-                </div>
-
-                <nav className="mt-16 flex flex-col gap-8">
-                  {NAV_LINKS.map((link, index) => (
-                    <motion.a
-                      key={link.label}
-                      href={link.href}
+                <motion.div
+                  className="relative flex h-full flex-col px-6 py-6"
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 18 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                >
+                  <div className="flex items-center justify-between">
+                    <img src={logoText} alt="PandaPay" className="h-6" />
+                    <button
+                      type="button"
                       onClick={() => setIsOpen(false)}
-                      className="font-heading text-3xl font-bold text-text-primary transition-colors hover:text-primary-400"
-                      initial={{ opacity: 0, y: 14 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 14 }}
-                      transition={{ duration: 0.24, delay: index * 0.04 }}
+                      className="min-h-11 min-w-11 p-1 text-text-secondary transition-colors hover:text-text-primary"
+                      aria-label="Close menu"
                     >
-                      {link.label}
-                    </motion.a>
-                  ))}
-                </nav>
+                      <X size={28} />
+                    </button>
+                  </div>
 
-                <div className="mt-auto flex flex-col gap-4">
-                  <ThemeToggle dropDirection="up" />
-                  <a
-                    href="#explore-shop"
-                    className={`block w-full rounded-full py-4 text-center font-sans text-base font-medium text-text-primary transition-colors hover:bg-primary-500/10 ${primaryOutlinePill}`}
-                  >
-                    Shop now
-                  </a>
-                </div>
+                  <nav className="mt-16 flex flex-col gap-8" aria-label="Mobile">
+                    {NAV_LINKS.map((link, index) => (
+                      <motion.a
+                        key={link.label}
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className="font-heading text-3xl font-bold text-text-primary transition-colors hover:text-primary-400"
+                        initial={{ opacity: 0, y: 14 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 14 }}
+                        transition={{ duration: 0.24, delay: index * 0.04 }}
+                      >
+                        {link.label}
+                      </motion.a>
+                    ))}
+                  </nav>
+
+                  <div className="mt-auto flex flex-col gap-4">
+                    <ThemeToggle dropDirection="up" />
+                    <a
+                      href="#explore-shop"
+                      className={`block w-full rounded-full py-4 text-center font-sans text-base font-medium text-text-primary transition-colors hover:bg-primary-500/10 ${primaryOutlinePill}`}
+                    >
+                      Shop now
+                    </a>
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>,
-            document.body
-          )}
-      </AnimatePresence>
+            ) : null}
+          </AnimatePresence>,
+          document.body
+        )}
     </>
   );
 };

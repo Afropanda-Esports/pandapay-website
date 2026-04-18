@@ -31,7 +31,7 @@ const Testimonial: React.FC = () => {
   return (
     <section
       id="testimonial"
-      className="w-full overflow-hidden border-b border-border bg-background py-16 lg:py-24"
+      className="w-full overflow-hidden bg-background py-16 shadow-[var(--shadow-section-separate)] lg:py-24"
     >
       <div className="mx-auto flex w-full min-w-0 max-w-[1440px] flex-col items-stretch px-4 lg:px-20">
         <FadeReveal className="mb-12 w-full min-w-0 max-w-4xl">
