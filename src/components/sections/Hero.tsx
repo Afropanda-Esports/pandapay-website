@@ -77,18 +77,18 @@ const Hero: React.FC = () => {
                     transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <h1
-                      className="max-w-[540px] text-5xl text-text-primary md:text-6xl lg:text-7xl xl:text-8xl"
+                      className="max-w-[540px] text-[3.55rem] text-text-primary sm:text-[4.4rem] md:text-6xl lg:text-7xl xl:text-8xl"
                       style={{
                         fontFamily: '"Syne", sans-serif',
                         fontWeight: 800,
-                        lineHeight: 1,
+                        lineHeight: 0.94,
                         letterSpacing: '-0.03em',
                       }}
                     >
                       <span className="block">{heroCopy.titleTop}</span>
                       <span className="block">{heroCopy.titleMid}</span>
                       <span className="block">{heroCopy.titleBottom}</span>
-                      <span className="mt-3 block text-primary-500">{heroCopy.titleAccentTop}</span>
+                      <span className="mt-2 block text-primary-500 sm:mt-3">{heroCopy.titleAccentTop}</span>
                       <span className="block text-primary-500">{heroCopy.titleAccentBottom}</span>
                     </h1>
                   </motion.div>
