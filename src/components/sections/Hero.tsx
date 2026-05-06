@@ -77,12 +77,13 @@ const Hero: React.FC = () => {
                     transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <h1
-                      className="max-w-[540px] text-[3.55rem] text-text-primary sm:text-[4.4rem] md:text-6xl lg:text-7xl xl:text-8xl"
+                      className="max-w-[540px] break-words text-[clamp(2.6rem,11vw,5.5rem)] text-text-primary md:text-6xl lg:text-7xl xl:text-8xl"
                       style={{
                         fontFamily: '"Syne", sans-serif',
                         fontWeight: 800,
                         lineHeight: 0.94,
                         letterSpacing: '-0.03em',
+                        overflowWrap: 'break-word',
                       }}
                     >
                       <span className="block">{heroCopy.titleTop}</span>
