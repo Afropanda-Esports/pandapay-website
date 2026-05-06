@@ -1,106 +1,141 @@
-import { Check, CreditCard, Landmark, ShieldCheck } from 'lucide-react';
-import { cardHoverShadow } from '../../cardHover';
+import { Landmark, ShieldCheck, Wallet2 } from 'lucide-react';
 import FadeReveal from '../FadeReveal';
 
-const storyPoints = [
-  'Choose a product your account can actually use.',
-  'Pay with transfer, crypto, or gift-card rails that fit your region.',
-  'Get a clearer handoff with less waiting and less doubt.',
-];
-
-const proofPoints = [
+const methods = [
   {
-    icon: CreditCard,
-    title: 'Payment flexibility',
-    description: 'Built around how gamers already pay, not how checkout tools expect them to pay.',
-  },
-  {
+    title: 'Naira Bank Transfer',
+    body: 'Transfer from any Nigerian bank. Send your screenshot and our AI confirms your payment in seconds.',
+    label: 'Local rails',
     icon: Landmark,
-    title: 'Regional awareness',
-    description: 'Pricing and delivery can respect the reality of local currencies and account regions.',
+    variant: 'naira' as const,
   },
   {
-    icon: ShieldCheck,
-    title: 'More confidence',
-    description: 'A calmer purchase flow means fewer mistakes, fewer retries, and clearer next steps.',
+    title: 'USDC / Crypto',
+    body: 'Pay with USDC across multiple chains. Confirmed automatically on-chain — no manual verification needed.',
+    label: 'On-chain',
+    icon: Wallet2,
+    variant: 'usdc' as const,
   },
-];
+  {
+    title: 'cNGN Stablecoin',
+    body: 'Pay in cNGN, the naira-pegged stablecoin. Combine crypto speed with naira stability.',
+    label: 'Stable value',
+    icon: ShieldCheck,
+    variant: 'cngn' as const,
+  },
+] as const;
 
-const MicroStory = () => {
+const bankPills = ['GTBank', 'UBA', 'Moniepoint', 'Opay'] as const;
+
+export default function MicroStory() {
   return (
     <section
-      id="micro-story"
+      id="payment-methods"
       className="px-6 py-20 shadow-[var(--shadow-section-separate)] md:px-12 lg:px-20"
     >
       <div className="mx-auto flex w-full min-w-0 max-w-[1440px] flex-col gap-12">
         <FadeReveal className="w-full min-w-0 max-w-4xl">
           <div className="w-full min-w-0">
-            <div className="inline-flex rounded-full bg-primary-500/8 px-4 py-2 shadow-[0_0_0_1px_rgba(204,53,0,0.14),0_6px_18px_-6px_rgba(204,53,0,0.14)]">
-              <span className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
-                Built for gamers, by gamers
+            <div className="inline-flex rounded-full border border-[rgba(192,75,34,0.2)] bg-[rgba(192,75,34,0.08)] px-4 py-2 dark:border-[rgba(192,75,34,0.3)] dark:bg-[rgba(192,75,34,0.15)]">
+              <span className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-[#C04B22]">
+                Payment methods
               </span>
             </div>
-            <h2 className="mt-5 w-full min-w-0 font-heading text-4xl font-bold leading-tight text-text-primary md:text-6xl">
-              A simpler bridge between intent and checkout.
+            <h2 className="mt-5 w-full min-w-0 font-heading text-4xl font-bold leading-tight text-[#120B04] dark:text-[rgb(225,225,227)] md:text-6xl">
+              Pay however you want.
             </h2>
-            <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-base leading-8 text-text-muted">
-              PandaPay exists because buying a subscription or code should feel direct.
-              No region guesswork. No payment maze. No awkward final step.
+            <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]">
+              Move between local rails and on-chain rails without changing your flow. PandaPay keeps checkout inside WhatsApp.
             </p>
           </div>
         </FadeReveal>
 
-        <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-          <FadeReveal
-            className={`min-w-0 w-full rounded-[32px] bg-[var(--color-card-soft)] p-8 shadow-elevation-2 ${cardHoverShadow}`}
-            delay={0.06}
-          >
-          <div className="flex flex-col gap-5">
-            {storyPoints.map((point, index) => (
-              <div key={point} className="flex items-start gap-4">
-                <div className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-500/10 text-primary-500">
-                  <Check size={16} />
-                </div>
-                <div>
-                  <p className="font-sans text-sm uppercase tracking-[0.18em] text-text-muted">
-                    Step 0{index + 1}
-                  </p>
-                  <p className="mt-2 font-sans text-base leading-7 text-text-primary">
-                    {point}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          </FadeReveal>
+        <div className="grid w-full min-w-0 grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr] lg:grid-rows-2">
+          {methods.map((method, index) => {
+            const Icon = method.icon;
+            const isNaira = method.variant === 'naira';
+            const isUsdc = method.variant === 'usdc';
 
-          <div className="grid grid-cols-1 gap-5">
-            {proofPoints.map((item, index) => {
-              const Icon = item.icon;
+            return (
+              <FadeReveal
+                key={method.title}
+                className={`${isNaira ? 'lg:row-span-2' : ''} min-w-0 w-full`}
+                delay={index * 0.06}
+              >
+                <article
+                  className={[
+                    'relative h-full overflow-hidden rounded-[28px] border p-7 md:p-8',
+                    isNaira
+                      ? 'border-white/6 bg-[#1A1208]'
+                      : isUsdc
+                        ? 'border-[#E8DDD0] bg-[#F5F0E8] dark:border-white/8 dark:bg-[#1C130A]'
+                        : 'border-[#E8DDD0] bg-white dark:border-white/8 dark:bg-[#25190F]',
+                  ].join(' ')}
+                >
+                  {isNaira ? (
+                    <div className="pointer-events-none absolute right-[-40px] top-[-40px] h-48 w-48 rounded-full bg-[radial-gradient(circle,rgba(192,75,34,0.32)_0%,rgba(192,75,34,0.08)_45%,transparent_72%)]" />
+                  ) : null}
 
-              return (
-                <FadeReveal key={item.title} className="min-w-0 w-full" delay={0.1 + index * 0.06}>
-                  <div
-                    className={`rounded-[28px] bg-[var(--color-card-soft)] p-6 shadow-elevation-2 ${cardHoverShadow}`}
-                  >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black/[0.06] text-primary-500 dark:bg-white/10">
+                  <div className="relative z-10 flex h-full flex-col">
+                    <p
+                      className={`font-sans text-xs font-semibold uppercase tracking-[0.24em] ${
+                        isNaira
+                          ? 'text-white/40'
+                          : 'text-[#6B5642] dark:text-[rgba(225,225,227,0.4)]'
+                      }`}
+                    >
+                      {method.label}
+                    </p>
+
+                    <div
+                      className={`mt-5 flex h-12 w-12 items-center justify-center rounded-2xl ${
+                        isNaira
+                          ? 'bg-[rgba(192,75,34,0.2)] text-[rgba(192,75,34,0.9)]'
+                          : 'bg-black/[0.05] text-[#120B04] dark:bg-white/5 dark:text-[rgb(225,225,227)]'
+                      }`}
+                    >
                       <Icon size={20} />
                     </div>
-                    <h3 className="mt-5 font-heading text-xl font-bold text-text-primary">
-                      {item.title}
+
+                    <h3
+                      className={`mt-8 font-heading text-3xl font-bold leading-tight ${
+                        isNaira
+                          ? 'text-[#F5F0E8]'
+                          : 'text-[#120B04] dark:text-[rgb(225,225,227)]'
+                      }`}
+                    >
+                      {method.title}
                     </h3>
-                    <p className="mt-3 font-sans text-sm leading-7 text-text-muted">
-                      {item.description}
+
+                    <p
+                      className={`mt-4 max-w-xl font-sans text-sm leading-8 ${
+                        isNaira
+                          ? 'text-white/55'
+                          : 'text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]'
+                      }`}
+                    >
+                      {method.body}
                     </p>
+
+                    {isNaira ? (
+                      <div className="mt-auto flex flex-wrap gap-3 pt-8">
+                        {bankPills.map((pill) => (
+                          <span
+                            key={pill}
+                            className="rounded-full border border-white/10 bg-white/7 px-4 py-2 text-sm text-white/55"
+                          >
+                            {pill}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
-                </FadeReveal>
-              );
-            })}
-          </div>
+                </article>
+              </FadeReveal>
+            );
+          })}
         </div>
       </div>
     </section>
   );
-};
-
-export default MicroStory;
+}

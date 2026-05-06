@@ -11,24 +11,24 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'What payment methods does PandaPay support?',
+    question: 'What can I buy on PandaPay today?',
     answer:
-      'PandaPay is designed around bank transfers, crypto, and other practical checkout options that work for gamers across multiple markets.',
+      'Right now, PandaPay supports PlayStation gift cards and PS Plus. More gaming products are being added as the catalog expands.',
   },
   {
-    question: 'How long does payment confirmation take?',
+    question: 'How long does delivery take?',
     answer:
-      'Most confirmations should feel fast. The exact timing still depends on the payment rail you use, but the goal is a clearer and shorter wait.',
+      'Most codes are delivered within 2 minutes of payment confirmation. Bank transfers may take up to 30 minutes during busy periods.',
   },
   {
-    question: 'When will I receive my game code or credit?',
+    question: 'What payment methods do you accept?',
     answer:
-      'Delivery is intended to happen as soon as payment is confirmed, with fewer back-and-forth checks and less uncertainty.',
+      'We accept Naira bank transfer, cNGN stablecoin, and USDC across multiple supported chains.',
   },
   {
-    question: 'Can I pay in my local currency?',
+    question: 'What exactly does the AI do?',
     answer:
-      'Yes. PandaPay is built to reduce the friction between local currency, account region, and the product you are trying to buy.',
+      'Panda Pay AI handles the entire purchase flow on WhatsApp: natural language shopping, live NGN pricing, payment confirmation, fraud checks, delivery, and 24/7 support.',
   },
 ];
 
@@ -48,7 +48,7 @@ const FAQ = () => {
               FAQ
             </p>
             <h2 className="w-full min-w-0 font-heading text-4xl font-bold leading-tight text-text-primary md:text-5xl">
-              Answers that should feel as clear as the checkout.
+              Frequently asked questions.
             </h2>
             <p className="w-full min-w-0 max-w-xl font-sans text-base leading-8 text-text-muted">
               A simpler product needs simpler explanations. These are the core questions
@@ -86,7 +86,7 @@ const FAQ = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.24, ease: 'easeInOut' }}
+                      transition={{ duration: 0.7, ease: 'easeInOut' }}
                     >
                       <p className="pt-4 pr-8 font-sans text-sm leading-7 text-text-muted md:text-base">
                         {faq.answer}

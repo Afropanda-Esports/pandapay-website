@@ -3,25 +3,26 @@ import avatar01 from '../../assets/testimonials/Testimonial01.png';
 import TestimonialCard from '../TestimonialCard';
 import FadeReveal from '../FadeReveal';
 
+// Representative testimonial quotes for social proof on the homepage.
 const testimonials = [
   {
-    quote: 'Finally, a way to buy PlayStation credits with Naira and USDT. It was a smooth experience!',
+    quote: 'I wanted a quick gaming top-up without leaving WhatsApp. PandaPay made the whole thing feel simple.',
     author: 'Tunde',
-    location: 'Lagos, Nairobi',
+    location: 'Lagos',
     avatar: avatar01,
     bgColor: 'bg-testimonial-1',
   },
   {
-    quote: 'Used USDT for my FIFA subscription and confirmation was instant. It was a good experience.',
-    author: 'Ama',
-    location: 'Accra',
+    quote: 'Paying with USDC felt clean. I sent the exact amount and my code arrived without extra back-and-forth.',
+    author: 'Alex',
+    location: 'Abuja',
     avatar: avatar01,
     bgColor: 'bg-testimonial-2',
   },
   {
-    quote: 'I’ve tried other platforms before, but Panda Pay’s checkout felt simpler and more transparent.',
-    author: 'Olu',
-    location: 'Ibadan',
+    quote: 'The AI actually understands natural chat. I just said what I wanted and it handled the rest.',
+    author: 'Kemi',
+    location: 'Port Harcourt',
     avatar: avatar01,
     bgColor: 'bg-testimonial-3',
   },
@@ -37,10 +38,10 @@ const Testimonial: React.FC = () => {
         <FadeReveal className="mb-12 w-full min-w-0 max-w-4xl">
           <div className="w-full min-w-0">
             <p className="w-full min-w-0 font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
-              Trust
+              What gamers are saying
             </p>
             <h2 className="mt-5 w-full min-w-0 font-heading text-3xl font-bold leading-tight text-text-primary md:text-5xl">
-              Trusted by gamers across Africa.
+              Social proof from our community.
             </h2>
             <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-base leading-8 text-text-muted">
               Clearer payments should create calmer feedback too. These are the kinds

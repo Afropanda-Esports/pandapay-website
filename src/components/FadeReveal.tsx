@@ -20,8 +20,9 @@ const FadeReveal = ({
 }: FadeRevealProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, {
-    amount: 0.2,
-    margin: '-10% 0px -10% 0px',
+    amount: 0.05,
+    margin: '0px 0px -40px 0px',
+    once: true,
   });
 
   return (
@@ -39,7 +40,7 @@ const FadeReveal = ({
           hidden: { opacity: 0, y: distance },
           visible: { opacity: 1, y: 0 },
         }}
-        transition={{ duration: 0.95, delay, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="block h-full min-h-0 w-full min-w-0 max-w-full" style={layoutFullWidth}>
           {children}

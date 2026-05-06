@@ -11,10 +11,10 @@ import regionSmart from '../../assets/solution-icons/region-smart.svg';
 import transparentFee from '../../assets/solution-icons/transparent-fee.svg';
 
 const features = [
-  { icon: instantDelivery, title: 'Instant Delivery', description: 'No waiting, no guesswork' },
-  { icon: multiPayment, title: 'Multi-Payment', description: 'Bank • Crypto • Gift Cards' },
-  { icon: regionSmart, title: 'Region Smart', description: 'Matches your account region' },
-  { icon: transparentFee, title: 'Transparent Fees', description: 'What you see is what you pay' },
+  { icon: instantDelivery, title: 'Understands plain language', description: 'Type in English or Pidgin. Panda Pay AI gets it instantly.' },
+  { icon: multiPayment, title: '2-second confirmation', description: 'Upload a receipt and AI confirms payment in under 2 seconds.' },
+  { icon: regionSmart, title: 'Live naira prices', description: 'NGN prices update with exchange rates. No surprises.' },
+  { icon: transparentFee, title: 'Automatic fraud protection', description: 'Every transaction is checked before delivery.' },
 ];
 
 const Solution = () => {
@@ -30,14 +30,14 @@ const Solution = () => {
           <FadeReveal className="w-full min-w-0 max-w-4xl">
             <div className="w-full min-w-0">
               <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
-                Why it feels easier
+                AI advantage
               </p>
               <h2 className="mt-5 w-full min-w-0 font-heading text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-none text-text-primary">
-                Pay with less stress.
+                Powered by AI. Built for African gamers.
               </h2>
               <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-base leading-8 text-text-muted">
-                A simpler flow, clear pricing, and fewer payment dead ends. The product
-                should feel calm before it feels clever.
+                Panda Pay AI handles shopping, payment confirmation, live pricing, fraud
+                checks, support, and stock updates inside WhatsApp.
               </p>
             </div>
           </FadeReveal>

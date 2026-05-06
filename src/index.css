@@ -1,4 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Syne:wght@700;800&display=swap");
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ─── Satoshi ──────────────────────────────────────────────────────────────── */
 @font-face {
@@ -86,6 +88,9 @@
   /* ── Colors: Semantic overlay / nav */
   --color-overlay:  initial;
   --color-nav-bg:   initial;
+  --color-hero-left: initial;
+  --color-hero-right: initial;
+  --color-hero-status: initial;
 
   /* ── Shadows: Primary glow (values set in :root / html.dark) */
   --shadow-primary-glow-sm: initial;
@@ -203,18 +208,21 @@
 
 /* ─── Theme: Light mode (default) ──────────────────────────────────────────── */
 :root {
-  --color-background:       #ffffff;
-  --color-surface:          #f5f5f5;
-  --color-surface-raised:   #ebebeb;
-  --color-border:           #d4d4d6;
-  --color-border-subtle:    #e8e8ea;
-  --color-text-primary:     #0a0a0a;
-  --color-text-secondary:   #3d3d3f;
-  --color-text-muted:       #737375;
+  --color-background:       #faf8f5;
+  --color-surface:          #f5f0e8;
+  --color-surface-raised:   #ffffff;
+  --color-border:           #e8ddd0;
+  --color-border-subtle:    #e8ddd0;
+  --color-text-primary:     #120b04;
+  --color-text-secondary:   #6b5642;
+  --color-text-muted:       #6b5642;
   --color-text-inverse:     #ffffff;
   --color-overlay:          rgba(255, 255, 255, 0.5);
-  --color-nav-bg:           #ffffff;
-  --color-card-soft:        #fcefea;
+  --color-nav-bg:           #faf8f5;
+  --color-card-soft:        #f5f0e8;
+  --color-hero-left:        var(--color-background);
+  --color-hero-right:       #2c1f10;
+  --color-hero-status:      #5d9e6e;
   --shadow-primary-glow-sm: 0 0 16px 0 rgba(204, 53, 0, 0.20);
   --shadow-primary-glow-md: 0 0 24px 0 rgba(204, 53, 0, 0.25);
   /* Soft separation instead of solid section borders */
@@ -223,20 +231,27 @@
   --shadow-footer-rule: inset 0 1px 0 rgba(10, 10, 10, 0.065);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ─── Theme: Dark mode ─────────────────────────────────────────────────────── */
 html.dark {
   --color-background:       #0a0a0a;
-  --color-surface:          #121212;
-  --color-surface-raised:   #1c1c1d;
+  --color-surface:          #1c130a;
+  --color-surface-raised:   #25190f;
   --color-border:           #2a2a2a;
   --color-border-subtle:    #1c1c1d;
   --color-text-primary:     #e1e1e3;
-  --color-text-secondary:   #9a9a9c;
-  --color-text-muted:       #737375;
+  --color-text-secondary:   rgba(225, 225, 227, 0.55);
+  --color-text-muted:       rgba(225, 225, 227, 0.55);
   --color-text-inverse:     #0a0a0a;
   --color-overlay:          rgba(10, 10, 10, 0.5);
   --color-nav-bg:           rgba(0, 0, 0, 1);
-  --color-card-soft:        #1a1a1a;
+  --color-card-soft:        #1c130a;
+  --color-hero-left:        var(--color-card-soft);
+  --color-hero-right:       #25190f;
+  --color-hero-status:      #5d9e6e;
   --shadow-primary-glow-sm: 0 0 16px 0 rgba(204, 53, 0, 0.25);
   --shadow-primary-glow-md: 0 0 24px 0 rgba(204, 53, 0, 0.35);
   --shadow-section-separate: 0 20px 52px -26px rgba(0, 0, 0, 0.82);

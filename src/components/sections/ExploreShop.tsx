@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowUpRight, CreditCard, Gamepad2, Zap } from 'lucide-react';
 import { cardFooterInsetRule, cardHoverShadow, primaryOutlinePill } from '../../cardHover';
 import FadeReveal from '../FadeReveal';
+import { DISCORD_URL, WHATSAPP_URL } from '../../siteContent';
 
 /** Warm palette on first two cards; third matches testimonial white (`testimonial-3`). */
 const exploreCardThemes = [
@@ -34,20 +35,20 @@ const exploreCardThemes = [
 const products = [
   {
     title: 'Xbox Game Pass',
-    description: 'Unlock 100+ games with a single pass. Play on console, PC, and cloud.',
-    tag: 'Popular',
+    description: 'Coming soon for console and PC subscriptions.',
+    tag: 'Coming soon',
     icon: Gamepad2,
   },
   {
-    title: 'Call of Duty Mobile',
-    description: 'Top up your CODM credits instantly. Get CP packs at the best rates.',
-    tag: 'Hot',
+    title: 'Fortnite V-Bucks',
+    description: 'Wallet top-ups and bundles are on the roadmap.',
+    tag: 'Coming soon',
     icon: Zap,
   },
   {
-    title: 'Roblox Gift Cards',
-    description: 'Gift Robux to yourself or friends. Redeem across all Roblox platforms.',
-    tag: 'Gift Ready',
+    title: 'FIFA Coins Marketplace',
+    description: 'In-game currency and more African payment options are coming.',
+    tag: 'Coming soon',
     icon: CreditCard,
   },
 ];
@@ -61,17 +62,20 @@ const ExploreShop: React.FC = () => {
               min-content width in the card flex context. Block layout + max-width is stable. */}
           <div className="mx-auto w-full min-w-0 max-w-4xl text-center">
             <h2 className="font-heading text-4xl font-bold leading-tight text-text-primary md:text-5xl">
-              Play more. Less stress.
+              More is coming
             </h2>
             <p className="mx-auto mt-5 max-w-3xl font-sans text-sm leading-8 text-text-muted md:text-base">
-              Buy gift cards, credits, and game passes for your favorite platforms in
-              one clean checkout powered by bank transfers, crypto, or gift cards.
+              The catalog is growing. Xbox Game Pass, Fortnite V-Bucks, FIFA Coins, and more — plus
+              new African payment rails. PandaPay is built to be your one-stop gaming wallet.
             </p>
             <a
-              href="#hero"
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noreferrer"
               className={`mx-auto mt-6 inline-flex items-center justify-center whitespace-nowrap rounded-full px-8 py-3 text-sm font-semibold text-text-primary transition-all hover:bg-primary-500/10 ${primaryOutlinePill}`}
+              aria-label="Join our Discord to be first to know"
             >
-              Explore our shop
+              Join our Discord to be first to know
             </a>
           </div>
 
@@ -112,13 +116,22 @@ const ExploreShop: React.FC = () => {
                       <span
                         className={`inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2 ${theme.link}`}
                       >
-                        Learn more <ArrowUpRight size={14} />
+                        Coming soon <ArrowUpRight size={14} />
                       </span>
                     </div>
                   </div>
                 </FadeReveal>
               );
             })}
+          </div>
+          <div className="rounded-3xl bg-[var(--color-card-soft)] p-8 text-center">
+            <h3 className="font-heading text-3xl font-bold text-text-primary">Ready to play without limits?</h3>
+            <p className="mt-3 text-sm text-text-muted">
+              Message Panda Pay on WhatsApp and get your gaming code in minutes.
+            </p>
+            <a href={WHATSAPP_URL} className="mt-6 inline-flex rounded-full bg-primary-500 px-6 py-3 text-sm font-semibold text-white" aria-label="Start on WhatsApp">
+              Start on WhatsApp
+            </a>
           </div>
         </div>
       </div>

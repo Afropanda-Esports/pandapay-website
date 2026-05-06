@@ -9,20 +9,25 @@
     <link rel="apple-touch-icon" href="/icon-dark.png" />
 
     <!-- Primary Meta Tags -->
-    <title>PandaPay — Pay for Your Favorite Games Seamlessly</title>
-    <meta name="title" content="PandaPay — Pay for Your Favorite Games Seamlessly" />
-    <meta name="description" content="Buy gift cards, game credits, and passes for PlayStation, Xbox, FIFA, and more. Pay with bank transfers, crypto, or gift cards instantly." />
-    <meta name="keywords" content="game payments, gift cards, game credits, PlayStation, Xbox, FIFA, crypto payments, PandaPay" />
+    <title>Panda Pay — Buy Gaming Gift Cards on WhatsApp | Nigeria & Ghana</title>
+    <meta name="title" content="Panda Pay — Buy Gaming Gift Cards on WhatsApp | Nigeria & Ghana" />
+    <meta name="description" content="Buy gaming gift cards and subscriptions on WhatsApp using Naira, USDC, or crypto. PandaPay handles pricing, payment confirmation, and instant code delivery." />
+    <meta name="keywords" content="gaming gift cards, WhatsApp checkout, game subscriptions, Naira payments, USDC payments, crypto payments, PandaPay" />
     <meta name="author" content="PandaPay" />
     <meta name="theme-color" content="#0a0a0a" />
 
     <!-- FOUT prevention: apply dark class before React loads -->
     <script>
       (function() {
-        var stored = localStorage.getItem('theme');
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored === 'dark' || ((stored === 'system' || !stored) && prefersDark)) {
-          document.documentElement.classList.add('dark');
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+          if (stored === 'dark' || (!stored && prefersDark) || (stored === 'system' && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          /* no-op */
         }
       })();
     </script>
@@ -30,16 +35,16 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pandapay.com/" />
-    <meta property="og:title" content="PandaPay — Pay for Your Favorite Games Seamlessly" />
-    <meta property="og:description" content="Buy gift cards, game credits, and passes for PlayStation, Xbox, FIFA, and more. Pay with bank transfers, crypto, or gift cards instantly." />
+    <meta property="og:title" content="Panda Pay — Buy Gaming Gift Cards on WhatsApp | Nigeria & Ghana" />
+    <meta property="og:description" content="Buy gaming gift cards and subscriptions on WhatsApp using Naira, USDC, or crypto. PandaPay handles pricing, payment confirmation, and instant code delivery." />
     <meta property="og:image" content="/icon-dark.png" />
     <meta property="og:site_name" content="PandaPay" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://pandapay.com/" />
-    <meta property="twitter:title" content="PandaPay — Pay for Your Favorite Games Seamlessly" />
-    <meta property="twitter:description" content="Buy gift cards, game credits, and passes for PlayStation, Xbox, FIFA, and more. Pay with bank transfers, crypto, or gift cards instantly." />
+    <meta property="twitter:title" content="Panda Pay — Buy Gaming Gift Cards on WhatsApp | Nigeria & Ghana" />
+    <meta property="twitter:description" content="Buy gaming gift cards and subscriptions on WhatsApp using Naira, USDC, or crypto. PandaPay handles pricing, payment confirmation, and instant code delivery." />
     <meta property="twitter:image" content="/icon-dark.png" />
 
     <!-- Robots -->

@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback, type React
 
 type ThemePreference = 'system' | 'light' | 'dark';
 type ResolvedTheme = 'light' | 'dark';
+const THEME_STORAGE_KEY = 'theme';
 
 interface ThemeContextValue {
   theme: ThemePreference;
@@ -17,7 +18,15 @@ function getSystemTheme(): ResolvedTheme {
 }
 
 function getInitialPreference(): ThemePreference {
-  const stored = localStorage.getItem('theme');
+  const stale = localStorage.getItem('pandapay-theme');
+  if (stale === 'light' || stale === 'dark' || stale === 'system') {
+    if (!localStorage.getItem(THEME_STORAGE_KEY)) {
+      localStorage.setItem(THEME_STORAGE_KEY, stale);
+    }
+    localStorage.removeItem('pandapay-theme');
+  }
+
+  const stored = localStorage.getItem(THEME_STORAGE_KEY);
   if (stored === 'light' || stored === 'dark' || stored === 'system') return stored;
   return 'light';
 }
@@ -30,12 +39,23 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<ThemePreference>(getInitialPreference);
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => resolve(theme));
 
+  useEffect(() => {
+    const stale = localStorage.getItem('pandapay-theme');
+    if (stale === 'light' || stale === 'dark' || stale === 'system') {
+      if (!localStorage.getItem(THEME_STORAGE_KEY)) {
+        localStorage.setItem(THEME_STORAGE_KEY, stale);
+      }
+      localStorage.removeItem('pandapay-theme');
+    }
+  }, []);
+
   // Apply dark class and persist preference
   useEffect(() => {
     const resolved = resolve(theme);
     setResolvedTheme(resolved);
     document.documentElement.classList.toggle('dark', resolved === 'dark');
-    localStorage.setItem('theme', theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    localStorage.removeItem('color-scheme');
   }, [theme]);
 
   // Listen for OS theme changes when preference is 'system'
