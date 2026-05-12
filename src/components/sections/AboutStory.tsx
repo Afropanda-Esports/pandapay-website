@@ -19,7 +19,7 @@ export default function AboutStory() {
               We built the store Africa's gamers deserved.
             </h2>
             <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]">
-              African gamers spend billions every year on gaming — but most payment infrastructure was never built for them. PandaPay changes that.
+              African gamers spend millions every year on gaming — but most payment infrastructure was never built for them. PandaPay changes that.
             </p>
           </div>
         </FadeReveal>

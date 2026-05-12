@@ -25,7 +25,7 @@ const LandingPage: React.FC = () => {
         path="/"
       />
       <Navbar />
-      <main className="-mt-20 flex min-w-0 w-full flex-1 flex-col items-stretch overflow-x-hidden lg:-mt-24">
+      <main className="pt-16 flex min-w-0 w-full flex-1 flex-col items-stretch overflow-x-hidden lg:pt-20">
         <Hero />
         <Suspense fallback={null}>
           <Painpoint />

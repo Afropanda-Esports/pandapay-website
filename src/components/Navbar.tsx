@@ -134,7 +134,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`sticky top-0 z-50 flex w-full items-center px-6 transition-[height,box-shadow] duration-200 ease-out md:px-12 lg:px-20 ${isScrolled ? 'h-16' : 'h-20 lg:h-24'}`}
+        className={`fixed inset-x-0 top-0 z-50 flex w-full items-center px-6 transition-[height,box-shadow] duration-200 ease-out md:px-12 lg:px-20 ${isScrolled ? 'h-16' : 'h-20 lg:h-24'}`}
         style={navSurfaceStyle}
       >
         <div className="mx-auto flex w-full max-w-[1440px] min-w-0 items-center gap-3">

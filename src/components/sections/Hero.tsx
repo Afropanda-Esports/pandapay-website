@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
       >
         <div className="grid w-full min-w-0 grid-cols-1 min-h-screen md:grid-cols-2">
           <div
-            className="relative flex min-h-[60vh] min-w-0 flex-col px-7 pb-8 pt-28 md:min-h-screen md:px-10 md:pb-10 md:pt-32 lg:px-16 lg:pb-14 lg:pt-36"
+            className="relative flex min-h-[60vh] min-w-0 flex-col px-7 pb-8 pt-[4.5rem] md:min-h-screen md:px-10 md:pb-10 md:pt-[5rem] lg:px-16 lg:pb-14 lg:pt-[5.5rem]"
             style={{ backgroundColor: 'var(--color-hero-left)' }}
           >
             <img
@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
                     transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <h1
-                      className="max-w-[540px] text-[13.5vw] text-text-primary sm:text-[10vw] md:text-6xl lg:text-7xl xl:text-8xl"
+                      className="max-w-[540px] text-[10vw] text-text-primary sm:text-[7.8vw] md:text-5xl lg:text-6xl xl:text-7xl"
                       style={{
                         fontFamily: '"Syne", sans-serif',
                         fontWeight: 800,
@@ -168,7 +168,7 @@ const Hero: React.FC = () => {
                     className="text-base text-text-secondary md:text-lg"
                     style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 400 }}
                   >
-                    <span className="font-medium text-primary-500">+5,000</span> gamers across
+                    <span className="font-medium text-primary-500">+200</span> gamers across
                     Africa
                   </p>
                 </motion.div>

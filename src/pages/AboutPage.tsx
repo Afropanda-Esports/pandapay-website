@@ -37,7 +37,7 @@ export default function AboutPage() {
       />
       <PageHero
         title="We built the store Africa's gamers deserved."
-        body="African gamers spend billions every year on gaming — but most payment infrastructure was never built for them. PandaPay changes that."
+        body="African gamers spend millions every year on gaming — but most payment infrastructure was never built for them. PandaPay changes that."
       />
 
       <main className="pb-20">
