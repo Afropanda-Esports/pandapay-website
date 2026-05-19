@@ -9,6 +9,17 @@ export function whatsappUrl(message?: string): string {
 }
 
 export const WHATSAPP_URL = whatsappUrl();
+
+/** Set to true when the WhatsApp bot is accepting live orders. */
+export const WHATSAPP_BOT_LIVE = false;
+
+export const botStatusShort = WHATSAPP_BOT_LIVE ? "online" : "offline";
+export const botStatusNav = WHATSAPP_BOT_LIVE ? "AI online" : "AI offline";
+export const botStatusDetail = WHATSAPP_BOT_LIVE
+  ? "AI assistant · online now"
+  : "AI assistant · offline for now";
+export const botStatusHero = WHATSAPP_BOT_LIVE ? "Online — AI active" : "Offline — back soon";
+
 export const TWITTER_URL = "https://x.com/afropandaesport";
 export const INSTAGRAM_URL = "https://www.instagram.com/afropandaesports";
 export const DISCORD_URL = "https://discord.gg/2vW7vp7eDu";

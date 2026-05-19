@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight, MessageCircleMore } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { layoutFullWidth } from '../../layoutStyles';
 import { useTheme } from '../../context/ThemeContext';
-import { WHATSAPP_URL } from '../../siteContent';
+import { botStatusHero, WHATSAPP_BOT_LIVE, WHATSAPP_URL } from '../../siteContent';
 import { displayHeroTitle } from '../../typography';
 import logoTextDark from '../../assets/logo/logo-text-dark.png';
 import logoTextLight from '../../assets/logo/logo-text-light.png';
@@ -181,9 +181,11 @@ const Hero: React.FC = () => {
                   </p>
                   <p
                     className="text-sm"
-                    style={{ color: 'var(--color-hero-status)' }}
+                    style={{
+                      color: WHATSAPP_BOT_LIVE ? 'var(--color-hero-status)' : 'rgba(255,255,255,0.45)',
+                    }}
                   >
-                    Online — AI active
+                    {botStatusHero}
                   </p>
                 </div>
                 <div className="ml-auto flex flex-col gap-1.5 opacity-40">

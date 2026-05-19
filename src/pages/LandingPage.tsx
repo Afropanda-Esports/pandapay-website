@@ -20,7 +20,7 @@ const LandingPage: React.FC = () => {
         path="/"
       />
       <Navbar />
-      <main className="flex min-w-0 w-full flex-1 flex-col items-stretch overflow-x-hidden pt-16 lg:pt-20">
+      <main className="flex min-w-0 w-full flex-1 flex-col items-stretch overflow-x-hidden pt-24 lg:pt-28">
         <Hero />
         <Inventory />
         <Suspense fallback={null}>

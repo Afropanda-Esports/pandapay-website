@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 import { sectionTitle } from '../../typography';
+import { botStatusShort } from '../../siteContent';
 import FadeReveal from '../FadeReveal';
 
 type ChatTestimonial = {
@@ -179,7 +180,7 @@ export default function Testimonial() {
                     </div>
                     <div>
                       <p className="font-semibold leading-tight">Panda Pay</p>
-                      <p className="text-xs text-white/80">online</p>
+                      <p className="text-xs text-white/60">{botStatusShort}</p>
                     </div>
                   </div>
 
