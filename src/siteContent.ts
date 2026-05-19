@@ -1,4 +1,14 @@
-export const WHATSAPP_URL = "https://wa.me/234XXXXXXXXXX";
+const WHATSAPP_NUMBER =
+  (import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined)?.replace(/\D/g, "") ||
+  "234XXXXXXXXXX";
+
+export function whatsappUrl(message?: string): string {
+  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+  if (!message?.trim()) return base;
+  return `${base}?text=${encodeURIComponent(message.trim())}`;
+}
+
+export const WHATSAPP_URL = whatsappUrl();
 export const TWITTER_URL = "https://x.com/afropandaesport";
 export const INSTAGRAM_URL = "https://www.instagram.com/afropandaesports";
 export const DISCORD_URL = "https://discord.gg/2vW7vp7eDu";

@@ -3,18 +3,13 @@ import { layoutFullWidth } from '../layoutStyles';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Hero from '../components/sections/Hero';
+import Inventory from '../components/sections/Inventory';
 import SeoMeta from '../components/SeoMeta';
 
-const Painpoint = lazy(() => import('../components/sections/Painpoint'));
-const MicroStory = lazy(() => import('../components/sections/MicroStory'));
 const HowItWorksDeepDive = lazy(() => import('../components/sections/HowItWorksDeepDive'));
-const CryptoShowcase = lazy(() => import('../components/sections/CryptoShowcase'));
-const WhyPandaPay = lazy(() => import('../components/sections/WhyPandaPay'));
-const Solution = lazy(() => import('../components/sections/Solution'));
-const AboutStory = lazy(() => import('../components/sections/AboutStory'));
 const Testimonial = lazy(() => import('../components/sections/Testimonial'));
 const FAQ = lazy(() => import('../components/sections/FAQ'));
-const ExploreShop = lazy(() => import('../components/sections/ExploreShop'));
+const ShopCta = lazy(() => import('../components/sections/ShopCta'));
 
 const LandingPage: React.FC = () => {
   return (
@@ -25,19 +20,14 @@ const LandingPage: React.FC = () => {
         path="/"
       />
       <Navbar />
-      <main className="pt-16 flex min-w-0 w-full flex-1 flex-col items-stretch overflow-x-hidden lg:pt-20">
+      <main className="flex min-w-0 w-full flex-1 flex-col items-stretch overflow-x-hidden pt-16 lg:pt-20">
         <Hero />
+        <Inventory />
         <Suspense fallback={null}>
-          <Painpoint />
           <HowItWorksDeepDive />
-          <MicroStory />
-          <CryptoShowcase />
-          <WhyPandaPay />
-          <Solution />
-          <AboutStory />
           <Testimonial />
           <FAQ />
-          <ExploreShop />
+          <ShopCta />
         </Suspense>
       </main>
 

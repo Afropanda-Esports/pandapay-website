@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus } from 'lucide-react';
 import { cardHoverShadow } from '../../cardHover';
+import { sectionTitle } from '../../typography';
 import FadeReveal from '../FadeReveal';
 
 interface FAQItem {
@@ -47,7 +48,7 @@ const FAQ = () => {
             <p className="w-full min-w-0 font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
               FAQ
             </p>
-            <h2 className="w-full min-w-0 font-heading text-4xl font-bold leading-tight text-text-primary md:text-5xl">
+            <h2 className={`w-full min-w-0 ${sectionTitle}`}>
               Frequently asked questions.
             </h2>
             <p className="w-full min-w-0 max-w-xl font-sans text-base leading-8 text-text-muted">

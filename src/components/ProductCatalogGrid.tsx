@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import FadeReveal from "./FadeReveal";
 import type { Product } from "../siteContent";
-import { WHATSAPP_URL } from "../siteContent";
+import { whatsappUrl } from "../siteContent";
 
 type Props = {
   products: Product[];
@@ -31,13 +31,13 @@ export default function ProductCatalogGrid({
               <p className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-primary-500">
                 {product.category}
               </p>
-              <h3 className="mt-3 font-heading text-2xl font-bold text-text-primary">
+              <h3 className="mt-3 font-heading text-xl font-bold text-text-primary">
                 {product.name}
               </h3>
               <p className="mt-3 flex-1 font-sans text-sm leading-7 text-text-muted">
                 {product.description}
               </p>
-              <p className="mt-5 font-heading text-3xl font-bold text-primary-500">
+              <p className="mt-5 font-heading text-2xl font-bold text-primary-500">
                 {product.price}
               </p>
               {product.status === 'coming-soon' ? (
@@ -46,7 +46,7 @@ export default function ProductCatalogGrid({
                 </span>
               ) : (
                 <a
-                  href={WHATSAPP_URL}
+                  href={whatsappUrl(`Hi PandaPay, I'd like to buy ${product.name}.`)}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-text-primary"
                   aria-label={`Buy ${product.name} on WhatsApp`}
                 >

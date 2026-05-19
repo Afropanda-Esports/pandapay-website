@@ -2,6 +2,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import SeoMeta from "../components/SeoMeta";
 import FAQ from "../components/sections/FAQ";
+import { sectionTitle } from "../typography";
 import { WHATSAPP_URL } from "../siteContent";
 
 export default function FaqPage() {
@@ -15,7 +16,7 @@ export default function FaqPage() {
       <Navbar />
       <main className="pt-6">
         <section className="mx-auto max-w-[1440px] px-6 md:px-12 lg:px-20">
-          <h1 className="font-heading text-5xl font-bold text-text-primary">Frequently Asked Questions</h1>
+          <h1 className={sectionTitle}>Frequently Asked Questions</h1>
           <p className="mt-4 max-w-3xl leading-8 text-text-muted">
             Panda Pay AI handles your full purchase flow on WhatsApp, so answers stay fast and clear.
           </p>

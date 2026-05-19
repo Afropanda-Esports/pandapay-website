@@ -1,3 +1,4 @@
+import { sectionTitleOnDark, stepTitleOnDark } from '../../typography';
 import FadeReveal from '../FadeReveal';
 import { WHATSAPP_URL } from '../../siteContent';
 
@@ -58,7 +59,7 @@ export default function HowItWorksDeepDive() {
             <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-[#C04B22]">
               Full flow
             </p>
-            <h2 className="mt-5 w-full min-w-0 font-heading text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[1.02] text-[#120B04] dark:text-[rgb(225,225,227)]">
+            <h2 className={`mt-5 w-full min-w-0 ${sectionTitleOnDark}`}>
               From chat to code in minutes.
             </h2>
             <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]">
@@ -93,7 +94,7 @@ export default function HowItWorksDeepDive() {
                         {step.tag}
                       </span>
                     </div>
-                    <h3 className="max-w-4xl font-heading text-2xl font-bold leading-tight text-[#120B04] dark:text-[rgb(225,225,227)] md:text-3xl">
+                    <h3 className={`max-w-4xl ${stepTitleOnDark}`}>
                       {step.title}
                     </h3>
                     <p className="max-w-3xl font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]">

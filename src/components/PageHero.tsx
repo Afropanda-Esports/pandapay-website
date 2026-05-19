@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { pageHeroTitle } from "../typography";
 import Navbar from "./Navbar";
 import FadeReveal from "./FadeReveal";
 
@@ -23,7 +24,7 @@ export default function PageHero({ badge, title, body, children }: Props) {
                 </span>
               </div>
             ) : null}
-            <h1 className="mt-5 font-heading text-[clamp(3rem,8vw,6.5rem)] font-bold leading-[0.95] text-[#120B04] dark:text-[rgb(225,225,227)]">
+            <h1 className={`mt-5 ${pageHeroTitle}`}>
               {title}
             </h1>
             <p className="mt-6 max-w-3xl font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)] md:text-lg">

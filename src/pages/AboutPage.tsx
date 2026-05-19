@@ -46,7 +46,7 @@ export default function AboutPage() {
             {sections.map((section, index) => (
               <FadeReveal key={section.title} className="w-full min-w-0" delay={index * 0.05}>
                 <article className="h-full rounded-[32px] bg-[var(--color-card-soft)] p-8 shadow-elevation-2">
-                  <h2 className="font-heading text-3xl font-bold text-[#120B04] dark:text-[rgb(225,225,227)] md:text-4xl">
+                  <h2 className="font-heading text-[clamp(1.25rem,2.5vw,1.75rem)] font-bold text-[#120B04] dark:text-[rgb(225,225,227)]">
                     {section.title}
                   </h2>
                   <p className="mt-4 font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]">

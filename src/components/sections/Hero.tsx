@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { layoutFullWidth } from '../../layoutStyles';
 import { useTheme } from '../../context/ThemeContext';
 import { WHATSAPP_URL } from '../../siteContent';
+import { displayHeroTitle } from '../../typography';
 import logoTextDark from '../../assets/logo/logo-text-dark.png';
 import logoTextLight from '../../assets/logo/logo-text-light.png';
 
@@ -19,7 +20,6 @@ const Hero: React.FC = () => {
   ];
 
   const heroCopy = {
-    badge: 'AI-Powered for African Gamers',
     titleTop: 'Your',
     titleMid: 'Gaming',
     titleBottom: 'Store.',
@@ -52,32 +52,13 @@ const Hero: React.FC = () => {
             />
             <div className="relative z-10 flex h-full min-h-0 flex-col justify-between">
               <div className="flex flex-col gap-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0 }}
-                  className="inline-flex w-fit items-center gap-3 rounded-full bg-primary-500/10 px-5 py-3"
-                >
-                  <span className="relative flex h-3 w-3">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-500/50" />
-                    <span className="relative inline-flex h-3 w-3 rounded-full bg-primary-500" />
-                  </span>
-                  <span
-                    className="text-xs font-medium uppercase tracking-[0.18em] text-text-secondary md:text-[13px]"
-                    style={{ fontFamily: '"DM Sans", sans-serif' }}
-                  >
-                    {heroCopy.badge}
-                  </span>
-                </motion.div>
-
-                <div className="flex flex-col gap-8">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  >
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              >
                     <h1
-                      className="max-w-[540px] text-[10vw] text-text-primary sm:text-[7.8vw] md:text-5xl lg:text-6xl xl:text-7xl"
+                      className={displayHeroTitle}
                       style={{
                         fontFamily: '"Syne", sans-serif',
                         fontWeight: 800,
@@ -94,18 +75,17 @@ const Hero: React.FC = () => {
                       <span className="mt-2 block text-primary-500 sm:mt-3">{heroCopy.titleAccentTop}</span>
                       <span className="block text-primary-500">{heroCopy.titleAccentBottom}</span>
                     </h1>
-                  </motion.div>
+              </motion.div>
 
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="max-w-[380px] text-[clamp(1rem,2vw,1.1rem)] leading-[1.7] text-text-secondary"
-                    style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 300 }}
-                  >
-                    {heroCopy.body}
-                  </motion.p>
-                </div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="max-w-[380px] text-[clamp(1rem,2vw,1.1rem)] leading-[1.7] text-text-secondary"
+                style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 300 }}
+              >
+                {heroCopy.body}
+              </motion.p>
               </div>
 
               <div className="flex flex-col gap-10 pt-10">
@@ -132,14 +112,14 @@ const Hero: React.FC = () => {
                     </span>
                   </a>
                   <a
-                    href="#how-it-works"
+                    href="#inventory"
                     className="inline-flex items-center gap-3 text-text-secondary transition-colors hover:text-primary-500"
                   >
                     <span
                       className="text-[15px]"
                       style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 400 }}
                     >
-                      How it works
+                      Browse shop
                     </span>
                     <ArrowRight size={18} />
                   </a>

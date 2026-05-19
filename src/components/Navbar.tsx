@@ -12,11 +12,9 @@ import { WHATSAPP_URL } from '../siteContent';
 
 const NAV_LINKS = [
   { label: 'Home', href: '#hero' },
-  { label: 'Products', href: '#explore-shop' },
+  { label: 'Shop', href: '#inventory' },
   { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Crypto', href: '#crypto' },
   { label: 'FAQ', href: '#faq' },
-  { label: 'About', href: '#about' },
 ];
 
 const Navbar = () => {
