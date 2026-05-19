@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { fetchOfferings, type Offering } from '../../api/offerings';
-import { getInventoryImage } from '../../inventoryImages';
+import {
+  getInventoryImage,
+  INVENTORY_IMAGE_HEIGHT,
+  INVENTORY_IMAGE_WIDTH,
+} from '../../inventoryImages';
 import { whatsappUrl } from '../../siteContent';
 import { cardFooterInsetRule } from '../../cardHover';
 import { sectionTitle } from '../../typography';
@@ -30,10 +34,11 @@ function InventoryCard({ offering, index }: { offering: Offering; index: number 
           <img
             src={imageSrc}
             alt={offering.title}
-            width={1080}
-            height={1350}
+            width={INVENTORY_IMAGE_WIDTH}
+            height={INVENTORY_IMAGE_HEIGHT}
             className="h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.02]"
-            loading={index < 2 ? 'eager' : 'lazy'}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            fetchPriority={index === 0 ? 'high' : 'low'}
             decoding="async"
             sizes="(max-width: 640px) 46vw, 280px"
           />

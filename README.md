@@ -14,3 +14,8 @@ Copy `.env.example` to `.env` and set:
 - `VITE_API_URL` — optional in production; in dev the Vite proxy forwards `/api` to `http://localhost:3000`
 
 The homepage **Inventory** section loads featured offerings from `GET /offerings` on the PandaPay API and links each card to WhatsApp with a product-specific pre-filled message.
+
+### Inventory images
+
+- **Served from:** `public/inventory/*.webp` (static URLs like `/inventory/playstation.webp`, copied to `dist/` on build).
+- **Source workflow:** add or replace PNGs in `public/inventory/`, then run `pnpm run optimize:inventory` to resize (560px wide) and convert to WebP. Do not keep a separate `inventory/` folder at the repo root.
