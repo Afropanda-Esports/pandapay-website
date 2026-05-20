@@ -112,7 +112,7 @@ export default function Testimonial() {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-24 bottom-1/4 h-72 w-72 rounded-full bg-secondary-500/10 blur-3xl"
+        className="pointer-events-none absolute -right-24 bottom-1/4 h-72 w-72 rounded-full bg-primary-500/8 blur-3xl"
         aria-hidden
       />
 

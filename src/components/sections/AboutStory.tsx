@@ -12,7 +12,7 @@ export default function AboutStory() {
       <div className="mx-auto flex w-full min-w-0 max-w-[1440px] flex-col gap-12 px-4 py-12 lg:px-20 lg:py-0">
         <FadeReveal className="w-full min-w-0 max-w-4xl">
           <div className="w-full min-w-0">
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-[#C04B22]">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
               About
             </p>
             <h2 className="mt-5 w-full min-w-0 font-heading text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[1.02] text-[#120B04] dark:text-[rgb(225,225,227)]">
@@ -53,7 +53,7 @@ export default function AboutStory() {
 
         <div className="grid w-full min-w-0 grid-cols-1 gap-5 lg:grid-cols-[0.95fr_1.05fr]">
           <FadeReveal className="w-full min-w-0">
-            <article className="h-full rounded-[32px] bg-[#C04B22] p-8 md:p-10">
+            <article className="h-full rounded-[32px] bg-primary-500 p-8 md:p-10">
               <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-white/60">
                 Mission
               </p>

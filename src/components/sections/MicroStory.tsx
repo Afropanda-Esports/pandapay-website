@@ -37,7 +37,7 @@ export default function MicroStory() {
         <FadeReveal className="w-full min-w-0 max-w-4xl">
           <div className="w-full min-w-0">
             <div className="inline-flex rounded-full border border-[rgba(192,75,34,0.2)] bg-[rgba(192,75,34,0.08)] px-4 py-2 dark:border-[rgba(192,75,34,0.3)] dark:bg-[rgba(192,75,34,0.15)]">
-              <span className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-[#C04B22]">
+              <span className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
                 Payment methods
               </span>
             </div>

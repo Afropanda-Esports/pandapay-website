@@ -49,11 +49,22 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Apply dark class and persist preference
+  // Apply dark class, theme-color, and persist preference
   useEffect(() => {
     const resolved = resolve(theme);
     setResolvedTheme(resolved);
     document.documentElement.classList.toggle('dark', resolved === 'dark');
+
+    let themeColorMeta = document.querySelector<HTMLMetaElement>(
+      'meta[name="theme-color"]:not([media])',
+    );
+    if (!themeColorMeta) {
+      themeColorMeta = document.createElement('meta');
+      themeColorMeta.name = 'theme-color';
+      document.head.appendChild(themeColorMeta);
+    }
+    themeColorMeta.content = resolved === 'dark' ? '#0c0c0c' : '#ffffff';
+
     localStorage.setItem(THEME_STORAGE_KEY, theme);
     localStorage.removeItem('color-scheme');
   }, [theme]);
@@ -67,6 +78,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       const resolved: ResolvedTheme = e.matches ? 'dark' : 'light';
       setResolvedTheme(resolved);
       document.documentElement.classList.toggle('dark', resolved === 'dark');
+      const themeColorMeta = document.querySelector<HTMLMetaElement>(
+        'meta[name="theme-color"]:not([media])',
+      );
+      if (themeColorMeta) {
+        themeColorMeta.content = resolved === 'dark' ? '#0c0c0c' : '#ffffff';
+      }
     };
 
     mq.addEventListener('change', handler);

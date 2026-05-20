@@ -110,7 +110,7 @@ function FlowPhone({ activeStep }: { activeStep: number }) {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.div
-        className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-primary-500/25 via-secondary-500/10 to-transparent blur-2xl"
+        className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-primary-500/25 via-primary-500/5 to-transparent blur-2xl"
         animate={{ opacity: [0.35, 0.55, 0.35] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
         aria-hidden
@@ -119,7 +119,7 @@ function FlowPhone({ activeStep }: { activeStep: number }) {
         className="relative rounded-[2rem] p-[3px]"
         style={{
           background:
-            'linear-gradient(145deg, rgba(204,53,0,0.5), rgba(39,165,137,0.35), rgba(204,53,0,0.25))',
+            'linear-gradient(145deg, rgba(255,107,1,0.55), rgba(255,107,1,0.2), rgba(255,107,1,0.35))',
         }}
         whileHover={{ y: -4 }}
         transition={{ type: 'spring', stiffness: 320, damping: 24 }}
@@ -134,7 +134,7 @@ function FlowPhone({ activeStep }: { activeStep: number }) {
               <MessageCircle size={18} aria-hidden />
             </motion.div>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold">Panda Pay</p>
+              <p className="text-sm font-semibold">Pandapay</p>
               <p className="text-[11px] text-white/70">Full purchase flow</p>
             </div>
             <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold tabular-nums">
@@ -240,7 +240,7 @@ function StepCard({
         <motion.div
           className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${
             isActive
-              ? 'bg-primary-500 text-white shadow-[0_4px_14px_-2px_rgba(204,53,0,0.45)]'
+              ? 'bg-primary-500 text-white shadow-[0_4px_14px_-2px_rgba(255,107,1,0.45)]'
               : 'bg-primary-500/10 text-primary-500'
           }`}
           animate={isActive ? { scale: [1, 1.06, 1] } : { scale: 1 }}
@@ -269,7 +269,7 @@ function StepCard({
 
       {isActive ? (
         <motion.div
-          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500"
+          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500"
           layoutId="flow-active-bar"
           initial={{ width: 0 }}
           animate={{ width: '100%' }}
@@ -365,7 +365,7 @@ export default function HowItWorksDeepDive() {
               aria-hidden
             >
               <motion.div
-                className="w-full origin-top bg-gradient-to-b from-primary-500 to-secondary-500"
+                className="w-full origin-top bg-gradient-to-b from-primary-500 to-primary-400"
                 animate={{ height: `${(activeStep / Math.max(flowSteps.length - 1, 1)) * 100}%` }}
                 transition={{ type: 'spring', stiffness: 200, damping: 28 }}
               />
@@ -389,7 +389,7 @@ export default function HowItWorksDeepDive() {
         <FadeReveal className="mt-14 flex flex-col items-center gap-4 sm:flex-row sm:justify-center" delay={0.1}>
           <a
             href={WHATSAPP_URL}
-            className="group inline-flex items-center gap-2 rounded-full bg-primary-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_24px_-4px_rgba(204,53,0,0.45)] transition-all hover:bg-primary-600"
+            className="group inline-flex items-center gap-2 rounded-full bg-primary-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_24px_-4px_rgba(255,107,1,0.45)] transition-all hover:bg-primary-600"
           >
             Try it on WhatsApp
             <ArrowUpRight

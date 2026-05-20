@@ -12,11 +12,11 @@ export const cardHoverShadow =
 
 /** Primary “outline” pill without a hard stroke (ring + depth + soft glow). */
 export const primaryOutlinePill =
-  'shadow-[0_0_0_2px_rgba(204,53,0,0.38),0_8px_22px_-6px_rgba(204,53,0,0.15),0_0_20px_-2px_rgba(204,53,0,0.18)] transition-all hover:shadow-[0_0_0_2px_rgba(204,53,0,0.5),0_12px_28px_-4px_rgba(204,53,0,0.22),0_0_24px_-2px_rgba(204,53,0,0.24)]';
+  'shadow-[0_0_0_2px_rgba(255,107,1,0.38),0_8px_22px_-6px_rgba(255,107,1,0.15),0_0_20px_-2px_rgba(255,107,1,0.18)] transition-all hover:shadow-[0_0_0_2px_rgba(255,107,1,0.5),0_12px_28px_-4px_rgba(255,107,1,0.22),0_0_24px_-2px_rgba(255,107,1,0.24)]';
 
 /** Soft top edge inside tinted cards (replaces `border-t`). */
 export const cardFooterInsetRule =
-  'shadow-[inset_0_1px_0_0_rgba(0,0,0,0.075)] dark:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.22)]';
+  'shadow-[inset_0_1px_0_0_rgba(0,0,0,0.075)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]';
 
 /** White / near-white card on a light page (Painpoint + Testimonial `bg-testimonial-3`). */
 export const lightCardSurface =

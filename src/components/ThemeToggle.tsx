@@ -5,7 +5,8 @@ type ThemeIconButtonProps = {
   className?: string;
 };
 
-const themeOrder = ['light', 'dark', 'system'] as const;
+/** Cycle starts from default preference (system). */
+const themeOrder = ['system', 'light', 'dark'] as const;
 
 export default function ThemeToggle({ className = '' }: ThemeIconButtonProps) {
   const { theme, setTheme } = useTheme();

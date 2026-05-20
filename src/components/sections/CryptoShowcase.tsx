@@ -41,7 +41,7 @@ export default function CryptoShowcase() {
       <div className="mx-auto flex w-full min-w-0 max-w-[1440px] flex-col gap-12 px-4 py-12 lg:px-20 lg:py-0">
         <FadeReveal className="w-full min-w-0 max-w-4xl">
           <div className="w-full min-w-0">
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-[#C04B22]">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
               Crypto-native gaming
             </p>
             <h2 className="mt-5 w-full min-w-0 font-heading text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[1.02] text-[#120B04] dark:text-[rgb(225,225,227)]">
@@ -81,7 +81,7 @@ export default function CryptoShowcase() {
           {editorialCards.map((card, index) => (
             <FadeReveal key={card.title} className="w-full min-w-0" delay={index * 0.08}>
               <article className="h-full rounded-2xl border border-[#E8DDD0] bg-[#F5F0E8] p-8 dark:border-white/8 dark:bg-[#1C130A]">
-                <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-[#C04B22]">
+                <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
                   {card.eyebrow}
                 </p>
                 <h3 className="mt-5 text-[22px] font-medium leading-tight text-[#120B04] dark:text-[rgb(225,225,227)]">

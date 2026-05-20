@@ -132,16 +132,16 @@ const Navbar = () => {
             animate={{
               boxShadow: isScrolled
                 ? isDark
-                  ? '0 0 0 1px rgba(255,255,255,0.06), 0 12px 40px -12px rgba(0,0,0,0.55), 0 0 32px -8px rgba(204,53,0,0.15)'
-                  : '0 0 0 1px rgba(0,0,0,0.05), 0 12px 40px -12px rgba(18,11,4,0.12), 0 0 28px -8px rgba(204,53,0,0.12)'
+                  ? '0 0 0 1px rgba(255,255,255,0.06), 0 12px 40px -12px rgba(0,0,0,0.55), 0 0 32px -8px rgba(255,107,1,0.18)'
+                  : '0 0 0 1px rgba(0,0,0,0.05), 0 12px 40px -12px rgba(12,12,12,0.1), 0 0 28px -8px rgba(255,107,1,0.14)'
                 : isDark
                   ? '0 0 0 1px rgba(255,255,255,0.05), 0 4px 24px -8px rgba(0,0,0,0.35)'
-                  : '0 0 0 1px rgba(0,0,0,0.04), 0 4px 20px -8px rgba(18,11,4,0.08)',
+                  : '0 0 0 1px rgba(0,0,0,0.04), 0 4px 20px -8px rgba(12,12,12,0.06)',
             }}
             style={{
               background: isDark
-                ? 'linear-gradient(135deg, rgba(204,53,0,0.45), rgba(39,165,137,0.25), rgba(204,53,0,0.2))'
-                : 'linear-gradient(135deg, rgba(204,53,0,0.35), rgba(39,165,137,0.2), rgba(204,53,0,0.15))',
+                ? 'linear-gradient(135deg, rgba(255,107,1,0.45), rgba(255,107,1,0.12), rgba(255,107,1,0.2))'
+                : 'linear-gradient(135deg, rgba(255,107,1,0.35), rgba(255,107,1,0.1), rgba(255,107,1,0.15))',
             }}
           >
             <nav
@@ -158,7 +158,7 @@ const Navbar = () => {
                 <motion.img
                   src={icon}
                   alt=""
-                  className="h-9 w-9 shrink-0 md:h-10 md:w-10"
+                  className={`h-9 w-9 shrink-0 overflow-hidden md:h-10 md:w-10 ${!isCollapsedLogo ? 'sm:hidden' : ''}`}
                   animate={{ scale: isCollapsedLogo ? 1 : 0.92, opacity: 1 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                 />
@@ -226,7 +226,7 @@ const Navbar = () => {
                 <ThemeToggle />
                 <a
                   href={WHATSAPP_URL}
-                  className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12)_inset,0_4px_16px_-2px_rgba(204,53,0,0.45)] transition-all duration-200 hover:bg-primary-600 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.15)_inset,0_8px_24px_-4px_rgba(204,53,0,0.5)]"
+                  className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12)_inset,0_4px_16px_-2px_rgba(255,107,1,0.45)] transition-all duration-200 hover:bg-primary-600 hover:shadow-[0_0_0_1px_rgba(255,255,255,0.15)_inset,0_8px_24px_-4px_rgba(255,107,1,0.5)]"
                   aria-label="Start on WhatsApp"
                 >
                   <span
@@ -243,7 +243,7 @@ const Navbar = () => {
               <div className="ml-auto flex items-center gap-2 md:hidden">
                 <a
                   href={WHATSAPP_URL}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-white shadow-[0_4px_14px_-2px_rgba(204,53,0,0.45)]"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-500 text-white shadow-[0_4px_14px_-2px_rgba(255,107,1,0.45)]"
                   aria-label="WhatsApp"
                 >
                   <WhatsAppIcon className="h-[18px] w-[18px]" />
@@ -303,7 +303,7 @@ const Navbar = () => {
                   exit={{ x: '100%' }}
                   transition={{ type: 'spring', stiffness: 320, damping: 34 }}
                   style={{
-                    backgroundColor: isDark ? '#14100c' : '#faf8f5',
+                    backgroundColor: isDark ? '#0c0c0c' : '#ffffff',
                   }}
                 >
                   <motion.div
@@ -312,7 +312,7 @@ const Navbar = () => {
                     transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                   />
                   <motion.div
-                    className="pointer-events-none absolute -right-8 bottom-32 h-40 w-40 rounded-full bg-secondary-500/20 blur-3xl"
+                    className="pointer-events-none absolute -right-8 bottom-32 h-40 w-40 rounded-full bg-primary-500/15 blur-3xl"
                     animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.5, 0.3] }}
                     transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                   />
@@ -324,7 +324,6 @@ const Navbar = () => {
                     transition={{ delay: 0.05 }}
                   >
                     <div className="flex items-center gap-2">
-                      <img src={icon} alt="" className="h-9 w-9" />
                       <img src={logoText} alt="PandaPay" className="h-7 w-auto" />
                     </div>
                     <button
@@ -414,7 +413,7 @@ const Navbar = () => {
                         <a
                           href={WHATSAPP_URL}
                           onClick={() => setIsOpen(false)}
-                          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-primary-500 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_8px_24px_-4px_rgba(204,53,0,0.45)]"
+                          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-primary-500 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_8px_24px_-4px_rgba(255,107,1,0.45)]"
                         >
                           <WhatsAppIcon />
                           Start on WhatsApp

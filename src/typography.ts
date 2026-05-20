@@ -1,22 +1,24 @@
-/** Shared heading scales — section titles, step titles, page heroes. */
+/** Shared heading scales — American Captain + brand orange accents */
 
 export const sectionTitle =
-  'font-heading text-[clamp(1.75rem,4.2vw,2.75rem)] font-bold leading-tight text-text-primary';
+  'font-heading text-[clamp(1.75rem,4.2vw,2.75rem)] leading-tight text-text-primary';
 
-export const sectionTitleOnDark =
-  'font-heading text-[clamp(1.75rem,4.2vw,2.75rem)] font-bold leading-tight text-[#120B04] dark:text-[rgb(225,225,227)]';
+export const sectionTitleOnDark = sectionTitle;
 
 export const stepTitle =
-  'font-heading text-[clamp(1.125rem,2.2vw,1.5rem)] font-bold leading-tight text-text-primary';
+  'font-heading text-[clamp(1.125rem,2.2vw,1.5rem)] leading-tight text-text-primary';
 
-export const stepTitleOnDark =
-  'font-heading text-[clamp(1.125rem,2.2vw,1.5rem)] font-bold leading-tight text-[#120B04] dark:text-[rgb(225,225,227)]';
+export const stepTitleOnDark = stepTitle;
 
 export const ctaTitle =
-  'font-heading text-[clamp(1.5rem,3vw,2rem)] font-bold leading-tight text-text-primary';
+  'font-heading text-[clamp(1.5rem,3vw,2rem)] leading-tight text-text-primary';
 
 export const pageHeroTitle =
-  'font-heading text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[0.95] text-[#120B04] dark:text-[rgb(225,225,227)]';
+  'font-heading text-[clamp(2rem,5vw,2.5rem)] leading-[1.05] text-text-primary';
 
+/** Scales with hero copy column via @container (see Hero). */
 export const displayHeroTitle =
-  'max-w-[540px] text-[8.5vw] text-text-primary sm:text-[6.5vw] md:text-4xl lg:text-5xl xl:text-6xl';
+  'font-heading w-full max-w-none text-balance text-[clamp(2.75rem,14cqi,7.25rem)] leading-[0.88] tracking-[0.02em] text-text-primary';
+
+export const eyebrow =
+  'font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500';

@@ -14,18 +14,28 @@
     <meta name="description" content="Buy gaming gift cards and subscriptions on WhatsApp using Naira, USDC, or crypto. PandaPay handles pricing, payment confirmation, and instant code delivery." />
     <meta name="keywords" content="gaming gift cards, WhatsApp checkout, game subscriptions, Naira payments, USDC payments, crypto payments, PandaPay" />
     <meta name="author" content="PandaPay" />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
 
-    <!-- FOUT prevention: apply dark class before React loads -->
+    <!-- FOUT prevention: match ThemeContext (default preference = system) -->
     <script>
       (function() {
         try {
           var stored = localStorage.getItem('theme');
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var useDark =
+            stored === 'dark' ? true : stored === 'light' ? false : prefersDark;
 
-          if (stored === 'dark' || (!stored && prefersDark) || (stored === 'system' && prefersDark)) {
-            document.documentElement.classList.add('dark');
+          document.documentElement.classList.toggle('dark', useDark);
+
+          var themeColor = useDark ? '#0c0c0c' : '#ffffff';
+          var meta = document.querySelector('meta[name="theme-color"]:not([media])');
+          if (!meta) {
+            meta = document.createElement('meta');
+            meta.name = 'theme-color';
+            document.head.appendChild(meta);
           }
+          meta.content = themeColor;
         } catch (e) {
           /* no-op */
         }

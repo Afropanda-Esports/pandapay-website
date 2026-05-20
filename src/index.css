@@ -1,109 +1,75 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Syne:wght@700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.cdnfonts.com/css/american-captain");
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ─── Satoshi ──────────────────────────────────────────────────────────────── */
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-Italic.otf") format("opentype");
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Satoshi";
-  src: url("./assets/satoshi/Satoshi-BoldItalic.otf") format("opentype");
-  font-weight: 700;
-  font-style: italic;
-}
+/* ─── PandaPay brand (guidelines): White #ffffff, Eerie Black #0c0c0c, Orange #ff6b01 ─ */
 
 /* ─── Design Tokens ────────────────────────────────────────────────────────── */
 @theme {
-  /* Fonts */
-  --font-heading: "Satoshi", sans-serif;
-  --font-body: "Satoshi", sans-serif;
-  --font-sans: "Satoshi", sans-serif;
+  /* Fonts — American Captain (headings), Poppins (body) */
+  --font-heading: "American Captain", sans-serif;
+  --font-body: "Poppins", sans-serif;
+  --font-sans: "Poppins", sans-serif;
 
-  /* ── Colors: Primary (orange-red, base #CC3500) */
-  --color-primary-100: #fbe4d8;
-  --color-primary-200: #f5b8a0;
-  --color-primary-300: #ee8a68;
-  --color-primary-400: #e05830;
-  --color-primary-500: #cc3500;
-  --color-primary-600: #aa2d00;
-  --color-primary-700: #8a2200;
-  --color-primary-800: #5c1800;
+  /* Primary — Orange #ff6b01 */
+  --color-primary-100: #fff4eb;
+  --color-primary-200: #ffd9b8;
+  --color-primary-300: #ffb87a;
+  --color-primary-400: #ff8f2e;
+  --color-primary-500: #ff6b01;
+  --color-primary-600: #e55f00;
+  --color-primary-700: #c24f00;
+  --color-primary-800: #8a3800;
 
-  /* ── Colors: Secondary (teal, base #27A589) */
-  --color-secondary-100: #d4f5ed;
-  --color-secondary-200: #aaebd8;
-  --color-secondary-300: #72d8c0;
-  --color-secondary-400: #42c0a4;
-  --color-secondary-500: #27a589;
-  --color-secondary-600: #1d7d64;
-  --color-secondary-700: #145949;
-  --color-secondary-800: #0d3d32;
+  /* Secondary — aligned to orange (no teal in brand palette) */
+  --color-secondary-100: #fff4eb;
+  --color-secondary-200: #ffd9b8;
+  --color-secondary-300: #ffb87a;
+  --color-secondary-400: #ff8f2e;
+  --color-secondary-500: #ff6b01;
+  --color-secondary-600: #e55f00;
+  --color-secondary-700: #c24f00;
+  --color-secondary-800: #8a3800;
 
-  /* ── Colors: Neutral (base #141415) */
-  --color-neutral-50:   #f0f0f2;
-  --color-neutral-100:  #e1e1e3;
-  --color-neutral-200:  #c3c3c5;
-  --color-neutral-300:  #9a9a9c;
-  --color-neutral-400:  #737375;
-  --color-neutral-500:  #565658;
-  --color-neutral-600:  #3d3d3f;
-  --color-neutral-700:  #2a2a2b;
-  --color-neutral-800:  #1c1c1d;
-  --color-neutral-900:  #141415;
-  --color-neutral-1000: #0a0a0a;
+  /* Neutral — Eerie Black base */
+  --color-neutral-50:   #f7f7f7;
+  --color-neutral-100:  #e8e8e8;
+  --color-neutral-200:  #d1d1d1;
+  --color-neutral-300:  #a3a3a3;
+  --color-neutral-400:  #737373;
+  --color-neutral-500:  #525252;
+  --color-neutral-600:  #3d3d3d;
+  --color-neutral-700:  #2a2a2a;
+  --color-neutral-800:  #1a1a1a;
+  --color-neutral-900:  #0c0c0c;
+  --color-neutral-1000: #0c0c0c;
   --color-neutral-1100: #080808;
 
-  /* ── Colors: Semantic surfaces (values set in :root / html.dark) */
   --color-background:     initial;
   --color-surface:        initial;
   --color-surface-raised: initial;
   --color-border:         initial;
   --color-border-subtle:  initial;
-
-  /* Warm off-white (light) / very dark grey (dark) — e.g. MicroStory proof cards */
   --color-card-soft: initial;
-
-  /* ── Colors: Semantic text */
   --color-text-primary:   initial;
   --color-text-secondary: initial;
   --color-text-muted:     initial;
   --color-text-inverse:   initial;
-
-  /* ── Colors: Semantic overlay / nav */
   --color-overlay:  initial;
   --color-nav-bg:   initial;
   --color-hero-left: initial;
   --color-hero-right: initial;
   --color-hero-status: initial;
-
-  /* ── Shadows: Primary glow (values set in :root / html.dark) */
   --shadow-primary-glow-sm: initial;
   --shadow-primary-glow-md: initial;
 
-  /* ── Colors: Testimonial card palette (fixed, not theme-sensitive) */
-  --color-testimonial-1: #fca065;
-  --color-testimonial-2: #ffdbb5;
+  --color-testimonial-1: #ff8f2e;
+  --color-testimonial-2: #ffd9b8;
   --color-testimonial-3: #ffffff;
-  --color-testimonial-4: #ffd1af;
-  --color-testimonial-5: #ffad73;
+  --color-testimonial-4: #ffb87a;
+  --color-testimonial-5: #ff6b01;
 
-  /* ── Colors: Success (base #35976B) */
   --color-success-100: #d6f1e5;
   --color-success-200: #aae3cb;
   --color-success-300: #7ccfaa;
@@ -113,7 +79,6 @@
   --color-success-700: #1c5240;
   --color-success-800: #123628;
 
-  /* ── Colors: Error (base #A73125) */
   --color-error-100: #f6dedd;
   --color-error-200: #edbbba;
   --color-error-300: #dc8a87;
@@ -123,7 +88,6 @@
   --color-error-700: #5f1410;
   --color-error-800: #3d0d08;
 
-  /* ── Colors: Warning (base #F7B30B) */
   --color-warning-100: #fef6e0;
   --color-warning-200: #fdedb8;
   --color-warning-300: #fbda7c;
@@ -133,7 +97,6 @@
   --color-warning-700: #8a6103;
   --color-warning-800: #5c4002;
 
-  /* ── Colors: Info (base #1F72AD) */
   --color-info-100: #d4e9f5;
   --color-info-200: #aacfeb;
   --color-info-300: #70b5de;
@@ -143,7 +106,6 @@
   --color-info-700: #103e62;
   --color-info-800: #0a2840;
 
-  /* ── Typography: sizes */
   --text-h1: 40px;
   --text-h2: 32px;
   --text-h3: 24px;
@@ -158,7 +120,6 @@
   --text-label:    14px;
   --text-caption:  12px;
 
-  /* ── Typography: line heights */
   --leading-h1: 130%;
   --leading-h2: 130%;
   --leading-h3: 140%;
@@ -173,10 +134,6 @@
   --leading-label:    140%;
   --leading-caption:  150%;
 
-  /* ── Layout spacing scale (design tokens)
-   * Do NOT use the --spacing-* prefix here: in Tailwind v4, utilities like max-w-5xl and max-w-xl
-   * resolve to var(--spacing-5xl), var(--spacing-xl), etc. Overriding those tokens shrinks max-width
-   * to pixel values (e.g. 72px) and breaks prose columns site-wide. */
   --layout-space-xxs: 4px;
   --layout-space-xs: 8px;
   --layout-space-sm: 16px;
@@ -189,77 +146,72 @@
   --layout-space-5xl: 72px;
   --layout-space-6xl: 80px;
 
-  /* ── Border radius */
   --radius-sm:   4px;
   --radius-md:   8px;
   --radius-lg:   16px;
   --radius-xl:   24px;
   --radius-pill: 999px;
 
-  /* ── Shadows (elevation) */
-  --shadow-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.08);
-  --shadow-elevation-2: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-elevation-3: 0 4px 12px rgba(0, 0, 0, 0.10);
-  --shadow-elevation-4: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --shadow-elevation-2: 0 2px 8px rgba(0, 0, 0, 0.14);
+  --shadow-elevation-3: 0 4px 12px rgba(0, 0, 0, 0.18);
+  --shadow-elevation-4: 0 8px 24px rgba(0, 0, 0, 0.22);
 
-  /* ── Layout */
   --width-layout: 1440px;
 }
 
-/* ─── Theme: Light mode (default) ──────────────────────────────────────────── */
+/* Light — white surfaces, black type, orange accents */
 :root {
-  --color-background:       #faf8f5;
-  --color-surface:          #f5f0e8;
-  --color-surface-raised:   #ffffff;
-  --color-border:           #e8ddd0;
-  --color-border-subtle:    #e8ddd0;
-  --color-text-primary:     #120b04;
-  --color-text-secondary:   #6b5642;
-  --color-text-muted:       #6b5642;
+  --color-background:       #ffffff;
+  --color-surface:          #ffffff;
+  --color-surface-raised:   #f7f7f7;
+  --color-border:           rgba(12, 12, 12, 0.12);
+  --color-border-subtle:    rgba(12, 12, 12, 0.08);
+  --color-text-primary:     #0c0c0c;
+  --color-text-secondary:   rgba(12, 12, 12, 0.65);
+  --color-text-muted:       rgba(12, 12, 12, 0.5);
   --color-text-inverse:     #ffffff;
-  --color-overlay:          rgba(255, 255, 255, 0.5);
-  --color-nav-bg:           #faf8f5;
-  --color-card-soft:        #f5f0e8;
-  --color-hero-left:        var(--color-background);
-  --color-hero-right:       #2c1f10;
-  --color-hero-status:      #5d9e6e;
-  --shadow-primary-glow-sm: 0 0 16px 0 rgba(204, 53, 0, 0.20);
-  --shadow-primary-glow-md: 0 0 24px 0 rgba(204, 53, 0, 0.25);
-  /* Soft separation instead of solid section borders */
-  --shadow-section-separate: 0 16px 44px -24px rgba(10, 10, 10, 0.09);
-  --shadow-marquee-edge: 0 -14px 36px -22px rgba(10, 10, 10, 0.075), 0 14px 36px -22px rgba(10, 10, 10, 0.075);
-  --shadow-footer-rule: inset 0 1px 0 rgba(10, 10, 10, 0.065);
+  --color-overlay:          rgba(255, 255, 255, 0.6);
+  --color-nav-bg:           #ffffff;
+  --color-card-soft:        #f7f7f7;
+  --color-hero-left:        #ffffff;
+  --color-hero-right:       #0c0c0c;
+  --color-hero-status:      #35976b;
+  --shadow-primary-glow-sm: 0 0 16px 0 rgba(255, 107, 1, 0.22);
+  --shadow-primary-glow-md: 0 0 24px 0 rgba(255, 107, 1, 0.28);
+  --shadow-section-separate: 0 16px 44px -24px rgba(12, 12, 12, 0.08);
+  --shadow-marquee-edge: 0 -14px 36px -22px rgba(12, 12, 12, 0.06), 0 14px 36px -22px rgba(12, 12, 12, 0.06);
+  --shadow-footer-rule: inset 0 1px 0 rgba(12, 12, 12, 0.08);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* ─── Theme: Dark mode ─────────────────────────────────────────────────────── */
+/* Dark — eerie black (brand default look) */
 html.dark {
-  --color-background:       #0a0a0a;
-  --color-surface:          #1c130a;
-  --color-surface-raised:   #25190f;
-  --color-border:           #2a2a2a;
-  --color-border-subtle:    #1c1c1d;
-  --color-text-primary:     #e1e1e3;
-  --color-text-secondary:   rgba(225, 225, 227, 0.55);
-  --color-text-muted:       rgba(225, 225, 227, 0.55);
-  --color-text-inverse:     #0a0a0a;
-  --color-overlay:          rgba(10, 10, 10, 0.5);
-  --color-nav-bg:           rgba(0, 0, 0, 1);
-  --color-card-soft:        #1c130a;
-  --color-hero-left:        var(--color-card-soft);
-  --color-hero-right:       #25190f;
-  --color-hero-status:      #5d9e6e;
-  --shadow-primary-glow-sm: 0 0 16px 0 rgba(204, 53, 0, 0.25);
-  --shadow-primary-glow-md: 0 0 24px 0 rgba(204, 53, 0, 0.35);
-  --shadow-section-separate: 0 20px 52px -26px rgba(0, 0, 0, 0.82);
-  --shadow-marquee-edge: 0 -16px 44px -22px rgba(0, 0, 0, 0.62), 0 16px 44px -22px rgba(0, 0, 0, 0.62);
+  --color-background:       #0c0c0c;
+  --color-surface:          #141414;
+  --color-surface-raised:   #1a1a1a;
+  --color-border:           rgba(255, 255, 255, 0.1);
+  --color-border-subtle:    rgba(255, 255, 255, 0.06);
+  --color-text-primary:     #ffffff;
+  --color-text-secondary:   rgba(255, 255, 255, 0.65);
+  --color-text-muted:       rgba(255, 255, 255, 0.45);
+  --color-text-inverse:     #0c0c0c;
+  --color-overlay:          rgba(12, 12, 12, 0.6);
+  --color-nav-bg:           #0c0c0c;
+  --color-card-soft:        #141414;
+  --color-hero-left:        #0c0c0c;
+  --color-hero-right:       #0c0c0c;
+  --color-hero-status:      rgba(255, 255, 255, 0.45);
+  --shadow-primary-glow-sm: 0 0 16px 0 rgba(255, 107, 1, 0.3);
+  --shadow-primary-glow-md: 0 0 24px 0 rgba(255, 107, 1, 0.38);
+  --shadow-section-separate: 0 20px 52px -26px rgba(0, 0, 0, 0.75);
+  --shadow-marquee-edge: 0 -16px 44px -22px rgba(0, 0, 0, 0.55), 0 16px 44px -22px rgba(0, 0, 0, 0.55);
   --shadow-footer-rule: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* ─── Animations ────────────────────────────────────────────────────────────── */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -291,9 +243,6 @@ html.dark {
   animation: marquee-y-down 60s linear infinite;
 }
 
-
-/* ─── Base ──────────────────────────────────────────────────────────────────── */
-/* Full-width chain: prevents flex items collapsing to min-content (Safari + nested flex). */
 html {
   width: 100%;
   overflow-x: hidden;
@@ -318,22 +267,6 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes marquee-reverse {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }

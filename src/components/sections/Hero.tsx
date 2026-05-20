@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
       >
         <div className="grid w-full min-w-0 grid-cols-1 min-h-screen md:grid-cols-2">
           <div
-            className="relative flex min-h-[60vh] min-w-0 flex-col px-7 pb-8 pt-[4.5rem] md:min-h-screen md:px-10 md:pb-10 md:pt-[5rem] lg:px-16 lg:pb-14 lg:pt-[5.5rem]"
+            className="@container relative flex min-h-[60vh] min-w-0 flex-col px-7 pb-8 pt-[4.5rem] md:min-h-screen md:px-10 md:pb-10 md:pt-[5rem] lg:px-16 lg:pb-14 lg:pt-[5.5rem]"
             style={{ backgroundColor: 'var(--color-hero-left)' }}
           >
             <img
@@ -51,23 +51,14 @@ const Hero: React.FC = () => {
               className="pointer-events-none absolute bottom-8 left-8 w-[min(88%,560px)] opacity-[0.055]"
             />
             <div className="relative z-10 flex h-full min-h-0 flex-col justify-between">
-              <div className="flex flex-col gap-8">
+              <div className="flex w-full min-w-0 flex-col gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
                     <h1
-                      className={displayHeroTitle}
-                      style={{
-                        fontFamily: '"Syne", sans-serif',
-                        fontWeight: 800,
-                        lineHeight: 0.94,
-                        letterSpacing: '-0.03em',
-                        overflowWrap: 'normal',
-                        wordBreak: 'keep-all',
-                        hyphens: 'none',
-                      }}
+                      className={`${displayHeroTitle} [overflow-wrap:normal] [word-break:keep-all] [hyphens:none]`}
                     >
                       <span className="block">{heroCopy.titleTop}</span>
                       <span className="block">{heroCopy.titleMid}</span>
@@ -81,8 +72,7 @@ const Hero: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="max-w-[380px] text-[clamp(1rem,2vw,1.1rem)] leading-[1.7] text-text-secondary"
-                style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 300 }}
+                className="max-w-[380px] font-sans text-[clamp(1rem,2vw,1.1rem)] font-light leading-[1.7] text-text-secondary"
               >
                 {heroCopy.body}
               </motion.p>
@@ -103,10 +93,7 @@ const Hero: React.FC = () => {
                     <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/10">
                       <MessageCircleMore size={18} />
                     </span>
-                    <span
-                      className="text-left text-sm leading-tight md:text-[15px]"
-                      style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 500 }}
-                    >
+                    <span className="text-left font-sans text-sm font-medium leading-tight md:text-[15px]">
                       Start on
                       <span className="block">WhatsApp</span>
                     </span>
@@ -115,10 +102,7 @@ const Hero: React.FC = () => {
                     href="#inventory"
                     className="inline-flex items-center gap-3 text-text-secondary transition-colors hover:text-primary-500"
                   >
-                    <span
-                      className="text-[15px]"
-                      style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 400 }}
-                    >
+                    <span className="font-sans text-[15px]">
                       Browse shop
                     </span>
                     <ArrowRight size={18} />
@@ -144,10 +128,7 @@ const Hero: React.FC = () => {
                       </div>
                     ))}
                   </div>
-                  <p
-                    className="text-base text-text-secondary md:text-lg"
-                    style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 400 }}
-                  >
+                  <p className="font-sans text-base text-text-secondary md:text-lg">
                     <span className="font-medium text-primary-500">+200</span> gamers across
                     Africa
                   </p>
@@ -173,11 +154,8 @@ const Hero: React.FC = () => {
                   PP
                 </div>
                 <div className="min-w-0">
-                  <p
-                    className="truncate text-[clamp(1.1rem,2vw,1.35rem)] text-white/90"
-                    style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 500 }}
-                  >
-                    Panda Pay
+                  <p className="truncate font-sans text-[clamp(1.1rem,2vw,1.35rem)] font-medium text-white/90">
+                    Pandapay
                   </p>
                   <p
                     className="text-sm"
@@ -197,16 +175,12 @@ const Hero: React.FC = () => {
 
               <div className="flex flex-col gap-6 px-6 py-6 md:px-8 md:py-8">
                 <div className="self-start rounded-[24px] bg-black/30 px-6 py-5 text-white/88">
-                  <p style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 400 }}>
-                    Hey, I want to buy a PSN gift card
-                  </p>
+                  <p className="font-sans">Hey, I want to buy a PSN gift card</p>
                   <span className="mt-2 block text-xs text-white/28">10:42 AM</span>
                 </div>
 
                 <div className="self-end rounded-[24px] bg-primary-500 px-6 py-5 text-white">
-                  <p style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 500 }}>
-                    Got you. Which denomination?
-                  </p>
+                  <p className="font-sans font-medium">Got you. Which denomination?</p>
                 </div>
 
                 <div className="self-end rounded-[26px] bg-black/18 p-5">
@@ -216,16 +190,10 @@ const Hero: React.FC = () => {
                         PS
                       </div>
                       <div>
-                        <p
-                          className="text-xl text-white/90"
-                          style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 500 }}
-                        >
+                        <p className="font-sans text-xl font-medium text-white/90">
                           PSN Gift Card $50
                         </p>
-                        <p
-                          className="mt-1 text-[1.35rem] text-primary-400"
-                          style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 500 }}
-                        >
+                        <p className="mt-1 font-sans text-[1.35rem] font-medium text-primary-400">
                           ₦80,000
                         </p>
                       </div>
@@ -235,16 +203,12 @@ const Hero: React.FC = () => {
                 </div>
 
                 <div className="self-start rounded-[24px] bg-black/30 px-6 py-5 text-white/88">
-                  <p style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 400 }}>
-                    Yes, the $50 one. How do I pay?
-                  </p>
+                  <p className="font-sans">Yes, the $50 one. How do I pay?</p>
                   <span className="mt-2 block text-xs text-white/28">10:43 AM</span>
                 </div>
 
                 <div className="self-end rounded-[24px] bg-primary-500 px-6 py-5 text-white">
-                  <p style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 500 }}>
-                    Pick your payment method:
-                  </p>
+                  <p className="font-sans font-medium">Pick your payment method:</p>
                 </div>
 
                 <div className="self-end flex flex-wrap gap-3">
