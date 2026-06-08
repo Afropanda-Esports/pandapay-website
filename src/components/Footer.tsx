@@ -74,6 +74,18 @@ const Footer = () => {
                     </div>
                 </div>
                 <p className="text-xs text-text-muted">Current product availability starts with PlayStation gift cards and PS Plus, with broader catalog support expanding over time.</p>
+                <p className="text-xs text-text-muted">
+                    PandaPay, a product of{' '}
+                    <a
+                        href="https://afropandaesports.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-text-secondary hover:text-text-primary transition-colors"
+                    >
+                        AfroPanda Esports
+                    </a>{' '}
+                    (Afro Panda Gaming Ltd)
+                </p>
 
             </div>
         </footer>

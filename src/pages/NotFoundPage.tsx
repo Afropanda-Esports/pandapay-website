@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SeoMeta from '../components/SeoMeta';
 
 const NotFoundPage: React.FC = () => {
     return (
         <div className="flex min-h-screen flex-col items-center justify-center p-4">
+            <SeoMeta
+                title="Page not found — Panda Pay"
+                description="This page does not exist."
+                path="/404"
+            />
             <h1 className="mb-4 text-6xl font-bold text-primary-500">404</h1>
             <h2 className="mb-6 text-2xl font-semibold">Page Not Found</h2>
             <p className="mb-8 text-text-muted text-center max-w-md">

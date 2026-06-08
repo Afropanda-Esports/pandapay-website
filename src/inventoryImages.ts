@@ -3,12 +3,20 @@ export const INVENTORY_IMAGE_WIDTH = 560;
 export const INVENTORY_IMAGE_HEIGHT = 700;
 
 const INVENTORY_IMAGE_PATHS: Record<string, string> = {
-  'game-gift-cards': '/inventory/game-gift-cards.webp',
-  roblox: '/inventory/roblox.webp',
-  'cod-battle-pass': '/inventory/cod-battle-pass.webp',
-  playstation: '/inventory/playstation.webp',
+  'psn-10': '/inventory/playstation.svg',
+  'psn-25': '/inventory/playstation.svg',
+  'psn-50': '/inventory/playstation.svg',
+  'psn-100': '/inventory/playstation.svg',
+  'ps-plus-essential-1m': '/inventory/ps-plus.svg',
+  'ps-plus-essential-3m': '/inventory/ps-plus.svg',
+  'ps-plus-extra-1m': '/inventory/ps-plus.svg',
+  'ps-plus-premium-1m': '/inventory/ps-plus.svg',
+  playstation: '/inventory/playstation.svg',
+  'game-gift-cards': '/inventory/playstation.svg',
+  roblox: '/inventory/coming-soon.svg',
+  'cod-battle-pass': '/inventory/coming-soon.svg',
 };
 
 export function getInventoryImage(slug: string): string {
-  return INVENTORY_IMAGE_PATHS[slug] ?? INVENTORY_IMAGE_PATHS['game-gift-cards'];
+  return INVENTORY_IMAGE_PATHS[slug] ?? INVENTORY_IMAGE_PATHS.playstation;
 }

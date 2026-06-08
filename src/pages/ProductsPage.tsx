@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
 import ProductCatalogGrid from '../components/ProductCatalogGrid';
 import SeoMeta from '../components/SeoMeta';
+import { mergeLivePrices, useOfferings } from '../hooks/useOfferings';
 import {
   AVAILABLE_PRODUCTS,
   COMING_SOON_PRODUCTS,
@@ -21,16 +22,26 @@ const TABS: { label: string; value: Tab }[] = [
 
 export default function ProductsPage() {
   const [activeTab, setActiveTab] = useState<Tab>('all');
+  const { offerings, loading: pricesLoading } = useOfferings();
+
+  const catalog = useMemo(
+    () => mergeLivePrices(PRODUCTS, offerings),
+    [offerings],
+  );
+  const availableCatalog = useMemo(
+    () => mergeLivePrices(AVAILABLE_PRODUCTS, offerings),
+    [offerings],
+  );
 
   const filteredProducts = useMemo<Product[]>(() => {
     if (activeTab === 'playstation') {
-      return AVAILABLE_PRODUCTS;
+      return availableCatalog;
     }
     if (activeTab === 'coming-soon') {
       return COMING_SOON_PRODUCTS;
     }
-    return PRODUCTS;
-  }, [activeTab]);
+    return catalog;
+  }, [activeTab, catalog, availableCatalog]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -74,6 +85,9 @@ export default function ProductsPage() {
               })}
             </div>
 
+            {pricesLoading && activeTab !== 'coming-soon' ? (
+              <p className="text-sm text-text-muted">Updating live prices…</p>
+            ) : null}
             <ProductCatalogGrid
               products={filteredProducts}
               muted={activeTab === 'coming-soon'}
