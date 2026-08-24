@@ -30,7 +30,7 @@ const Footer = () => {
                     {/* Left: Socials */}
                     <div className="flex flex-col gap-6">
                         <h3 className="font-heading text-lg text-text-primary">Pandapay</h3>
-                        <p className="text-sm text-text-secondary">Your gaming store. On WhatsApp.</p>
+                        <p className="text-sm text-text-secondary">VTU, bills &amp; gaming — on WhatsApp.</p>
                         <div className="flex items-center gap-6 text-text-secondary">
                             <a href={TWITTER_URL} target="_blank" rel="noreferrer" className="hover:text-primary-400 transition-colors" aria-label="X (Twitter)">
                                 <XIcon />
@@ -64,6 +64,14 @@ const Footer = () => {
                     </div>
                 </div>
 
+                {/* Contact Section */}
+                <div className="flex flex-col gap-2 font-sans text-sm text-text-secondary">
+                    <h3 className="text-text-primary font-medium mb-1">Contact</h3>
+                    <a href="mailto:info@pandapay.africa" className="hover:text-text-primary transition-colors w-fit">info@pandapay.africa</a>
+                    <a href="tel:+2347043864368" className="hover:text-text-primary transition-colors w-fit">+234 704 386 4368</a>
+                    <span>12 Olu Adebayo Street, Isolo, Lagos, Nigeria</span>
+                </div>
+
                 {/* Bottom Section: Legal & Copyright lines */}
                 <div
                     className={`flex w-full flex-col justify-between gap-4 pt-8 font-sans text-xs text-text-muted md:flex-row ${footerRuleShadow}`}
@@ -73,7 +81,7 @@ const Footer = () => {
                         <span>PandaPay is built for African gamers using local and on-chain payment rails.</span>
                     </div>
                 </div>
-                <p className="text-xs text-text-muted">Current product availability starts with PlayStation gift cards and PS Plus, with broader catalog support expanding over time.</p>
+                <p className="text-xs text-text-muted">Current product availability covers Nigerian VTU (airtime, data, electricity, cable TV, betting) and PS Plus, with gift cards and broader catalog support returning soon.</p>
                 <p className="text-xs text-text-muted">
                     PandaPay, a product of{' '}
                     <a

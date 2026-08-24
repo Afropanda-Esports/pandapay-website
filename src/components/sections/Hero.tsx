@@ -21,12 +21,12 @@ const Hero: React.FC = () => {
 
   const heroCopy = {
     titleTop: 'Your',
-    titleMid: 'Gaming',
+    titleMid: 'VTU',
     titleBottom: 'Store.',
     titleAccentTop: 'On',
     titleAccentBottom: 'WhatsApp.',
     body:
-      'Buy gaming gift cards and subscriptions using Naira, USDC, or crypto. No app, no stress — just send a message. Our AI handles everything from product selection to payment confirmation and instant code delivery.',
+      'Buy airtime, data, electricity, cable TV, and betting top-ups — plus gaming subscriptions — using Naira, USDC, or crypto. No app, no stress — just send a message. Our AI handles everything from product selection to payment confirmation and instant delivery.',
   };
 
   return (
@@ -175,26 +175,26 @@ const Hero: React.FC = () => {
 
               <div className="flex flex-col gap-6 px-6 py-6 md:px-8 md:py-8">
                 <div className="self-start rounded-[24px] bg-black/30 px-6 py-5 text-white/88">
-                  <p className="font-sans">Hey, I want to buy a PSN gift card</p>
+                  <p className="font-sans">Hey, I need 2GB MTN data + ₦5k airtime</p>
                   <span className="mt-2 block text-xs text-white/28">10:42 AM</span>
                 </div>
 
                 <div className="self-end rounded-[24px] bg-primary-500 px-6 py-5 text-white">
-                  <p className="font-sans font-medium">Got you. Which denomination?</p>
+                  <p className="font-sans font-medium">Got you. Confirming your number?</p>
                 </div>
 
                 <div className="self-end rounded-[26px] bg-black/18 p-5">
                   <div className="rounded-[22px] border border-primary-500/35 bg-black/22 p-4">
                     <div className="flex items-center gap-4">
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-info-500 text-2xl font-bold text-white">
-                        PS
+                        VTU
                       </div>
                       <div>
                         <p className="font-sans text-xl font-medium text-white/90">
-                          PSN Gift Card $50
+                          MTN Data 2GB + ₦5,000 Airtime
                         </p>
                         <p className="mt-1 font-sans text-[1.35rem] font-medium text-primary-400">
-                          ₦80,000
+                          ₦6,400
                         </p>
                       </div>
                     </div>
@@ -203,7 +203,7 @@ const Hero: React.FC = () => {
                 </div>
 
                 <div className="self-start rounded-[24px] bg-black/30 px-6 py-5 text-white/88">
-                  <p className="font-sans">Yes, the $50 one. How do I pay?</p>
+                  <p className="font-sans">Yes, that's it. How do I pay?</p>
                   <span className="mt-2 block text-xs text-white/28">10:43 AM</span>
                 </div>
 

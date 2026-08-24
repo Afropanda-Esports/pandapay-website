@@ -3,6 +3,11 @@ export const INVENTORY_IMAGE_WIDTH = 560;
 export const INVENTORY_IMAGE_HEIGHT = 700;
 
 const INVENTORY_IMAGE_PATHS: Record<string, string> = {
+  'vtu-airtime': '/inventory/airtime.svg',
+  'vtu-data': '/inventory/data.svg',
+  'vtu-electricity': '/inventory/electricity.svg',
+  'vtu-cable': '/inventory/cable-tv.svg',
+  'vtu-betting': '/inventory/betting.svg',
   'psn-10': '/inventory/playstation.svg',
   'psn-25': '/inventory/playstation.svg',
   'psn-50': '/inventory/playstation.svg',
@@ -18,5 +23,5 @@ const INVENTORY_IMAGE_PATHS: Record<string, string> = {
 };
 
 export function getInventoryImage(slug: string): string {
-  return INVENTORY_IMAGE_PATHS[slug] ?? INVENTORY_IMAGE_PATHS.playstation;
+  return INVENTORY_IMAGE_PATHS[slug] ?? INVENTORY_IMAGE_PATHS['vtu-airtime'];
 }

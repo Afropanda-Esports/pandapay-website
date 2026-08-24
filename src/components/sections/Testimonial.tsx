@@ -45,7 +45,7 @@ const testimonials: ChatTestimonial[] = [
   },
   {
     id: 'ada',
-    quote: 'Got my PSN card in under five minutes. No forms, no stress.',
+    quote: 'Topped up my data and paid my light bill in under five minutes. No forms, no stress.',
     author: 'Ada',
     location: 'Accra',
     time: '6:31 PM',
