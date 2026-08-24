@@ -5,17 +5,17 @@ import ProductCatalogGrid from '../components/ProductCatalogGrid';
 import SeoMeta from '../components/SeoMeta';
 import { mergeLivePrices, useOfferings } from '../hooks/useOfferings';
 import {
-  AVAILABLE_PRODUCTS,
   COMING_SOON_PRODUCTS,
   PRODUCTS,
   WHATSAPP_URL,
   type Product,
 } from '../siteContent';
 
-type Tab = 'all' | 'playstation' | 'coming-soon';
+type Tab = 'all' | 'vtu' | 'playstation' | 'coming-soon';
 
 const TABS: { label: string; value: Tab }[] = [
   { label: 'All', value: 'all' },
+  { label: 'VTU', value: 'vtu' },
   { label: 'PlayStation', value: 'playstation' },
   { label: 'Coming Soon', value: 'coming-soon' },
 ];
@@ -28,26 +28,25 @@ export default function ProductsPage() {
     () => mergeLivePrices(PRODUCTS, offerings),
     [offerings],
   );
-  const availableCatalog = useMemo(
-    () => mergeLivePrices(AVAILABLE_PRODUCTS, offerings),
-    [offerings],
-  );
 
   const filteredProducts = useMemo<Product[]>(() => {
+    if (activeTab === 'vtu') {
+      return catalog.filter((product) => product.category === 'VTU');
+    }
     if (activeTab === 'playstation') {
-      return availableCatalog;
+      return catalog.filter((product) => product.category === 'PlayStation');
     }
     if (activeTab === 'coming-soon') {
       return COMING_SOON_PRODUCTS;
     }
     return catalog;
-  }, [activeTab, catalog, availableCatalog]);
+  }, [activeTab, catalog]);
 
   return (
     <div className="min-h-screen bg-background">
       <SeoMeta
         title="Products — Panda Pay"
-        description="Browse PandaPay's gaming catalog. Prices update live with the exchange rate."
+        description="Browse PandaPay's VTU, bills, and gaming catalog. Prices update live with the exchange rate."
         path="/products"
       />
       <PageHero

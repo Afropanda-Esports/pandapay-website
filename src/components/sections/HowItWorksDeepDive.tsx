@@ -31,7 +31,7 @@ const flowSteps: FlowStep[] = [
     note: 'Start the order in one chat thread. No app install, no account setup, no menu maze.',
     tag: 'Start in chat',
     icon: MessageCircle,
-    chat: [{ role: 'user', text: 'Hey PandaPay 👋 I need a PSN gift card' }],
+    chat: [{ role: 'user', text: 'Hey PandaPay 👋 I need MTN data' }],
   },
   {
     label: 'Step 02',
@@ -39,7 +39,7 @@ const flowSteps: FlowStep[] = [
     note: 'The assistant understands natural language and turns it into a clean order flow instantly.',
     tag: 'Natural language',
     icon: Sparkles,
-    chat: [{ role: 'user', text: 'Abeg, the $50 one — I dey Lagos' }],
+    chat: [{ role: 'user', text: 'Abeg, 2GB — I dey Lagos' }],
   },
   {
     label: 'Step 03',
@@ -49,7 +49,7 @@ const flowSteps: FlowStep[] = [
     icon: Zap,
     chat: [
       { role: 'bot', text: 'Got you. Live price right now:' },
-      { role: 'bot', text: 'PSN $50 → ₦80,000', highlight: true },
+      { role: 'bot', text: 'MTN 2GB → ₦1,400', highlight: true },
     ],
   },
   {
@@ -87,13 +87,13 @@ const flowSteps: FlowStep[] = [
   },
   {
     label: 'Step 07',
-    title: 'Your gaming code is delivered to WhatsApp instantly.',
+    title: 'Your top-up lands instantly on WhatsApp.',
     note: 'The final handoff happens in the same thread, so the customer never loses context.',
     tag: 'Instant delivery',
     icon: Gift,
     chat: [
-      { role: 'bot', text: '🎮 Your code is ready:' },
-      { role: 'bot', text: 'XXXX-XXXX-XXXX', highlight: true },
+      { role: 'bot', text: '⚡ You\'re topped up:' },
+      { role: 'bot', text: 'MTN 2GB delivered ✓', highlight: true },
     ],
   },
 ];

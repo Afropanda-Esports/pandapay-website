@@ -15,8 +15,8 @@ const LandingPage: React.FC = () => {
   return (
     <div className="flex min-h-screen min-w-0 flex-col bg-background" style={layoutFullWidth}>
       <SeoMeta
-        title="Panda Pay — Buy Gaming Gift Cards on WhatsApp | Nigeria & Ghana"
-        description="Buy gaming gift cards and subscriptions on WhatsApp using Naira, USDC, or crypto. PandaPay handles pricing, payment confirmation, and instant code delivery."
+        title="Panda Pay — Airtime, Data, Bills & VTU on WhatsApp | Nigeria"
+        description="Buy airtime, data, electricity, cable TV, and betting top-ups on WhatsApp using Naira, USDC, or crypto. PandaPay handles pricing, payment confirmation, and instant delivery."
         path="/"
       />
       <Navbar />

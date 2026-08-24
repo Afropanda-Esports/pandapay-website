@@ -25,7 +25,7 @@ export const INSTAGRAM_URL = "https://www.instagram.com/afropandaesports";
 export const DISCORD_URL = "https://discord.gg/2vW7vp7eDu";
 export const CNGN_URL = "https://cngn.co";
 
-export type ProductCategory = "PlayStation" | "Coming Soon";
+export type ProductCategory = "VTU" | "PlayStation" | "Coming Soon";
 export type ProductStatus = "available" | "coming-soon";
 
 export type Product = {
@@ -37,7 +37,57 @@ export type Product = {
   description: string;
 };
 
+/**
+ * Temporary repositioning (see THEME_TOGGLE_PLAN-style note): while PandaPay onboards as a
+ * VTU merchant instead of a licensed payment aggregator, the catalog leads with Nigeria-local
+ * VTU (airtime, data, bills) and de-emphasizes gift cards. Revert to gift-card-forward catalog
+ * once Monnify/Paystack onboarding is complete.
+ */
+export const VTU_PRODUCTS: Product[] = [
+  {
+    id: "vtu-airtime",
+    name: "Airtime Top-Up",
+    price: "Live rates",
+    category: "VTU",
+    status: "available",
+    description: "Instant airtime recharge for MTN, Airtel, Glo, and 9mobile — any amount.",
+  },
+  {
+    id: "vtu-data",
+    name: "Data Bundles",
+    price: "From ₦500",
+    category: "VTU",
+    status: "available",
+    description: "MTN, Airtel, Glo, and 9mobile data plans, delivered straight to your line.",
+  },
+  {
+    id: "vtu-electricity",
+    name: "Electricity Bill Payment",
+    price: "Live rates",
+    category: "VTU",
+    status: "available",
+    description: "Prepaid and postpaid tokens for Ikeja Electric, Eko Electric, and other DisCos.",
+  },
+  {
+    id: "vtu-cable",
+    name: "Cable TV Subscription",
+    price: "From ₦1,900",
+    category: "VTU",
+    status: "available",
+    description: "DStv, GOtv, and StarTimes subscriptions renewed instantly, no decoder trip needed.",
+  },
+  {
+    id: "vtu-betting",
+    name: "Betting Wallet Funding",
+    price: "Live rates",
+    category: "VTU",
+    status: "available",
+    description: "Fund your Bet9ja, SportyBet, or 1xBet wallet in seconds from WhatsApp.",
+  },
+];
+
 export const PRODUCTS: Product[] = [
+  ...VTU_PRODUCTS,
   {
     id: "ps-plus-essential-1m",
     name: "PS Plus Essential — 1 Month",
@@ -81,34 +131,34 @@ export const PRODUCTS: Product[] = [
   {
     id: "psn-gift-card-10",
     name: "PSN Gift Card — $10",
-    price: "₦16,000",
-    category: "PlayStation",
-    status: "available",
-    description: "Top up your PlayStation wallet with a smaller PSN card denomination.",
+    price: "Coming soon",
+    category: "Coming Soon",
+    status: "coming-soon",
+    description: "Gift cards are paused while we complete VTU onboarding. Back soon.",
   },
   {
     id: "psn-gift-card-25",
     name: "PSN Gift Card — $25",
-    price: "₦40,000",
-    category: "PlayStation",
-    status: "available",
-    description: "Mid-size PSN balance top-up for games, add-ons, and subscriptions.",
+    price: "Coming soon",
+    category: "Coming Soon",
+    status: "coming-soon",
+    description: "Gift cards are paused while we complete VTU onboarding. Back soon.",
   },
   {
     id: "psn-gift-card-50",
     name: "PSN Gift Card — $50",
-    price: "₦80,000",
-    category: "PlayStation",
-    status: "available",
-    description: "A larger PlayStation wallet top-up for bigger purchases and bundles.",
+    price: "Coming soon",
+    category: "Coming Soon",
+    status: "coming-soon",
+    description: "Gift cards are paused while we complete VTU onboarding. Back soon.",
   },
   {
     id: "psn-gift-card-100",
     name: "PSN Gift Card — $100",
-    price: "₦160,000",
-    category: "PlayStation",
-    status: "available",
-    description: "High-value PSN card for players who want one larger checkout.",
+    price: "Coming soon",
+    category: "Coming Soon",
+    status: "coming-soon",
+    description: "Gift cards are paused while we complete VTU onboarding. Back soon.",
   },
   {
     id: "xbox-game-pass",

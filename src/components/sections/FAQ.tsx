@@ -14,7 +14,7 @@ const faqs: FAQItem[] = [
   {
     question: 'What can I buy on PandaPay today?',
     answer:
-      'Right now, PandaPay supports PlayStation gift cards and PS Plus. More gaming products are being added as the catalog expands.',
+      'Right now, PandaPay supports VTU — airtime, data, electricity, cable TV, and betting top-ups — plus PS Plus subscriptions. Gift cards are returning soon; more products are added as the catalog expands.',
   },
   {
     question: 'How long does delivery take?',

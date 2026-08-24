@@ -51,6 +51,7 @@ export function mergeLivePrices(
 ): Product[] {
   const bySlug = new Map(offerings.map((o) => [o.slug, o]));
   return products.map((product) => {
+    if (product.status === 'coming-soon') return product;
     const slug = PRODUCT_TO_OFFERING_SLUG[product.id] ?? product.id;
     const live = bySlug.get(slug);
     if (!live?.priceLabel) return product;
