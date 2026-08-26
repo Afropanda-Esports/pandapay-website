@@ -58,3 +58,14 @@ export function mergeLivePrices(
     return { ...product, price: live.priceLabel };
   });
 }
+
+export function filterProductsByOfferings(
+  products: Product[],
+  offerings: Offering[],
+): Product[] {
+  const availableSlugs = new Set(offerings.map((offering) => offering.slug));
+  return products.filter((product) => {
+    const slug = PRODUCT_TO_OFFERING_SLUG[product.id] ?? product.id;
+    return availableSlugs.has(slug);
+  });
+}
