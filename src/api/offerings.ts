@@ -6,6 +6,8 @@ export type Offering = {
   priceLabel: string | null;
   whatsappPrefill: string;
   sortOrder: number;
+  regionCode?: string;
+  regionName?: string;
 };
 
 export type OfferingsResponse = {
