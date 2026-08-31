@@ -23,10 +23,9 @@ export const botStatusHero = WHATSAPP_BOT_LIVE ? "Online — AI active" : "Offli
 export const TWITTER_URL = "https://x.com/afropandaesport";
 export const INSTAGRAM_URL = "https://www.instagram.com/afropandaesports";
 export const DISCORD_URL = "https://discord.gg/2vW7vp7eDu";
-export const CNGN_URL = "https://cngn.co";
 
-export type ProductCategory = "VTU" | "PlayStation" | "Coming Soon";
-export type ProductStatus = "available" | "coming-soon";
+export type ProductCategory = "VTU";
+export type ProductStatus = "available";
 
 export type Product = {
   id: string;
@@ -38,10 +37,8 @@ export type Product = {
 };
 
 /**
- * Temporary repositioning (see THEME_TOGGLE_PLAN-style note): while PandaPay onboards as a
- * VTU merchant instead of a licensed payment aggregator, the catalog leads with Nigeria-local
- * VTU (airtime, data, bills) and de-emphasizes gift cards. Revert to gift-card-forward catalog
- * once Monnify/Paystack onboarding is complete.
+ * PandaPay is onboarding as a VTU merchant. The catalog is Nigeria-local VTU only —
+ * airtime, data, electricity, and cable TV — paid for by Naira bank transfer.
  */
 export const VTU_PRODUCTS: Product[] = [
   {
@@ -76,139 +73,16 @@ export const VTU_PRODUCTS: Product[] = [
     status: "available",
     description: "DStv, GOtv, and StarTimes subscriptions renewed instantly, no decoder trip needed.",
   },
-  {
-    id: "vtu-betting",
-    name: "Betting Wallet Funding",
-    price: "Live rates",
-    category: "VTU",
-    status: "available",
-    description: "Fund your Bet9ja, SportyBet, or 1xBet wallet in seconds from WhatsApp.",
-  },
 ];
 
-export const PRODUCTS: Product[] = [
-  ...VTU_PRODUCTS,
-  {
-    id: "ps-plus-essential-1m",
-    name: "PS Plus Essential — 1 Month",
-    price: "₦8,000",
-    category: "PlayStation",
-    status: "available",
-    description: "Monthly online access and entry-level PlayStation subscription access.",
-  },
-  {
-    id: "ps-plus-essential-3m",
-    name: "PS Plus Essential — 3 Months",
-    price: "₦22,000",
-    category: "PlayStation",
-    status: "available",
-    description: "Quarterly PS Plus Essential top-up for steady multiplayer access.",
-  },
-  {
-    id: "ps-plus-extra-1m",
-    name: "PS Plus Extra — 1 Month",
-    price: "₦12,000",
-    category: "PlayStation",
-    status: "available",
-    description: "Access a deeper PlayStation games catalog with a monthly Extra plan.",
-  },
-  {
-    id: "ps-plus-extra-3m",
-    name: "PS Plus Extra — 3 Months",
-    price: "₦34,500",
-    category: "PlayStation",
-    status: "available",
-    description: "Quarterly PS Plus Extra subscription for players who want more choice.",
-  },
-  {
-    id: "ps-plus-premium-1m",
-    name: "PS Plus Premium — 1 Month",
-    price: "₦15,500",
-    category: "PlayStation",
-    status: "available",
-    description: "Premium-tier PlayStation subscription access, delivered through WhatsApp.",
-  },
-  {
-    id: "psn-gift-card-10",
-    name: "PSN Gift Card — $10",
-    price: "Coming soon",
-    category: "Coming Soon",
-    status: "coming-soon",
-    description: "Gift cards are paused while we complete VTU onboarding. Back soon.",
-  },
-  {
-    id: "psn-gift-card-25",
-    name: "PSN Gift Card — $25",
-    price: "Coming soon",
-    category: "Coming Soon",
-    status: "coming-soon",
-    description: "Gift cards are paused while we complete VTU onboarding. Back soon.",
-  },
-  {
-    id: "psn-gift-card-50",
-    name: "PSN Gift Card — $50",
-    price: "Coming soon",
-    category: "Coming Soon",
-    status: "coming-soon",
-    description: "Gift cards are paused while we complete VTU onboarding. Back soon.",
-  },
-  {
-    id: "psn-gift-card-100",
-    name: "PSN Gift Card — $100",
-    price: "Coming soon",
-    category: "Coming Soon",
-    status: "coming-soon",
-    description: "Gift cards are paused while we complete VTU onboarding. Back soon.",
-  },
-  {
-    id: "xbox-game-pass",
-    name: "Xbox Game Pass",
-    price: "Coming soon",
-    category: "Coming Soon",
-    status: "coming-soon",
-    description: "Xbox subscriptions are next in line as the catalog expands.",
-  },
-  {
-    id: "fortnite-v-bucks",
-    name: "Fortnite V-Bucks",
-    price: "Coming soon",
-    category: "Coming Soon",
-    status: "coming-soon",
-    description: "Battle pass and V-Bucks top-ups are on the roadmap.",
-  },
-  {
-    id: "fifa-coins",
-    name: "FIFA Coins",
-    price: "Coming soon",
-    category: "Coming Soon",
-    status: "coming-soon",
-    description: "Football gamers will be able to top up faster with local rails.",
-  },
-  {
-    id: "steam-wallet",
-    name: "Steam Wallet",
-    price: "Coming soon",
-    category: "Coming Soon",
-    status: "coming-soon",
-    description: "Steam wallet codes are part of PandaPay's broader gaming wallet vision.",
-  },
-];
+export const PRODUCTS: Product[] = [...VTU_PRODUCTS];
 
 export const AVAILABLE_PRODUCTS = PRODUCTS.filter((product) => product.status === "available");
-export const COMING_SOON_PRODUCTS = PRODUCTS.filter((product) => product.status === "coming-soon");
 
 export const PAYMENT_METHODS = [
   {
     title: "Naira Bank Transfer",
     body: "Transfer from any Nigerian bank. Send your screenshot and our AI confirms your payment in seconds.",
-  },
-  {
-    title: "USDC / Crypto",
-    body: "Pay with USDC across multiple chains. Confirmed automatically on-chain — no manual verification needed.",
-  },
-  {
-    title: "cNGN Stablecoin",
-    body: "Pay in cNGN, the naira-pegged stablecoin. Combine crypto speed with naira stability.",
   },
 ] as const;
 
@@ -222,19 +96,18 @@ export const WHY_PANDAPAY = [
     body: "Our AI reads your bank screenshot and confirms payments in under 2 seconds.",
   },
   {
-    title: "Crypto-Native",
-    body: "Pay in USDC or stablecoins across multiple chains. Web3-ready from day one.",
+    title: "Instant Delivery",
+    body: "Airtime, data, tokens, and subscription renewals land in the chat within minutes.",
   },
 ] as const;
 
 export const HOW_IT_WORKS_STEPS = [
   "Message PandaPay on WhatsApp",
   "Tell the AI what you want — in plain English or Pidgin",
-  "Get a live price in Naira or USDC",
-  "Choose your payment method",
-  "Naira: transfer and upload your screenshot. AI confirms in under 2 seconds.",
-  "Crypto: send USDC to the wallet address. Confirmed automatically on-chain.",
-  "Your gaming code is delivered to WhatsApp instantly.",
+  "Get a live price in Naira",
+  "Transfer from any Nigerian bank and upload your screenshot",
+  "The AI confirms your payment in under 2 seconds",
+  "Your airtime, data, token, or subscription lands in WhatsApp instantly.",
 ] as const;
 
 export const HOMEPAGE_FLOW = [
@@ -246,11 +119,11 @@ export const HOMEPAGE_FLOW = [
   {
     step: "Step 02",
     title: "See your live price",
-    body: "Get a current Naira or USDC quote before you commit to checkout.",
+    body: "Get a current Naira quote before you commit to checkout.",
   },
   {
     step: "Step 03",
     title: "Pay and receive",
-    body: "Complete payment and receive your code on WhatsApp without leaving the conversation.",
+    body: "Complete payment and receive your top-up on WhatsApp without leaving the conversation.",
   },
 ] as const;

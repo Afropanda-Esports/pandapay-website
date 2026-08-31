@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
     titleAccentTop: 'On',
     titleAccentBottom: 'WhatsApp.',
     body:
-      'Buy airtime, data, electricity, cable TV, and betting top-ups — plus gaming subscriptions — using Naira, USDC, or crypto. No app, no stress — just send a message. Our AI handles everything from product selection to payment confirmation and instant delivery.',
+      'Buy airtime, data, electricity, and cable TV, paid for by Naira bank transfer. No app, no stress — just send a message. Our AI handles everything from product selection to payment confirmation and instant delivery.',
   };
 
   return (
@@ -214,12 +214,6 @@ const Hero: React.FC = () => {
                 <div className="self-end flex flex-wrap gap-3">
                   <span className="rounded-full border border-success-500/40 bg-success-500/18 px-4 py-2 text-sm text-success-300">
                     Naira Transfer
-                  </span>
-                  <span className="rounded-full border border-info-500/40 bg-info-500/18 px-4 py-2 text-sm text-blue-200">
-                    USDC
-                  </span>
-                  <span className="rounded-full border border-primary-400/40 bg-primary-500/18 px-4 py-2 text-sm text-primary-200">
-                    cNGN
                   </span>
                 </div>
 

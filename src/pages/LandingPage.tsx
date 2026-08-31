@@ -16,7 +16,7 @@ const LandingPage: React.FC = () => {
     <div className="flex min-h-screen min-w-0 flex-col bg-background" style={layoutFullWidth}>
       <SeoMeta
         title="Panda Pay — Airtime, Data, Bills & VTU on WhatsApp | Nigeria"
-        description="Buy airtime, data, electricity, cable TV, and betting top-ups on WhatsApp using Naira, USDC, or crypto. PandaPay handles pricing, payment confirmation, and instant delivery."
+        description="Buy airtime, data, electricity, and cable TV on WhatsApp, paid for by Naira bank transfer. PandaPay handles pricing, payment confirmation, and instant delivery."
         path="/"
       />
       <Navbar />

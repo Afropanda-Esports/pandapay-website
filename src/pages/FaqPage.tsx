@@ -10,7 +10,7 @@ export default function FaqPage() {
     <div className="min-h-screen bg-background">
       <SeoMeta
         title="Frequently Asked Questions"
-        description="Got questions about Panda Pay? Find answers about payments, delivery, crypto, and more."
+        description="Got questions about Panda Pay? Find answers about products, payments, delivery, and more."
         path="/faq"
       />
       <Navbar />

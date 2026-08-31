@@ -8,12 +8,12 @@ export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-background">
       <SeoMeta
-        title="How Panda Pay Works — WhatsApp Gaming Checkout"
-        description="See how PandaPay's WhatsApp-native AI takes you from chat to live pricing, payment confirmation, and instant gaming code delivery."
+        title="How Panda Pay Works — WhatsApp VTU Checkout"
+        description="See how PandaPay's WhatsApp-native AI takes you from chat to live pricing, bank-transfer confirmation, and instant top-up delivery."
         path="/how-it-works"
       />
       <PageHero
-        title="From chat to code in minutes."
+        title="From chat to top-up in minutes."
         body="PandaPay is powered by AI that lives inside WhatsApp. No app. No menus. Just a conversation."
       />
 
@@ -53,12 +53,12 @@ export default function HowItWorksPage() {
             <FadeReveal className="w-full min-w-0" delay={0.08}>
               <article className="h-full rounded-[32px] bg-[var(--color-card-soft)] p-8 shadow-elevation-2">
                 <h2 className="font-heading text-3xl font-bold text-[#120B04] dark:text-[rgb(225,225,227)] md:text-4xl">
-                  On-Chain Auto-Confirmation
+                  Instant Fulfillment
                 </h2>
                 <p className="mt-4 font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]">
-                  Crypto payments are monitored by chain listeners in real time. As soon as
-                  the transaction is confirmed on-chain, the fulfillment pipeline triggers
-                  automatically and delivers the code.
+                  Once a payment is verified, the fulfillment pipeline triggers automatically
+                  and delivers the airtime, data, token, or subscription to the same WhatsApp
+                  chat — usually within two minutes.
                 </p>
               </article>
             </FadeReveal>

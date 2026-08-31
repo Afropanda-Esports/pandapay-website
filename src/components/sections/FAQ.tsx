@@ -14,17 +14,17 @@ const faqs: FAQItem[] = [
   {
     question: 'What can I buy on PandaPay today?',
     answer:
-      'Right now, PandaPay supports VTU — airtime, data, electricity, cable TV, and betting top-ups — plus PS Plus subscriptions. Gift cards are returning soon; more products are added as the catalog expands.',
+      'PandaPay supports VTU — airtime, data, electricity, and cable TV. More products are added as the catalog expands.',
   },
   {
     question: 'How long does delivery take?',
     answer:
-      'Most codes are delivered within 2 minutes of payment confirmation. Bank transfers may take up to 30 minutes during busy periods.',
+      'Most top-ups are delivered within 2 minutes of payment confirmation. Bank transfers may take up to 30 minutes during busy periods.',
   },
   {
     question: 'What payment methods do you accept?',
     answer:
-      'We accept Naira bank transfer, cNGN stablecoin, and USDC across multiple supported chains.',
+      'We accept Naira bank transfer from any Nigerian bank. Send your payment screenshot and our AI confirms it in seconds.',
   },
   {
     question: 'What exactly does the AI do?',
