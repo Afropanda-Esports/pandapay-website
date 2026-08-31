@@ -18,7 +18,7 @@ type ChatTestimonial = {
 const testimonials: ChatTestimonial[] = [
   {
     id: 'tunde',
-    quote: 'I wanted a quick gaming top-up without leaving WhatsApp. PandaPay made the whole thing feel simple.',
+    quote: 'I wanted a quick airtime top-up without leaving WhatsApp. PandaPay made the whole thing feel simple.',
     author: 'Tunde',
     location: 'Lagos',
     time: '10:42 AM',
@@ -123,11 +123,11 @@ export default function Testimonial() {
               Real chats
             </p>
             <h2 className={`mt-4 ${sectionTitle}`}>
-              Gamers don&apos;t leave reviews. They leave messages.
+              People don&apos;t leave reviews. They leave messages.
             </h2>
             <p className="mt-4 max-w-md font-sans text-base leading-8 text-text-muted">
               Every purchase ends in WhatsApp — so the best proof is how people talk after they
-              get their code.
+              get their top-up.
             </p>
 
             <ul className="mt-10 grid grid-cols-3 gap-4">
@@ -208,7 +208,7 @@ export default function Testimonial() {
                 className="absolute -right-2 top-8 hidden rounded-2xl bg-testimonial-2 px-4 py-3 shadow-elevation-3 sm:block lg:-right-8"
               >
                 <p className="font-heading text-sm font-bold text-neutral-900">Instant delivery</p>
-                <p className="text-xs text-neutral-700">Codes in-chat</p>
+                <p className="text-xs text-neutral-700">Top-ups in-chat</p>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: -20 }}

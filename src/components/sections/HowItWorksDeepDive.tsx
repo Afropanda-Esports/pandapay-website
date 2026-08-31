@@ -274,7 +274,7 @@ export default function HowItWorksDeepDive() {
           <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
             Full flow
           </p>
-          <h2 className={`mt-4 ${sectionTitleOnDark}`}>From chat to code in minutes.</h2>
+          <h2 className={`mt-4 ${sectionTitleOnDark}`}>From chat to top-up in minutes.</h2>
           <p className="mt-4 max-w-2xl font-sans text-base leading-8 text-text-muted">
             PandaPay is powered by AI that lives inside WhatsApp. Scroll the steps — watch the
             conversation update live.
