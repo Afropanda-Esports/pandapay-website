@@ -50,24 +50,6 @@ const FALLBACK_OFFERINGS: Offering[] = [
     whatsappPrefill: 'Hi PandaPay, I want to renew a cable TV subscription.',
     sortOrder: 4,
   },
-  {
-    id: 'vtu-betting',
-    slug: 'vtu-betting',
-    title: 'Betting Wallet',
-    subtitle: 'Bet9ja, SportyBet, 1xBet',
-    priceLabel: null,
-    whatsappPrefill: 'Hi PandaPay, I want to fund my betting wallet.',
-    sortOrder: 5,
-  },
-  {
-    id: 'ps-plus',
-    slug: 'ps-plus-essential-1m',
-    title: 'PS Plus',
-    subtitle: 'Essential, Extra & Premium tiers',
-    priceLabel: 'From ₦8,000',
-    whatsappPrefill: 'Hi PandaPay, I want a PS Plus subscription.',
-    sortOrder: 6,
-  },
 ];
 
 function apiBaseUrl(): string {

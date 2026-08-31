@@ -8,22 +8,22 @@ const sections = [
   {
     title: 'The Problem',
     body:
-      "Gamers in Nigeria and Ghana could not easily access gaming products. International card payments failed. Stores didn't accept Naira. Crypto was too complicated. The market was underserved by both global gaming platforms and local fintech.",
+      'Buying airtime, data, and paying bills in Nigeria still means juggling apps, USSD codes, and clunky checkouts. The everyday top-up was overdue for something simpler.',
   },
   {
     title: 'Our Solution',
     body:
-      'A WhatsApp-native AI that handles the entire purchase flow. Multi-rail payments — Naira bank transfer, USDC, and stablecoins — built around how Africans already transact.',
+      'A WhatsApp-native AI that handles the entire purchase flow. Pay by Naira bank transfer from any Nigerian bank — built around how Nigerians already transact.',
   },
   {
     title: 'The Stack',
     body:
-      'AI-powered. Multi-chain. Naira-first. Built on Anthropic Claude, with crypto rails designed for fast, reliable checkout.',
+      'AI-powered. Naira-first. Built on Anthropic Claude, with bank-transfer verification designed for fast, reliable checkout.',
   },
   {
     title: 'Team',
     body:
-      'Team details will be added here as PandaPay grows. For now, the mission is clear: remove payment friction for African gamers and build the store the market should have had from the start.',
+      'Team details will be added here as PandaPay grows. For now, the mission is clear: remove payment friction for everyday top-ups and bills in Nigeria.',
   },
 ] as const;
 
@@ -31,13 +31,13 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
       <SeoMeta
-        title="About Panda Pay — The Gaming Store Built for Africa"
-        description="Learn why PandaPay exists, the payment problem it solves for African gamers, and how its WhatsApp-native AI checkout works."
+        title="About Panda Pay — VTU & Bills on WhatsApp"
+        description="Learn why PandaPay exists, the payment friction it removes for everyday top-ups and bills in Nigeria, and how its WhatsApp-native AI checkout works."
         path="/about"
       />
       <PageHero
-        title="We built the store Africa's gamers deserved."
-        body="African gamers spend millions every year on gaming — but most payment infrastructure was never built for them. PandaPay changes that."
+        title="We built the simplest way to top up in Nigeria."
+        body="Airtime, data, electricity, and cable TV shouldn't need an app or a USSD maze. PandaPay makes it a WhatsApp message."
       />
 
       <main className="pb-20">

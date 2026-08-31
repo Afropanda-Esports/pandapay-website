@@ -27,7 +27,7 @@ const testimonials: ChatTestimonial[] = [
   },
   {
     id: 'alex',
-    quote: 'Paying with USDC felt clean. I sent the exact amount and my code arrived without extra back-and-forth.',
+    quote: 'Sent the bank transfer, dropped my screenshot, and my airtime landed before I finished typing thanks.',
     author: 'Alex',
     location: 'Abuja',
     time: '11:08 AM',
@@ -55,7 +55,7 @@ const testimonials: ChatTestimonial[] = [
 ];
 
 const stats = [
-  { value: '5,000+', label: 'Gamers served' },
+  { value: '5,000+', label: 'Top-ups delivered' },
   { value: '<2 min', label: 'Avg. delivery' },
   { value: '24/7', label: 'AI on WhatsApp' },
 ];
@@ -217,8 +217,8 @@ export default function Testimonial() {
                 transition={{ delay: 0.45 }}
                 className="absolute -left-2 bottom-12 hidden rounded-2xl bg-testimonial-1 px-4 py-3 shadow-elevation-3 sm:block lg:-left-10"
               >
-                <p className="font-heading text-sm font-bold text-neutral-900">Naira & USDC</p>
-                <p className="text-xs text-neutral-800">Your rails, your choice</p>
+                <p className="font-heading text-sm font-bold text-neutral-900">Naira transfer</p>
+                <p className="text-xs text-neutral-800">Pay from any bank</p>
               </motion.div>
             </div>
           </FadeReveal>

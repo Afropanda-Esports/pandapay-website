@@ -3,11 +3,9 @@ import type { LucideIcon } from 'lucide-react';
 import {
   ArrowUpRight,
   Camera,
-  Coins,
   Gift,
   MessageCircle,
   Sparkles,
-  Wallet,
   Zap,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -43,8 +41,8 @@ const flowSteps: FlowStep[] = [
   },
   {
     label: 'Step 03',
-    title: 'Get a live price in Naira or USDC',
-    note: 'Pricing stays current at the moment of checkout, so the buyer always sees the exact rail they want.',
+    title: 'Get a live price in Naira',
+    note: 'Pricing stays current at the moment of checkout, so the buyer always sees the exact amount to send.',
     tag: 'Live pricing',
     icon: Zap,
     chat: [
@@ -54,18 +52,7 @@ const flowSteps: FlowStep[] = [
   },
   {
     label: 'Step 04',
-    title: 'Choose your payment method',
-    note: 'Move between bank transfer, cNGN, or crypto without leaving the conversation.',
-    tag: 'Flexible rails',
-    icon: Wallet,
-    chat: [
-      { role: 'bot', text: 'Pick your payment method:' },
-      { role: 'bot', text: 'Naira · USDC · cNGN', highlight: true },
-    ],
-  },
-  {
-    label: 'Step 05',
-    title: 'Naira: transfer and upload your screenshot. AI confirms in under 2 seconds.',
+    title: 'Transfer from any Nigerian bank and upload your screenshot',
     note: 'Our vision AI extracts the amount, reference, and sender details and validates the payment against the pending order.',
     tag: 'AI verification',
     icon: Camera,
@@ -75,18 +62,7 @@ const flowSteps: FlowStep[] = [
     ],
   },
   {
-    label: 'Step 06',
-    title: 'Crypto: send USDC to the wallet address. Confirmed automatically on-chain.',
-    note: 'As soon as the transaction is confirmed, the fulfillment pipeline continues without manual intervention.',
-    tag: 'Auto-confirmation',
-    icon: Coins,
-    chat: [
-      { role: 'user', text: 'USDC sent ✓' },
-      { role: 'bot', text: 'On-chain confirmed — fulfilling…', highlight: true },
-    ],
-  },
-  {
-    label: 'Step 07',
+    label: 'Step 05',
     title: 'Your top-up lands instantly on WhatsApp.',
     note: 'The final handoff happens in the same thread, so the customer never loses context.',
     tag: 'Instant delivery',

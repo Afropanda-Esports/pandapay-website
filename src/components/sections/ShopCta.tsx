@@ -9,10 +9,10 @@ export default function ShopCta() {
         <FadeReveal>
           <div className="rounded-3xl bg-[var(--color-card-soft)] p-8 text-center shadow-elevation-2 md:p-12">
             <h3 className={ctaTitle}>
-              Ready to play without limits?
+              Ready to top up in seconds?
             </h3>
             <p className="mx-auto mt-3 max-w-lg text-sm text-text-muted">
-              Message Panda Pay on WhatsApp and get your gaming code in minutes.
+              Message Panda Pay on WhatsApp and get your airtime, data, or bill payment sorted in minutes.
             </p>
             <a
               href={WHATSAPP_URL}

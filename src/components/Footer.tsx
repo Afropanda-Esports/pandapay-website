@@ -30,7 +30,7 @@ const Footer = () => {
                     {/* Left: Socials */}
                     <div className="flex flex-col gap-6">
                         <h3 className="font-heading text-lg text-text-primary">Pandapay</h3>
-                        <p className="text-sm text-text-secondary">VTU, bills &amp; gaming — on WhatsApp.</p>
+                        <p className="text-sm text-text-secondary">VTU &amp; bills — on WhatsApp.</p>
                         <div className="flex items-center gap-6 text-text-secondary">
                             <a href={TWITTER_URL} target="_blank" rel="noreferrer" className="hover:text-primary-400 transition-colors" aria-label="X (Twitter)">
                                 <XIcon />
@@ -78,10 +78,10 @@ const Footer = () => {
                 >
                     <p>© 2026 Pandapay. Prices shown are approximate and subject to change with exchange rates.</p>
                     <div className="flex gap-6">
-                        <span>PandaPay is built for African gamers using local and on-chain payment rails.</span>
+                        <span>PandaPay is built for Nigerians using local bank-transfer payment rails.</span>
                     </div>
                 </div>
-                <p className="text-xs text-text-muted">Current product availability covers Nigerian VTU (airtime, data, electricity, cable TV, betting) and PS Plus, with gift cards and broader catalog support returning soon.</p>
+                <p className="text-xs text-text-muted">Current product availability covers Nigerian VTU — airtime, data, electricity, and cable TV — paid for by Naira bank transfer.</p>
                 <p className="text-xs text-text-muted">
                     PandaPay, a product of{' '}
                     <a

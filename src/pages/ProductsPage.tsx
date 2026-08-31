@@ -1,27 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Footer from '../components/Footer';
 import PageHero from '../components/PageHero';
 import ProductCatalogGrid from '../components/ProductCatalogGrid';
 import SeoMeta from '../components/SeoMeta';
 import { mergeLivePrices, useOfferings } from '../hooks/useOfferings';
-import {
-  COMING_SOON_PRODUCTS,
-  PRODUCTS,
-  WHATSAPP_URL,
-  type Product,
-} from '../siteContent';
-
-type Tab = 'all' | 'vtu' | 'playstation' | 'coming-soon';
-
-const TABS: { label: string; value: Tab }[] = [
-  { label: 'All', value: 'all' },
-  { label: 'VTU', value: 'vtu' },
-  { label: 'PlayStation', value: 'playstation' },
-  { label: 'Coming Soon', value: 'coming-soon' },
-];
+import { PRODUCTS, WHATSAPP_URL } from '../siteContent';
 
 export default function ProductsPage() {
-  const [activeTab, setActiveTab] = useState<Tab>('all');
   const { offerings, loading: pricesLoading } = useOfferings();
 
   const catalog = useMemo(
@@ -29,29 +14,16 @@ export default function ProductsPage() {
     [offerings],
   );
 
-  const filteredProducts = useMemo<Product[]>(() => {
-    if (activeTab === 'vtu') {
-      return catalog.filter((product) => product.category === 'VTU');
-    }
-    if (activeTab === 'playstation') {
-      return catalog.filter((product) => product.category === 'PlayStation');
-    }
-    if (activeTab === 'coming-soon') {
-      return COMING_SOON_PRODUCTS;
-    }
-    return catalog;
-  }, [activeTab, catalog]);
-
   return (
     <div className="min-h-screen bg-background">
       <SeoMeta
         title="Products — Panda Pay"
-        description="Browse PandaPay's VTU, bills, and gaming catalog. Prices update live with the exchange rate."
+        description="Browse PandaPay's VTU catalog — airtime, data, electricity, and cable TV. Prices update live with the exchange rate."
         path="/products"
       />
       <PageHero
         title="The Catalog."
-        body="Every gaming product we sell. Prices update live with the exchange rate."
+        body="Airtime, data, electricity, and cable TV. Prices update live with the exchange rate."
       >
         <a
           href={WHATSAPP_URL}
@@ -64,34 +36,10 @@ export default function ProductsPage() {
       <main className="pb-20">
         <section className="w-full min-w-0 py-12 shadow-[var(--shadow-section-separate)] lg:py-20">
           <div className="mx-auto flex w-full min-w-0 max-w-[1440px] flex-col gap-8 px-6 md:px-12 lg:px-20">
-            <div className="flex flex-wrap gap-3">
-              {TABS.map((tab) => {
-                const isActive = tab.value === activeTab;
-                return (
-                  <button
-                    key={tab.value}
-                    type="button"
-                    onClick={() => setActiveTab(tab.value)}
-                    className={`rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
-                      isActive
-                        ? 'bg-primary-500 text-white'
-                        : 'border border-border text-text-primary hover:bg-primary-500/10'
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </div>
-
-            {pricesLoading && activeTab !== 'coming-soon' ? (
+            {pricesLoading ? (
               <p className="text-sm text-text-muted">Updating live prices…</p>
             ) : null}
-            <ProductCatalogGrid
-              products={filteredProducts}
-              muted={activeTab === 'coming-soon'}
-              variantByStatus={activeTab === 'all'}
-            />
+            <ProductCatalogGrid products={catalog} />
 
             <p className="text-sm text-text-muted">
               Prices update automatically with exchange rates. Final price confirmed at
