@@ -129,8 +129,8 @@ const Hero: React.FC = () => {
                     ))}
                   </div>
                   <p className="font-sans text-base text-text-secondary md:text-lg">
-                    <span className="font-medium text-primary-500">+200</span> gamers across
-                    Africa
+                    <span className="font-medium text-primary-500">+200</span> customers across
+                    Nigeria
                   </p>
                 </motion.div>
               </div>
