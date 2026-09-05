@@ -9,12 +9,12 @@ export default function HowItWorksPage() {
     <div className="min-h-screen bg-background">
       <SeoMeta
         title="How Panda Pay Works — WhatsApp VTU Checkout"
-        description="See how PandaPay's WhatsApp-native AI takes you from chat to live pricing, bank-transfer confirmation, and instant top-up delivery."
+        description="See PandaPay's guided WhatsApp journey from the current catalog through cart review, bank-transfer checkout, and order updates."
         path="/how-it-works"
       />
       <PageHero
-        title="From chat to top-up in minutes."
-        body="PandaPay is powered by AI that lives inside WhatsApp. No app. No menus. Just a conversation."
+        title="From catalog to confirmation."
+        body="Browse what is available, review your cart, complete checkout, and follow your order in WhatsApp."
       />
 
       <main className="pb-20">
@@ -40,25 +40,24 @@ export default function HowItWorksPage() {
             <FadeReveal className="w-full min-w-0">
               <article className="h-full rounded-[32px] bg-[var(--color-card-soft)] p-8 shadow-elevation-2">
                 <h2 className="font-heading text-3xl font-bold text-[#120B04] dark:text-[rgb(225,225,227)] md:text-4xl">
-                  AI Payment Verification
+                  Guided checkout
                 </h2>
                 <p className="mt-4 font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]">
-                  For Naira payments, users upload a bank transfer screenshot directly to
-                  WhatsApp. Our vision AI extracts the amount, reference, and sender details
-                  and validates the payment against the pending order in under 2 seconds. No
-                  human review needed for clean screenshots.
+                  PandaPay shows the required checkout details and exact bank-transfer
+                  instructions in the conversation. Review the total carefully before sending
+                  payment.
                 </p>
               </article>
             </FadeReveal>
             <FadeReveal className="w-full min-w-0" delay={0.08}>
               <article className="h-full rounded-[32px] bg-[var(--color-card-soft)] p-8 shadow-elevation-2">
                 <h2 className="font-heading text-3xl font-bold text-[#120B04] dark:text-[rgb(225,225,227)] md:text-4xl">
-                  Instant Fulfillment
+                  Clear order updates
                 </h2>
                 <p className="mt-4 font-sans text-base leading-8 text-[#6B5642] dark:text-[rgba(225,225,227,0.55)]">
-                  Once a payment is verified, the fulfillment pipeline triggers automatically
-                  and delivers the airtime, data, token, or subscription to the same WhatsApp
-                  chat — usually within two minutes.
+                  Payment and fulfillment status stays in the same WhatsApp conversation.
+                  Order fulfillment stays in WhatsApp, while an optional email address is used
+                  only for the order receipt.
                 </p>
               </article>
             </FadeReveal>

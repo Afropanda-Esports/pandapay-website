@@ -2,77 +2,33 @@ import { useEffect, useRef, useState } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import {
   ArrowUpRight,
-  Camera,
-  Gift,
+  BadgeCheck,
+  CreditCard,
+  ListChecks,
   MessageCircle,
-  Sparkles,
-  Zap,
+  PackageSearch,
+  ShoppingCart,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { sectionTitleOnDark } from '../../typography';
 import FadeReveal from '../FadeReveal';
-import { WHATSAPP_URL } from '../../siteContent';
+import { PURCHASE_FLOW_STEPS, WHATSAPP_URL } from '../../siteContent';
 
-type FlowStep = {
-  label: string;
-  title: string;
-  note: string;
-  tag: string;
-  icon: LucideIcon;
-  chat: { role: 'user' | 'bot'; text: string; highlight?: boolean }[];
-};
-
-const flowSteps: FlowStep[] = [
-  {
-    label: 'Step 01',
-    title: 'Message PandaPay on WhatsApp',
-    note: 'Start the order in one chat thread. No app install, no account setup, no menu maze.',
-    tag: 'Start in chat',
-    icon: MessageCircle,
-    chat: [{ role: 'user', text: 'Hey PandaPay 👋 I need MTN data' }],
-  },
-  {
-    label: 'Step 02',
-    title: 'Tell the AI what you want — in plain English or Pidgin',
-    note: 'The assistant understands natural language and turns it into a clean order flow instantly.',
-    tag: 'Natural language',
-    icon: Sparkles,
-    chat: [{ role: 'user', text: 'Abeg, 2GB — I dey Lagos' }],
-  },
-  {
-    label: 'Step 03',
-    title: 'Get a live price in Naira',
-    note: 'Pricing stays current at the moment of checkout, so the buyer always sees the exact amount to send.',
-    tag: 'Live pricing',
-    icon: Zap,
-    chat: [
-      { role: 'bot', text: 'Got you. Live price right now:' },
-      { role: 'bot', text: 'MTN 2GB → ₦1,400', highlight: true },
-    ],
-  },
-  {
-    label: 'Step 04',
-    title: 'Transfer from any Nigerian bank and upload your screenshot',
-    note: 'Our vision AI extracts the amount, reference, and sender details and validates the payment against the pending order.',
-    tag: 'AI verification',
-    icon: Camera,
-    chat: [
-      { role: 'user', text: '📎 Payment screenshot uploaded' },
-      { role: 'bot', text: 'Verified in 1.2 seconds ✓', highlight: true },
-    ],
-  },
-  {
-    label: 'Step 05',
-    title: 'Your top-up lands instantly on WhatsApp.',
-    note: 'The final handoff happens in the same thread, so the customer never loses context.',
-    tag: 'Instant delivery',
-    icon: Gift,
-    chat: [
-      { role: 'bot', text: '⚡ You\'re topped up:' },
-      { role: 'bot', text: 'MTN 2GB delivered ✓', highlight: true },
-    ],
-  },
+const flowIcons: LucideIcon[] = [
+  MessageCircle,
+  PackageSearch,
+  ListChecks,
+  ShoppingCart,
+  CreditCard,
+  BadgeCheck,
 ];
+
+const flowSteps = PURCHASE_FLOW_STEPS.map((step, index) => ({
+  ...step,
+  icon: flowIcons[index] ?? MessageCircle,
+}));
+
+type FlowStep = (typeof flowSteps)[number];
 
 function FlowPhone({ activeStep }: { activeStep: number }) {
   const scene = flowSteps[activeStep]?.chat ?? flowSteps[0].chat;
@@ -274,10 +230,10 @@ export default function HowItWorksDeepDive() {
           <p className="font-sans text-xs font-semibold uppercase tracking-[0.24em] text-primary-500">
             Full flow
           </p>
-          <h2 className={`mt-4 ${sectionTitleOnDark}`}>From chat to top-up in minutes.</h2>
+          <h2 className={`mt-4 ${sectionTitleOnDark}`}>From catalog to confirmation in one chat.</h2>
           <p className="mt-4 max-w-2xl font-sans text-base leading-8 text-text-muted">
-            PandaPay is powered by AI that lives inside WhatsApp. Scroll the steps — watch the
-            conversation update live.
+            Follow the guided purchase journey and keep each order update in the same WhatsApp
+            conversation.
           </p>
         </FadeReveal>
 

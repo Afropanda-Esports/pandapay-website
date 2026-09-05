@@ -11,6 +11,7 @@
     "dev": "vite",
     "optimize:inventory": "node scripts/optimize-inventory.mjs",
     "build": "tsc -b && vite build",
+    "verify:content": "node scripts/verify-whatsapp-number.mjs && node scripts/verify-marketing-content.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

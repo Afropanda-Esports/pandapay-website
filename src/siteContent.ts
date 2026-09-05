@@ -1,6 +1,8 @@
-const WHATSAPP_NUMBER =
-  (import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined)?.replace(/\D/g, "") ||
-  "234XXXXXXXXXX";
+import { normalizeWhatsappNumber } from "./whatsappNumber";
+
+const WHATSAPP_NUMBER = normalizeWhatsappNumber(
+  import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined,
+);
 
 export function whatsappUrl(message?: string): string {
   const base = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -11,7 +13,7 @@ export function whatsappUrl(message?: string): string {
 export const WHATSAPP_URL = whatsappUrl();
 
 /** Set to true when the WhatsApp bot is accepting live orders. */
-export const WHATSAPP_BOT_LIVE = false;
+export const WHATSAPP_BOT_LIVE = true;
 
 export const botStatusShort = WHATSAPP_BOT_LIVE ? "online" : "offline";
 export const botStatusNav = WHATSAPP_BOT_LIVE ? "AI online" : "AI offline";
@@ -101,29 +103,93 @@ export const WHY_PANDAPAY = [
   },
 ] as const;
 
-export const HOW_IT_WORKS_STEPS = [
-  "Message PandaPay on WhatsApp",
-  "Tell the AI what you want — in plain English or Pidgin",
-  "Get a live price in Naira",
-  "Transfer from any Nigerian bank and upload your screenshot",
-  "The AI confirms your payment in under 2 seconds",
-  "Your airtime, data, token, or subscription lands in WhatsApp instantly.",
+export type PurchaseFlowStep = {
+  label: string;
+  title: string;
+  note: string;
+  tag: string;
+  chat: ReadonlyArray<{ role: "user" | "bot"; text: string; highlight?: boolean }>;
+};
+
+export const PURCHASE_FLOW_STEPS: ReadonlyArray<PurchaseFlowStep> = [
+  {
+    label: "Step 01",
+    title: "Start in WhatsApp",
+    note: "Send PandaPay a message and use the guided shopping entry point in the reply.",
+    tag: "Open the chat",
+    chat: [
+      { role: "user", text: "Hi PandaPay" },
+      { role: "bot", text: "Welcome. Tap below to browse the catalog." },
+    ],
+  },
+  {
+    label: "Step 02",
+    title: "Browse what is available",
+    note: "Open the current catalog so you only choose from products that are available to order.",
+    tag: "Current catalog",
+    chat: [
+      { role: "user", text: "Browse catalog" },
+      { role: "bot", text: "Here is what is available today.", highlight: true },
+    ],
+  },
+  {
+    label: "Step 03",
+    title: "Choose an item",
+    note: "Use the structured controls to select an available product and its amount or option.",
+    tag: "Select a product",
+    chat: [
+      { role: "user", text: "I have picked an item" },
+      { role: "bot", text: "Select an available option to continue.", highlight: true },
+    ],
+  },
+  {
+    label: "Step 04",
+    title: "Review your cart",
+    note: "Check each item, quantity, and the total. Add, adjust, or remove items before checkout.",
+    tag: "Check the cart",
+    chat: [
+      { role: "bot", text: "Your cart is ready for review." },
+      { role: "user", text: "The items and quantities look right" },
+    ],
+  },
+  {
+    label: "Step 05",
+    title: "Complete checkout",
+    note: "Add a valid discount when available, optionally provide an email for your email receipt, and follow the exact bank-transfer instructions shown in chat.",
+    tag: "Pay securely",
+    chat: [
+      { role: "bot", text: "Review the total and follow the payment instructions." },
+      { role: "user", text: "Checkout details confirmed" },
+    ],
+  },
+  {
+    label: "Step 06",
+    title: "Receive confirmation",
+    note: "Payment and fulfillment updates stay in the conversation. Order fulfillment stays in WhatsApp; email is used only for receipts.",
+    tag: "Track the order",
+    chat: [
+      { role: "bot", text: "We will post payment and order updates here." },
+      { role: "bot", text: "Order status updated", highlight: true },
+    ],
+  },
 ] as const;
+
+export const HOW_IT_WORKS_STEPS = PURCHASE_FLOW_STEPS.map((step) => step.title);
 
 export const HOMEPAGE_FLOW = [
   {
     step: "Step 01",
-    title: "Chat naturally",
-    body: "Tell PandaPay what you want in plain English or Pidgin and get guided instantly.",
+    title: "Open the catalog",
+    body: "Start in WhatsApp and browse what is currently available to order.",
   },
   {
     step: "Step 02",
-    title: "See your live price",
-    body: "Get a current Naira quote before you commit to checkout.",
+    title: "Build your cart",
+    body: "Choose an item, review quantities and totals, then continue when everything looks right.",
   },
   {
     step: "Step 03",
-    title: "Pay and receive",
-    body: "Complete payment and receive your top-up on WhatsApp without leaving the conversation.",
+    title: "Checkout and track",
+    body: "Follow the bank-transfer instructions and receive payment and fulfillment updates in the chat.",
   },
 ] as const;
