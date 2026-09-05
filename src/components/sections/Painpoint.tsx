@@ -18,8 +18,8 @@ export default function Painpoint() {
               Every step stays in one chat.
             </h2>
             <p className="mt-5 w-full min-w-0 max-w-3xl font-sans text-base leading-8 text-text-muted">
-              Every step is handled by Panda Pay AI inside WhatsApp, from first message to
-              delivery.
+              Browse the available catalog, review your cart, complete checkout, and receive
+              order updates without leaving WhatsApp.
             </p>
           </div>
         </FadeReveal>
@@ -49,8 +49,8 @@ export default function Painpoint() {
                 Want the full flow?
               </p>
               <p className="mt-2 font-sans text-sm leading-7 text-text-muted">
-                See the complete WhatsApp purchase journey, from chat to live pricing to
-                instant code delivery.
+                See the complete WhatsApp purchase journey, from the current catalog through
+                checkout and order confirmation.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">

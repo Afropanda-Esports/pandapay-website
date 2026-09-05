@@ -54,7 +54,6 @@ const Footer = () => {
                             <a href="#hero" className="text-text-secondary hover:text-text-primary transition-colors">Home</a>
                             <a href="#inventory" className="text-text-secondary hover:text-text-primary transition-colors">Shop</a>
                             <a href="#how-it-works" className="text-text-secondary hover:text-text-primary transition-colors">How It Works</a>
-                            <a href="#testimonials" className="text-text-secondary hover:text-text-primary transition-colors">Testimonials</a>
                         </div>
                         <div className="flex flex-col gap-4">
                             <h3 className="text-text-primary font-medium mb-2">Resources</h3>

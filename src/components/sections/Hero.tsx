@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ArrowUpRight, MessageCircleMore } from 'lucide-react';
+import { ArrowRight, MessageCircleMore } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { layoutFullWidth } from '../../layoutStyles';
 import { useTheme } from '../../context/ThemeContext';
@@ -12,13 +12,6 @@ const Hero: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const panelY = useTransform(scrollYProgress, [0, 0.18], [0, 36]);
   const { resolvedTheme } = useTheme();
-  const avatarStyles = [
-    'bg-primary-200',
-    'bg-warning-700/70',
-    'bg-primary-500',
-    'bg-success-500/80',
-  ];
-
   const heroCopy = {
     titleTop: 'Your',
     titleMid: 'VTU',
@@ -109,30 +102,6 @@ const Hero: React.FC = () => {
                   </a>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.7, delay: 0.65 }}
-                  className="mt-auto flex flex-wrap items-center gap-4"
-                >
-                  <div className="flex -space-x-3">
-                    {avatarStyles.map((style, index) => (
-                      <div
-                        key={style}
-                        className={`flex h-12 w-12 items-center justify-center rounded-full border-4 ${style}`}
-                        style={{ borderColor: 'var(--color-hero-left)' }}
-                      >
-                        {index === 2 ? (
-                          <ArrowUpRight size={16} className="text-white/85" />
-                        ) : null}
-                      </div>
-                    ))}
-                  </div>
-                  <p className="font-sans text-base text-text-secondary md:text-lg">
-                    <span className="font-medium text-primary-500">+200</span> customers across
-                    Nigeria
-                  </p>
-                </motion.div>
               </div>
             </div>
           </div>

@@ -7,7 +7,6 @@ import Inventory from '../components/sections/Inventory';
 import SeoMeta from '../components/SeoMeta';
 
 const HowItWorksDeepDive = lazy(() => import('../components/sections/HowItWorksDeepDive'));
-const Testimonial = lazy(() => import('../components/sections/Testimonial'));
 const FAQ = lazy(() => import('../components/sections/FAQ'));
 const ShopCta = lazy(() => import('../components/sections/ShopCta'));
 
@@ -25,7 +24,6 @@ const LandingPage: React.FC = () => {
         <Inventory />
         <Suspense fallback={null}>
           <HowItWorksDeepDive />
-          <Testimonial />
           <FAQ />
           <ShopCta />
         </Suspense>
