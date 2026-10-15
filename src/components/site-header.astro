@@ -1,0 +1,380 @@
+---
+import BrandLogo from "@/components/brand-logo.astro";
+import { home } from "@/content/home";
+import { waLink } from "@/lib/site";
+
+const { nav, cta, ctaShort, ctaMessage } = home.header;
+const waHref = waLink(ctaMessage);
+---
+<header class="site-header" data-site-header>
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <BrandLogo variant="wordmark" on="light" class="site-header__logo-img" />
+    </a>
+
+    <nav class="site-header__nav" aria-label="Primary">
+      {
+        nav.map((item) =>
+          "external" in item && item.external ? (
+            <a
+              class="site-header__link"
+              href={waLink("Hi! I need support with an order.")}
+              data-track="support_click"
+              data-location="header"
+              target="_blank"
+              rel="noopener"
+            >
+              {item.label}
+            </a>
+          ) : (
+            <a
+              class="site-header__link"
+              href={item.href}
+              data-nav-section={"section" in item ? item.section : undefined}
+            >
+              {item.label}
+            </a>
+          ),
+        )
+      }
+    </nav>
+
+    <div class="site-header__cta-cell site-header__cta-cell--full">
+      <a
+        class="site-header__cta"
+        href={waHref}
+        data-track="cta_primary"
+        data-location="header"
+        target="_blank"
+        rel="noopener"
+      >
+        <span>{cta}</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <button
+      class="site-header__menu"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-header-panel"
+      data-menu-toggle
+    >
+      <span class="site-header__menu-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Menu</span>
+    </button>
+
+    <div class="site-header__cta-cell site-header__cta-cell--compact">
+      <a
+        class="site-header__cta"
+        href={waHref}
+        data-track="cta_primary"
+        data-location="header"
+        target="_blank"
+        rel="noopener"
+      >
+        {ctaShort}
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="site-header__panel"
+    id="site-header-panel"
+    hidden
+    data-menu-panel
+  >
+    {
+      nav.map((item) =>
+        "external" in item && item.external ? (
+          <a
+            class="site-header__panel-link"
+            href={waLink("Hi! I need support with an order.")}
+            data-track="support_click"
+            data-location="header-menu"
+            target="_blank"
+            rel="noopener"
+          >
+            {item.label}
+          </a>
+        ) : (
+          <a class="site-header__panel-link" href={item.href} data-menu-link>
+            {item.label}
+          </a>
+        ),
+      )
+    }
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--header-h);
+    border-bottom: 1px solid var(--color-line);
+    background: color-mix(in srgb, var(--color-white) 92%, transparent);
+    backdrop-filter: blur(8px);
+  }
+
+  .site-header__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: stretch;
+    height: 100%;
+  }
+
+  .site-header__logo {
+    display: inline-flex;
+    align-items: center;
+    padding-inline: var(--frame-pad);
+    border-right: 1px solid var(--color-line);
+    text-decoration: none;
+  }
+
+  .site-header__logo-img {
+    height: 28px;
+    width: auto;
+  }
+
+  .site-header__nav {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+  }
+
+  .site-header__link {
+    position: relative;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      background-size var(--duration-normal) var(--ease-standard);
+  }
+
+  .site-header__link:hover,
+  .site-header__link[aria-current="true"] {
+    color: var(--color-text);
+    background-size: 100% 1px;
+  }
+
+  .site-header__cta-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-inline: var(--space-3);
+    border-left: 1px solid var(--color-line);
+    background: var(--color-surface);
+  }
+
+  .site-header__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: var(--space-2) var(--space-5);
+    border: var(--border-btn);
+    border-radius: var(--radius-btn);
+    background: var(--color-orange);
+    color: var(--color-on-accent);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    box-shadow: var(--shadow-btn);
+    transition:
+      box-shadow var(--duration-fast) var(--ease-standard),
+      transform var(--duration-normal) var(--ease-enter);
+  }
+
+  .site-header__cta:hover {
+    box-shadow: var(--shadow-btn-hover);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .site-header__cta:active {
+    box-shadow: var(--shadow-btn-active);
+    transform: translate(2px, 2px);
+  }
+
+  .site-header__cta span[aria-hidden] {
+    transition: transform var(--duration-normal) var(--ease-enter);
+  }
+
+  .site-header__cta:hover span[aria-hidden] {
+    transform: translateX(4px);
+  }
+
+  .site-header__cta-cell--full {
+    display: none;
+  }
+
+  .site-header__cta-cell--compact .site-header__cta {
+    min-width: 4.5rem;
+  }
+
+  .site-header__menu {
+    display: grid;
+    place-items: center;
+    width: var(--header-h);
+    height: var(--header-h);
+    margin-left: auto;
+    border: 0;
+    border-left: 1px solid var(--color-line);
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  .site-header__menu-icon {
+    position: relative;
+    width: 14px;
+    height: 14px;
+  }
+
+  .site-header__menu-icon::before,
+  .site-header__menu-icon::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 1px;
+    background: currentColor;
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .site-header__menu-icon::before {
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  .site-header__menu-icon::after {
+    transform: translateY(-50%);
+  }
+
+  .site-header__menu[aria-expanded="true"] .site-header__menu-icon::before {
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .site-header__menu[aria-expanded="true"] .site-header__menu-icon::after {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  .site-header__panel {
+    position: absolute;
+    inset: var(--header-h) 0 auto;
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-white);
+  }
+
+  .site-header__panel[hidden] {
+    display: none;
+  }
+
+  .site-header__panel-link {
+    display: flex;
+    align-items: center;
+    min-height: 59px;
+    padding-inline: var(--frame-pad);
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .site-header__panel-link:last-child {
+    border-bottom: 0;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__nav {
+      display: flex;
+    }
+
+    .site-header__menu,
+    .site-header__cta-cell--compact,
+    .site-header__panel {
+      display: none;
+    }
+
+    .site-header__cta-cell--full {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-site-header]");
+  if (header) {
+    const toggle = header.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+    const panel = header.querySelector<HTMLElement>("[data-menu-panel]");
+    const links = header.querySelectorAll<HTMLAnchorElement>("[data-menu-link]");
+
+    const focusables = () =>
+      panel
+        ? [
+            ...panel.querySelectorAll<HTMLElement>(
+              'a[href], button:not([disabled])',
+            ),
+          ]
+        : [];
+
+    const close = () => {
+      if (!toggle || !panel) return;
+      toggle.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+      toggle.focus();
+    };
+
+    const open = () => {
+      if (!toggle || !panel) return;
+      toggle.setAttribute("aria-expanded", "true");
+      panel.hidden = false;
+      focusables()[0]?.focus();
+    };
+
+    toggle?.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      if (expanded) close();
+      else open();
+    });
+
+    links.forEach((link) => link.addEventListener("click", close));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        if (toggle?.getAttribute("aria-expanded") === "true") close();
+        return;
+      }
+      if (event.key !== "Tab" || toggle?.getAttribute("aria-expanded") !== "true")
+        return;
+      const items = focusables();
+      if (!items.length) return;
+      const first = items[0]!;
+      const last = items[items.length - 1]!;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+  }
+</script>

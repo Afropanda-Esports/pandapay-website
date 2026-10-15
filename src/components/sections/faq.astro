@@ -1,0 +1,192 @@
+---
+import Section from "@/components/frame/section.astro";
+import { home } from "@/content/home";
+import { waLink } from "@/lib/site";
+
+const { faq } = home;
+---
+<Section id="faq" aria-labelledby="faq-heading" class="faq">
+  <div class="faq__grid">
+    <div class="faq__intro">
+      <h2 id="faq-heading" class="faq__heading" data-reveal>{faq.heading}</h2>
+      <p class="faq__aside" data-reveal>{faq.aside}</p>
+      <a
+        class="faq__aside-link"
+        href={waLink(faq.asideMessage)}
+        data-track="support_click"
+        data-location="faq"
+        target="_blank"
+        rel="noopener"
+      >
+        {faq.asideCta}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="faq__list">
+      {
+        faq.items.map((item) => (
+          <details class="faq__item" data-question={item.slug}>
+            <summary class="faq__summary">
+              <span>{item.question}</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer">
+              <p>
+                {item.answer}
+                {"linkHref" in item && item.linkHref && (
+                  <>
+                    {" "}
+                    <a href={item.linkHref}>{item.linkLabel}</a>
+                  </>
+                )}
+              </p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</Section>
+
+<style>
+  .faq__grid {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .faq__heading {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.03em;
+    max-width: 12ch;
+    margin-bottom: var(--space-6);
+  }
+
+  .faq__aside {
+    margin: 0 0 var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .faq__aside-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+  }
+
+  .faq__list {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .faq__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 64px;
+    padding-block: var(--space-4);
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .faq__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icon {
+    position: relative;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .faq__icon::before,
+  .faq__icon::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .faq__icon::before {
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  .faq__icon::after {
+    transform: translateY(-50%);
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq__answer {
+    padding-bottom: var(--space-6);
+  }
+
+  .faq__answer p {
+    margin: 0;
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    font-size: var(--text-base);
+  }
+
+  .faq__answer a {
+    color: var(--color-text);
+  }
+
+  @supports (interpolate-size: allow-keywords) {
+    .faq__item {
+      interpolate-size: allow-keywords;
+    }
+
+    .faq__item::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition:
+        block-size var(--duration-normal) var(--ease-standard),
+        content-visibility var(--duration-normal) allow-discrete;
+    }
+
+    .faq__item[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .faq__grid {
+      grid-template-columns: 4fr 8fr;
+      gap: var(--space-8);
+      align-items: start;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>("#faq details").forEach((el) => {
+    el.addEventListener("toggle", () => {
+      if (!el.open) return;
+      const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: "faq_open",
+        question: el.dataset.question,
+      });
+    });
+  });
+</script>

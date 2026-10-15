@@ -1,0 +1,196 @@
+---
+import Section from "@/components/frame/section.astro";
+import Cells from "@/components/frame/cells.astro";
+import ButtonLink from "@/components/ui/button-link.astro";
+import Phone from "@/components/ui/phone.astro";
+import Stub from "@/components/ui/stub.astro";
+import { home } from "@/content/home";
+import { waLink } from "@/lib/site";
+import heroChatSvg from "../../../public/illustrations/hero-chat.svg?raw";
+
+const { hero } = home;
+---
+<Section id="top" marked={true} class="hero" aria-labelledby="hero-heading">
+  <div class="hero__main">
+    <div class="hero__copy">
+      <h1 id="hero-heading" class="hero__headline">
+        <span class="hero__headline-full" data-hero-headline>{hero.headline}</span>
+        <span class="hero__headline-short" data-hero-headline>{hero.headlineShort}</span>
+      </h1>
+      <p class="hero__subhead" data-hero-subhead>{hero.subhead}</p>
+      <div class="hero__actions" data-hero-actions>
+        <ButtonLink
+          href={waLink(hero.primaryMessage)}
+          track="cta_primary"
+          location="hero"
+          external
+        >
+          {hero.primaryCta}
+        </ButtonLink>
+        <a class="hero__secondary" href="#how-it-works">{hero.secondaryCta}</a>
+      </div>
+    </div>
+
+    <div class="hero__device" data-hero-phone>
+      <Phone>
+        <div class="hero__chat" set:html={heroChatSvg} />
+      </Phone>
+    </div>
+  </div>
+
+  <Cells cols={3} tabletCols={3} class="hero__proof">
+    {
+      hero.proof.map((item) => (
+        <div class="hero__proof-cell" data-reveal>
+          <Stub id={item.icon} ratio="1 / 1" size="24×24" label={item.label} class="hero__proof-icon" />
+          <p>{item.label}</p>
+        </div>
+      ))
+    }
+  </Cells>
+</Section>
+
+<style>
+  .hero {
+    padding-bottom: 0;
+  }
+
+  .hero :global(.cells.hero__proof) {
+    border-block-end: 0;
+  }
+
+  .hero__main {
+    display: grid;
+    gap: var(--space-10);
+    margin-inline: calc(var(--frame-pad) * -1);
+    margin-bottom: 0;
+    border-block: 1px solid var(--color-line);
+    background: var(--color-line);
+  }
+
+  .hero__copy,
+  .hero__device {
+    background: var(--color-surface);
+    padding: var(--space-10) var(--frame-pad);
+  }
+
+  .hero__copy {
+    display: grid;
+    gap: var(--space-6);
+    align-content: center;
+  }
+
+  .hero__headline {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.04em;
+    max-width: 14ch;
+  }
+
+  .hero__headline-short {
+    display: none;
+  }
+
+  .hero__subhead {
+    margin: 0;
+    max-width: 46ch;
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-body);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .hero__secondary {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    box-shadow: inset 0 -1px 0 var(--color-line-strong);
+  }
+
+  .hero__secondary:hover {
+    color: var(--color-orange);
+  }
+
+  .hero__device {
+    display: grid;
+    place-items: center;
+    background: var(--color-wash);
+  }
+
+  .hero__device :global(.phone) {
+    width: min(100%, 17.5rem);
+  }
+
+  .hero__chat,
+  .hero__chat :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__proof-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 4.5rem;
+    padding-block: var(--space-5) !important;
+  }
+
+  .hero__proof-cell p {
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+
+  .hero__proof-icon {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .hero__proof-icon :global(.stub__id),
+  .hero__proof-icon :global(.stub__label) {
+    display: none;
+  }
+
+  .hero__proof-icon::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 479px) {
+    .hero__headline-full {
+      display: none;
+    }
+    .hero__headline-short {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero__main {
+      grid-template-columns: 7fr 5fr;
+      gap: 1px;
+    }
+
+    .hero__device :global(.phone) {
+      width: min(100%, 22rem);
+    }
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import Section from "@/components/frame/section.astro";
+import SectionHead from "@/components/frame/section-head.astro";
+import Cells from "@/components/frame/cells.astro";
+import Stub from "@/components/ui/stub.astro";
+import { home } from "@/content/home";
+
+const { why } = home;
+---
+<Section id="why" aria-labelledby="why-heading">
+  <SectionHead id="why-heading" heading={why.heading} />
+
+  <Cells cols={3} tabletCols={2}>
+    {
+      why.items.map((item) => (
+        <article class="why-card" data-reveal>
+          <div class="why-card__top">
+            <Stub
+              id={`icon-why-${item.slug}`}
+              ratio="1 / 1"
+              size="40×40"
+              label={item.title}
+              class="why-card__icon"
+            />
+          </div>
+          <h3 class="why-card__title">{item.title}</h3>
+          <p class="why-card__line">{item.line}</p>
+        </article>
+      ))
+    }
+  </Cells>
+</Section>
+
+<style>
+  .why-card {
+    display: grid;
+    gap: var(--space-4);
+    align-content: end;
+    min-height: 240px;
+    transition: background var(--duration-fast) var(--ease-standard);
+  }
+
+  .why-card:hover {
+    background: var(--color-wash);
+  }
+
+  .why-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-bottom: auto;
+  }
+
+  .why-card__icon {
+    width: 40px;
+    height: 40px;
+    padding: 0 !important;
+    transition: transform var(--duration-normal) var(--ease-enter);
+  }
+
+  .why-card__icon :global(.stub__id),
+  .why-card__icon :global(.stub__label) {
+    display: none;
+  }
+
+  .why-card__icon::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--color-line-strong);
+  }
+
+  .why-card:hover .why-card__icon {
+    transform: translateY(-2px) rotate(-6deg);
+  }
+
+  .why-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .why-card__line {
+    margin: 0;
+    color: var(--color-text-muted);
+    max-width: 32ch;
+    font-size: var(--text-sm);
+  }
+</style>

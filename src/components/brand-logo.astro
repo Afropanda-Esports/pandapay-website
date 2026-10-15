@@ -1,0 +1,44 @@
+---
+import { site } from "@/lib/site";
+
+interface Props {
+  variant?: "mark" | "wordmark";
+  on?: "light" | "dark";
+  class?: string;
+  decorative?: boolean;
+}
+
+const {
+  variant = "wordmark",
+  on = "light",
+  class: className,
+  decorative = false,
+} = Astro.props;
+
+const src =
+  variant === "mark"
+    ? "/brand/icon-orange.png"
+    : on === "dark"
+      ? "/brand/wordmark-dark.png"
+      : "/brand/wordmark-light.png";
+
+const alt = decorative ? "" : site.name;
+---
+
+<img
+  class:list={["brand-logo", className]}
+  src={src}
+  alt={alt}
+  width={variant === "mark" ? 128 : 320}
+  height={variant === "mark" ? 128 : 80}
+  decoding="async"
+  loading={decorative ? "lazy" : "eager"}
+/>
+
+<style>
+  .brand-logo {
+    display: block;
+    width: auto;
+    height: auto;
+  }
+</style>

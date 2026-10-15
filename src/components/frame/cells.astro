@@ -1,0 +1,39 @@
+---
+interface Props {
+  cols?: number;
+  tabletCols?: number;
+  class?: string;
+}
+const { cols = 3, tabletCols = 2, class: className } = Astro.props;
+---
+<div
+  class:list={["cells", className]}
+  style={`--cols:${cols};--cols-tablet:${tabletCols}`}
+>
+  <slot />
+</div>
+
+<style>
+  .cells {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1px;
+    margin-inline: calc(var(--frame-pad) * -1);
+    background: var(--color-line);
+    border-block: 1px solid var(--color-line);
+  }
+  .cells > :global(*) {
+    background: var(--color-surface);
+    padding: var(--space-8) var(--frame-pad);
+  }
+  @media (min-width: 721px) {
+    .cells {
+      grid-template-columns: repeat(var(--cols-tablet), minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .cells {
+      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    }
+  }
+</style>

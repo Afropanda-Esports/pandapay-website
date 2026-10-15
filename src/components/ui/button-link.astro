@@ -1,0 +1,91 @@
+---
+interface Props {
+  href: string;
+  variant?: "primary" | "secondary";
+  track?: string;
+  location?: string;
+  external?: boolean;
+  class?: string;
+}
+const {
+  href,
+  variant = "primary",
+  track,
+  location,
+  external = false,
+  class: className,
+} = Astro.props;
+---
+<a
+  class:list={["btn", `btn--${variant}`, className]}
+  href={href}
+  data-track={track}
+  data-location={location}
+  {...(external ? { target: "_blank", rel: "noopener" } : {})}
+>
+  <span class="btn__label"><slot /></span>
+  <span class="btn__arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 3.25rem;
+    padding: var(--space-3) var(--space-6);
+    border: var(--border-btn);
+    border-radius: var(--radius-btn);
+    box-shadow: var(--shadow-btn);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition:
+      box-shadow var(--duration-fast) var(--ease-standard),
+      transform var(--duration-normal) var(--ease-enter);
+  }
+  .btn__arrow {
+    transition: transform var(--duration-normal) var(--ease-enter);
+  }
+  .btn:hover .btn__arrow,
+  .btn:focus-visible .btn__arrow {
+    transform: translateX(4px);
+  }
+
+  .btn--primary {
+    background: var(--color-orange);
+    color: var(--color-on-accent);
+  }
+  .btn--primary:hover {
+    box-shadow: var(--shadow-btn-hover);
+    transform: translateY(-2px) scale(1.02);
+  }
+  .btn--primary:active {
+    box-shadow: var(--shadow-btn-active);
+    transform: translate(2px, 2px);
+  }
+
+  .btn--secondary {
+    background: var(--color-surface);
+    color: var(--color-black);
+  }
+  .btn--secondary:hover {
+    box-shadow: var(--shadow-btn-hover);
+    transform: translateY(-2px) scale(1.02);
+  }
+  .btn--secondary:active {
+    box-shadow: var(--shadow-btn-active);
+    transform: translate(2px, 2px);
+  }
+
+  :global(.section--dark) .btn--secondary {
+    background: var(--color-black);
+    color: var(--color-white);
+    border-color: var(--color-white);
+    box-shadow: 4px 4px 0 0 var(--color-white);
+  }
+
+  :global(.section--dark) .btn--secondary:hover {
+    box-shadow: 7px 7px 0 0 var(--color-white);
+  }
+</style>
