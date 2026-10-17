@@ -5,7 +5,8 @@
  * clocks). Every motion maps to the visitor's scroll:
  *  1. Entry (scrubbed, before the pin): the phone rises, the reticle opens up,
  *     the statement words settle in.
- *  2. While pinned, scroll position picks the screen. Screens move like app
+ *  2. While pinned, scroll position picks the screen (one per step; a video
+ *     screen plays from the start when it comes in and pauses when it leaves). Screens move like app
  *     navigation: forward pushes in from the right, back pulls in from the left.
  *  3. Crossing into a new step: its word lights up, its pill turns black, its
  *     You/We detail opens, the aim line slides to it, and the reticle locks on
@@ -46,13 +47,21 @@ export function initFlow(root: HTMLElement) {
   const aimA = root.querySelector<SVGCircleElement>("[data-aim-a]");
   const aimB = root.querySelector<SVGCircleElement>("[data-aim-b]");
 
-  const N = screens.length;
+  // each screen takes `data-scroll` units of scroll (one unit ≈ half a screen height);
+  // videos get more, so there's time to watch them while the step is pinned
   const stepOf = screens.map((s) => Number(s.dataset.step) || 0);
+  const weight = screens.map((s) => Number(s.dataset.scroll) || 1);
+  const screenStart = weight.map((_, i) => weight.slice(0, i).reduce((a, b) => a + b, 0));
+  const N = weight.reduce((a, b) => a + b, 0);
   const steps = items.length;
-  const start = Array.from({ length: steps }, (_, s) => stepOf.indexOf(s));
-  const count = Array.from({ length: steps }, (_, s) => stepOf.filter((x) => x === s).length);
+  const start = Array.from({ length: steps }, (_, s) => screenStart[stepOf.indexOf(s)] ?? 0);
+  const count = Array.from({ length: steps }, (_, s) =>
+    weight.reduce((sum, w, i) => sum + (stepOf[i] === s ? w : 0), 0),
+  );
   const span = N + HOLD;
-  if (!N || !steps) return;
+  if (!screens.length || !steps) return;
+  const videos = screens.map((s) => s.querySelector("video"));
+  let sectionOn = false;
 
   let screen = 0;
   let step = 0;
@@ -63,8 +72,22 @@ export function initFlow(root: HTMLElement) {
   gsap.set(screens, { autoAlpha: 0, xPercent: 0 });
   gsap.set(screens[0]!, { autoAlpha: 1 });
 
+  /** Only the visible screen's video plays, from the start each time it comes in. */
+  function syncVideos(restart = false) {
+    videos.forEach((v, i) => {
+      if (!v) return;
+      if (i === screen && sectionOn && !reduce) {
+        if (restart) v.currentTime = 0;
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
+    });
+  }
+
   function showScreen(next: number) {
     if (next === screen) return;
+    gsap.delayedCall(0, () => syncVideos(true));
     const dir = next > screen ? 1 : -1;
     const out = screens[screen]!;
     const inc = screens[next]!;
@@ -187,7 +210,10 @@ export function initFlow(root: HTMLElement) {
 
   function apply(p: number) {
     const f = p * span;
-    const nextScreen = Math.min(N - 1, Math.floor(f));
+    let nextScreen = 0;
+    screenStart.forEach((st, i) => {
+      if (f >= st) nextScreen = i;
+    });
     const nextStep = stepOf[nextScreen]!;
 
     rings.forEach((ring, s) => {
@@ -255,6 +281,19 @@ export function initFlow(root: HTMLElement) {
       onToggle: (self) => (self.isActive ? drift.play() : drift.pause()),
     });
   }
+
+  // videos only run while the section is on screen
+  ScrollTrigger.create({
+    trigger: root,
+    start: "top bottom",
+    end: "bottom top",
+    onToggle: (self) => {
+      sectionOn = self.isActive;
+      syncVideos();
+    },
+  });
+  document.addEventListener("visibilitychange", () => (document.hidden ? videos.forEach((v) => v?.pause()) : syncVideos()));
+  if (reduce) videos.forEach((v) => v && (v.controls = true));
 
   /* ---------------- boot ---------------- */
 
