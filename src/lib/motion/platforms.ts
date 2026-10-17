@@ -402,6 +402,21 @@ export function initPlatforms(root: HTMLElement) {
     });
   });
 
+  // links like <a href="#utilities"> (e.g. in the footer) open that tab and scroll here
+  const openFromLink = (id: string) => {
+    if (!tabs.some((t) => t.dataset.tab === id)) return false;
+    select(id);
+    root.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    return true;
+  };
+  document.addEventListener("click", (e) => {
+    const a = (e.target as Element | null)?.closest?.<HTMLAnchorElement>('a[href="#utilities"], a[href="#gift-cards"]');
+    if (a && openFromLink(a.getAttribute("href")!.slice(1))) e.preventDefault();
+  });
+  if (location.hash === "#utilities" || location.hash === "#gift-cards") {
+    requestAnimationFrame(() => openFromLink(location.hash.slice(1)));
+  }
+
   // heading entry, once, when the section comes into view
   new IntersectionObserver(
     (entries, io) => {

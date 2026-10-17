@@ -498,7 +498,7 @@ export const home = {
           { id: "cyberpunk-2077", title: "Cyberpunk 2077", src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyRgPAVGpwTIYVzo5qm5IOGyL_c0BnXR-Iy1klgcIWxQX8hFK9Z1QvklQ&s=10", alt: "Cyberpunk 2077 key art" },
         ],
       },
-    ] satisfies Platform[],
+    ] satisfies Platform[] as Platform[],
     utilities: {
       heading: "Airtime, data and bills, sorted.",
       /** Seconds each utility card holds before the row moves on. */

@@ -1,0 +1,359 @@
+---
+/**
+ * Site footer.
+ *
+ *   top    – brand (logo, line, button) and four link columns:
+ *            Explore · Support (24/7) · Company · Legal
+ *   bar    – © line, the company behind Panda Pay, address, and the price note
+ *   strip  – "The line": the etched panorama of six game worlds, all playing at
+ *            once. Shown faint and tinted orange on black. Decorative only: it
+ *            can't be clicked, selected, dragged, cast or picture-in-pictured,
+ *            and screen readers skip it. Plays only while on screen; reduced
+ *            motion shows the still. On phones it drifts slowly sideways so all
+ *            six scenes pass by.
+ */
+import Button from "@/components/ui/button.astro";
+import Logo from "@/components/ui/logo.astro";
+import { site, waLink, supportLink } from "@/lib/site";
+
+const year = new Date().getFullYear();
+
+type FooterLink = { label: string; href: string; external?: boolean };
+type FooterColumn = { title: string; wide?: boolean; links: FooterLink[] };
+
+const columns: FooterColumn[] = [
+  {
+    title: "Explore",
+    links: [
+      { label: "Gift cards", href: "#gift-cards" },
+      { label: "Airtime, data & bills", href: "#utilities" },
+      { label: "How it works", href: "/#how-it-works" },
+      { label: "FAQ", href: "/#faq" },
+    ],
+  },
+  {
+    title: "Support",
+    wide: true,
+    links: [
+      { label: `WhatsApp ${site.supportPhone}`, href: supportLink("Hi! I need help with an order."), external: true },
+      { label: site.supportEmail, href: `mailto:${site.supportEmail}` },
+    ],
+  },
+  {
+    title: "Company",
+    wide: true,
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Articles", href: "/articles" },
+      { label: `Enquiries: ${site.email}`, href: `mailto:${site.email}` },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Terms", href: "/terms" },
+      { label: "Privacy", href: "/privacy" },
+      { label: "Refunds", href: "/refunds" },
+    ],
+  },
+];
+---
+
+<footer class="footer" data-footer data-nav-surface data-tone="dark">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <a class="footer__logo" href="/" aria-label="Panda Pay home">
+        <Logo tone="dark" />
+      </a>
+      <p class="footer__line">Gift cards, airtime, data and bills. All on WhatsApp.</p>
+      <Button href={waLink("Hi! I'd like to shop on Panda Pay.")} external track="cta_primary" location="footer">
+        Start on WhatsApp
+      </Button>
+    </div>
+
+    <nav class="footer__cols" aria-label="Footer">
+      {
+        columns.map((col) => (
+          <div class="footer__col" data-wide={col.wide ? "" : undefined}>
+            <h2 class="footer__title">{col.title}</h2>
+            <ul>
+              {col.links.map((l) => (
+                <li>
+                  <a
+                    href={l.href}
+                    target={l.external ? "_blank" : undefined}
+                    rel={l.external ? "noopener" : undefined}
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
+  </div>
+
+  <div class="footer__bar">
+    <p>
+      © {year} Panda Pay, a product of {site.parent}. {site.address}.
+    </p>
+    <p>Prices are approximate and may change with exchange rates. Built for Nigerians, paid by local bank transfer.</p>
+  </div>
+
+  <div class="footer__strip" aria-hidden="true" data-footer-strip>
+    <div class="footer__reel" data-footer-reel>
+      <video
+        class="footer__video"
+        data-footer-video
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster="/videos/footer/strip-poster.webp"
+        tabindex="-1"
+        width="3840"
+        height="462"
+      >
+        <source src="/videos/footer/strip.mp4" type="video/mp4" />
+        <source src="/videos/footer/strip.webm" type="video/webm" />
+      </video>
+      <span class="footer__tint"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* The strip plays only while it's on screen, never with reduced motion,
+     and blocks the right-click menu on itself. */
+  const strip = document.querySelector<HTMLElement>("[data-footer-strip]");
+  const video = strip?.querySelector<HTMLVideoElement>("[data-footer-video]");
+  if (strip && video) {
+    video.disablePictureInPicture = true;
+    video.disableRemotePlayback = true;
+    video.setAttribute(
+      "controlslist",
+      "nodownload nofullscreen noremoteplayback",
+    );
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    strip.addEventListener("contextmenu", (e) => e.preventDefault());
+    if (!reduce) {
+      let on = false;
+      const sync = () => (on && !document.hidden ? video.play().catch(() => {}) : video.pause());
+      new IntersectionObserver(
+        (entries) => {
+          on = entries.some((e) => e.isIntersecting);
+          if (on && video.preload === "none") {
+            video.preload = "auto";
+            video.load();
+          }
+          sync();
+        },
+        { rootMargin: "200px 0px" },
+      ).observe(strip);
+      document.addEventListener("visibilitychange", sync);
+    }
+  }
+</script>
+
+<style>
+  .footer {
+    --gutter: max(clamp(1rem, 5vw, 4.5rem), calc((100vw - 90rem) / 2));
+    --ink: #ffffff;
+    --muted: rgb(255 255 255 / 0.62);
+    position: relative;
+    overflow: hidden;
+    background: #0c0c0c;
+    color: var(--ink);
+  }
+
+  /* ---------- Top ---------- */
+  .footer__top {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    padding: clamp(4rem, 8vw, 7rem) var(--gutter) clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (min-width: 1024px) {
+    .footer__top {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      align-items: start;
+    }
+  }
+
+  .footer__brand {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+
+  .footer__logo {
+    display: block;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .footer__logo :global(.logo) {
+    height: 100%;
+  }
+
+  .footer__line {
+    margin: 0 0 0.5rem;
+    max-width: 28ch;
+    color: var(--muted);
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ---------- Columns ---------- */
+  .footer__cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 1.5rem;
+  }
+
+  /* phones: the columns with long emails and numbers take the full width */
+  @media (max-width: 759px) {
+    .footer__col[data-wide] {
+      grid-column: 1 / -1;
+    }
+
+    .footer__col:not([data-wide]) {
+      order: -1;
+    }
+  }
+
+  @media (min-width: 760px) {
+    .footer__cols {
+      grid-template-columns: 1fr 1.35fr 1.35fr 0.8fr;
+    }
+  }
+
+  .footer__title {
+    margin: 0 0 1rem;
+    color: var(--color-orange, #ff6b00);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .footer__col ul {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer__col a {
+    color: var(--ink);
+    font-size: 0.95rem;
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition:
+      background-size 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 200ms;
+  }
+
+  .footer__col a:hover {
+    color: #ffffff;
+    background-size: 100% 1px;
+  }
+
+  .footer a:focus-visible {
+    outline: 2px solid var(--color-orange, #ff6b00);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* ---------- Bar ---------- */
+  .footer__bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin: 0 var(--gutter);
+    padding: 1.5rem 0 0;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .footer__bar p {
+    margin: 0;
+    max-width: 62ch;
+  }
+
+  /* ---------- Strip ---------- */
+  .footer__strip {
+    position: relative;
+    height: clamp(9rem, calc(100vw * 462 / 3840), 18rem);
+    margin-top: clamp(1rem, 3vw, 2.5rem);
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    /* fade the sky edge into the footer */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 35%);
+    mask-image: linear-gradient(to bottom, transparent, #000 35%);
+  }
+
+  .footer__reel {
+    position: absolute;
+    inset: 0 auto 0 0;
+    height: 100%;
+    aspect-ratio: 3840 / 462;
+    min-width: 100%;
+    /* the tint multiplies against this black, so only the engraved lines turn orange */
+    background: #0c0c0c;
+    isolation: isolate;
+  }
+
+  .footer__video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom center;
+    /* cream paper → black, ink → light; the tint then turns the light lines orange */
+    filter: invert(1) grayscale(1) contrast(1.2);
+    opacity: 0.5;
+  }
+
+  .footer__tint {
+    position: absolute;
+    inset: 0;
+    background: var(--color-orange, #ff6b00);
+    mix-blend-mode: multiply;
+  }
+
+  /* phones: the strip keeps its height and drifts so all six scenes pass by */
+  @media (max-width: 1023px) {
+    .footer__reel {
+      animation: footer-drift 48s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes footer-drift {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% + 100vw));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer__reel {
+      animation: none;
+    }
+  }
+</style>
