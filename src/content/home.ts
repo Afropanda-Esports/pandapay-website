@@ -64,6 +64,26 @@ export interface FeatureTile {
   features: Feature[];
 }
 
+export interface FlowScreen {
+  id: string;
+  /** Replace with a real WhatsApp Flow screenshot: /images/flow/{id}.webp */
+  src?: string;
+  alt: string;
+  /** What this screen must show (placeholder text until the real screenshot lands). */
+  stub: string;
+}
+
+export interface FlowStep {
+  id: string;
+  icon: FeatureIcon;
+  /** The word in the left statement that lights up with this step. */
+  word: string;
+  title: string;
+  you: string;
+  we: string;
+  screens: FlowScreen[];
+}
+
 export const home = {
   hero: {
     /** Brand tagline from the brief. Stays the page's h1 while the slides rotate. */
@@ -298,6 +318,65 @@ export const home = {
           },
         ],
       },
-    ] satisfies FeatureTile[],
+    ] satisfies FeatureTile[] as FeatureTile[],
+  },
+
+  flow: {
+    heading: "How it works",
+    cta: { label: "Start on WhatsApp", message: "Hi! I'd like to shop on Panda Pay." },
+    steps: [
+      {
+        id: "say-hi",
+        icon: "wave",
+        word: "Hi.",
+        title: "Say hi",
+        you: "Send a message to Panda Pay on WhatsApp.",
+        we: "Welcome you and open the catalogue.",
+        screens: [
+          { id: "hi", alt: "", stub: "Chat with Panda Pay, the customer's first message: 'Hi'" },
+          { id: "welcome", alt: "", stub: "Welcome reply with the catalogue menu button" },
+        ],
+      },
+      {
+        id: "find-it",
+        icon: "discover",
+        word: "Tap.",
+        title: "Find it",
+        you: "Tap through category, brand, region and product.",
+        we: "Show only what's in stock for your region.",
+        screens: [
+          { id: "category", alt: "", stub: "Catalogue: choose a category (gift cards, airtime & data, bills)" },
+          { id: "brand", alt: "", stub: "Choose a brand or network" },
+          { id: "region", alt: "", stub: "Choose the region the card works in" },
+          { id: "product", alt: "", stub: "Choose a product line, then the exact product and value" },
+        ],
+      },
+      {
+        id: "pay",
+        icon: "naira",
+        word: "Pay.",
+        title: "Pay in Naira",
+        you: "Add it to your cart, check out and send a bank transfer.",
+        we: "Confirm your payment and create your order.",
+        screens: [
+          { id: "cart", alt: "", stub: "Cart with the chosen product, quantity and total" },
+          { id: "checkout", alt: "", stub: "Checkout summary with the order total in Naira" },
+          { id: "transfer", alt: "", stub: "Bank transfer details to pay from any Nigerian bank" },
+          { id: "confirmed", alt: "", stub: "Payment confirmed, order created with its order number" },
+        ],
+      },
+      {
+        id: "get-it",
+        icon: "gift",
+        word: "Done.",
+        title: "Get it in the chat",
+        you: "Nothing. Just wait for it.",
+        we: "Send your voucher or service confirmation, trackable any time.",
+        screens: [
+          { id: "tracking", alt: "", stub: "Order status: where the order is right now" },
+          { id: "delivered", alt: "", stub: "Voucher code or service confirmation delivered in the chat" },
+        ],
+      },
+    ] satisfies FlowStep[],
   },
 };
