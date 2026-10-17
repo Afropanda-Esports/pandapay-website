@@ -23,8 +23,8 @@
   --color-text-muted-inverse: color-mix(in srgb, var(--color-white) 68%, var(--color-black));
 
   /* Typography */
-  --font-sans: "Ranade", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Excon", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --text-xs: clamp(0.72rem, 0.69rem + 0.12vw, 0.78rem);
   --text-sm: clamp(0.82rem, 0.79rem + 0.14vw, 0.9rem);
@@ -40,7 +40,7 @@
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
-  --font-weight-semibold: 500; /* Excon has no 600; Medium */
+  --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
   /* Spacing scale */

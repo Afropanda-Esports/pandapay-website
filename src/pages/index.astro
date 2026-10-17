@@ -1,29 +1,14 @@
 ---
 import BaseLayout from "@/layouts/base-layout.astro";
-import Frame from "@/components/frame/frame.astro";
-import SiteHeader from "@/components/site-header.astro";
-import SiteFooter from "@/components/site-footer.astro";
+import SiteNav from "@/components/site-nav.astro";
 import Hero from "@/components/sections/hero.astro";
-import Catalogue from "@/components/sections/catalogue.astro";
-import HowItWorks from "@/components/sections/how-it-works.astro";
-import Why from "@/components/sections/why.astro";
-import Trust from "@/components/sections/trust.astro";
-import Faq from "@/components/sections/faq.astro";
-import FinalCta from "@/components/sections/final-cta.astro";
+import Features from "@/components/sections/features.astro";
 ---
 
 <BaseLayout>
-  <Frame>
-    <SiteHeader />
-    <main>
-      <Hero />
-      <Catalogue />
-      <HowItWorks />
-      <Why />
-      <Trust />
-      <Faq />
-      <FinalCta />
-    </main>
-    <SiteFooter />
-  </Frame>
+  <SiteNav />
+  <main>
+    <Hero />
+    <Features />
+  </main>
 </BaseLayout>

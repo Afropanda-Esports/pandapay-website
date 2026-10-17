@@ -1,31 +1,39 @@
-/* Local font faces — Ranade (body), Excon (display). */
+/* Local font faces — Poppins (body), Clash Grotesk (display). */
 @font-face {
-  font-family: "Ranade";
-  src: url("/fonts/ranade-light.woff2") format("woff2");
+  font-family: "Poppins";
+  src: url("/fonts/poppins-light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Ranade";
-  src: url("/fonts/ranade-regular.woff2") format("woff2");
+  font-family: "Poppins";
+  src: url("/fonts/poppins-regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Excon";
-  src: url("/fonts/excon-medium.woff2") format("woff2");
+  font-family: "Clash Grotesk";
+  src: url("/fonts/clash-grotesk-medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Excon";
-  src: url("/fonts/excon-bold.woff2") format("woff2");
+  font-family: "Clash Grotesk";
+  src: url("/fonts/clash-grotesk-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("/fonts/clash-grotesk-bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;

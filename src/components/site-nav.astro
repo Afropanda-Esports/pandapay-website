@@ -1,0 +1,374 @@
+---
+import Button from "@/components/ui/button.astro";
+import Logo from "@/components/ui/logo.astro";
+import { waLink } from "@/lib/site";
+
+const links = [
+  { label: "Products", href: "#products" },
+  { label: "How it works", href: "#how-it-works" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Support", href: "#support" },
+];
+const cta = { label: "Start on WhatsApp", short: "Start", message: "Hi! I'd like to shop on Panda Pay." };
+---
+
+<header class="nav" data-nav data-tone="light">
+  <div class="nav__pill">
+    <a class="nav__brand" href="/" aria-label="Panda Pay home">
+      <Logo tone="light" class="nav__logo" />
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {links.map((l) => <a class="nav__link" href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <div class="nav__actions">
+      <Button
+        href={waLink(cta.message)}
+        size="sm"
+        track="cta_primary"
+        location="nav"
+        external
+        aria-label={cta.label}
+        class="nav__cta"
+      >
+        <span class="nav__cta-long">{cta.label}</span>
+        <span class="nav__cta-short" aria-hidden="true">{cta.short}</span>
+      </Button>
+
+      <button
+        type="button"
+        class="nav__menu"
+        data-nav-menu
+        aria-expanded="false"
+        aria-controls="nav-sheet"
+        aria-label="Open menu"
+      >
+        <span class="nav__menu-bar"></span>
+        <span class="nav__menu-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="nav__sheet" id="nav-sheet" data-nav-sheet hidden>
+    <nav aria-label="Mobile">
+      {links.map((l) => <a class="nav__sheet-link" href={l.href} data-nav-close>{l.label}</a>)}
+    </nav>
+    <Button href={waLink(cta.message)} size="lg" track="cta_primary" location="nav-menu" external class="nav__sheet-cta">
+      {cta.label}
+    </Button>
+  </div>
+</header>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-nav]");
+  if (nav) {
+    const menu = nav.querySelector<HTMLButtonElement>("[data-nav-menu]")!;
+    const sheet = nav.querySelector<HTMLElement>("[data-nav-sheet]")!;
+    const logo = nav.querySelector<SVGElement>(".logo");
+    const pill = nav.querySelector<HTMLElement>(".nav__pill")!;
+
+    // ---- tone: read the surface currently under the pill ----
+    const setTone = (tone: string) => {
+      if (nav.dataset.tone === tone) return;
+      nav.dataset.tone = tone;
+      logo?.setAttribute("data-tone", tone);
+    };
+    const update = () => {
+      const r = pill.getBoundingClientRect();
+      const y = r.top + r.height / 2;
+      let tone = "light"; // the page itself is white
+      document.querySelectorAll<HTMLElement>("[data-nav-surface]").forEach((surface) => {
+        const s = surface.getBoundingClientRect();
+        if (s.top <= y && s.bottom >= y) tone = surface.dataset.tone ?? "light";
+      });
+      setTone(tone);
+      nav.toggleAttribute("data-scrolled", window.scrollY > 8);
+    };
+    // surfaces that change tone in place (the hero's slides) announce it
+    document.addEventListener("panda:tone", () => requestAnimationFrame(update));
+    window.addEventListener("resize", update);
+    let ticking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          update();
+          ticking = false;
+        });
+      },
+      { passive: true },
+    );
+    update();
+
+    // ---- mobile sheet ----
+    const open = () => {
+      sheet.hidden = false;
+      requestAnimationFrame(() => nav.setAttribute("data-open", ""));
+      menu.setAttribute("aria-expanded", "true");
+      menu.setAttribute("aria-label", "Close menu");
+      sheet.querySelector<HTMLElement>("a")?.focus();
+    };
+    const close = (returnFocus = true) => {
+      nav.removeAttribute("data-open");
+      menu.setAttribute("aria-expanded", "false");
+      menu.setAttribute("aria-label", "Open menu");
+      window.setTimeout(() => {
+        if (!nav.hasAttribute("data-open")) sheet.hidden = true;
+      }, 320);
+      if (returnFocus) menu.focus();
+    };
+    menu.addEventListener("click", () => (nav.hasAttribute("data-open") ? close() : open()));
+    sheet.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("[data-nav-close], a")) close(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && nav.hasAttribute("data-open")) close();
+    });
+    document.addEventListener("click", (e) => {
+      if (nav.hasAttribute("data-open") && !nav.contains(e.target as Node)) close(false);
+    });
+    window.matchMedia("(min-width: 901px)").addEventListener("change", (m) => {
+      if (m.matches && nav.hasAttribute("data-open")) close(false);
+    });
+  }
+</script>
+
+<style>
+  /* Shared geometry: the hero reserves --nav-space so the pill sits in its own band */
+  :global(:root) {
+    --nav-top: clamp(0.5rem, 1.2vw, 0.875rem);
+    --nav-h: 3.5rem;
+    --nav-gap: clamp(0.5rem, 1.2vw, 0.875rem);
+    --nav-space: calc(var(--nav-top) + var(--nav-h) + var(--nav-gap));
+  }
+
+  .nav {
+    --glass: rgb(18 18 20 / 0.42);
+    --glass-strong: rgb(18 18 20 / 0.72);
+    --glass-edge: rgb(255 255 255 / 0.16);
+    --glass-lip: rgb(255 255 255 / 0.18);
+    --nav-ink: #ffffff;
+    --nav-muted: rgb(255 255 255 / 0.74);
+    --nav-hover: rgb(255 255 255 / 0.12);
+
+    position: fixed;
+    top: var(--nav-top);
+    left: 50%;
+    z-index: 100;
+    width: min(calc(100% - 2rem), 60rem);
+    transform: translateX(-50%);
+  }
+
+  .nav[data-tone="light"] {
+    --glass: rgb(255 255 255 / 0.6);
+    --glass-strong: rgb(255 255 255 / 0.86);
+    --glass-edge: rgb(12 12 12 / 0.1);
+    --glass-lip: rgb(255 255 255 / 0.9);
+    --nav-ink: #0c0c0c;
+    --nav-muted: rgb(12 12 12 / 0.7);
+    --nav-hover: rgb(12 12 12 / 0.06);
+  }
+
+  .nav__pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: var(--nav-h);
+    padding: 0.375rem 0.375rem 0.375rem 1.25rem;
+    border: 1px solid var(--glass-edge);
+    border-radius: 999px;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    color: var(--nav-ink);
+    box-shadow:
+      inset 0 1px 0 var(--glass-lip),
+      0 12px 32px -16px rgb(0 0 0 / 0.45);
+    transition:
+      background-color 500ms cubic-bezier(0.65, 0, 0.35, 1),
+      border-color 500ms,
+      color 500ms,
+      box-shadow 500ms;
+  }
+
+  .nav[data-scrolled] .nav__pill {
+    background: var(--glass-strong);
+  }
+
+  .nav__brand {
+    display: flex;
+    flex: none;
+    height: 1.75rem;
+    border-radius: 0.5rem;
+  }
+
+  .nav__brand :global(.nav__logo) {
+    height: 100%;
+  }
+
+  .nav__brand:focus-visible,
+  .nav__link:focus-visible,
+  .nav__menu:focus-visible,
+  .nav__sheet-link:focus-visible {
+    outline: 2px solid var(--color-orange, #ff6b00);
+    outline-offset: 2px;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .nav__link {
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    color: var(--nav-muted);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 200ms, background-color 200ms;
+  }
+
+  .nav__link:hover {
+    background: var(--nav-hover);
+    color: var(--nav-ink);
+  }
+
+  .nav__actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .nav__cta-short {
+    display: none;
+  }
+
+  /* Menu button: only on small screens */
+  .nav__menu {
+    display: none;
+    position: relative;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--glass-edge);
+    border-radius: 50%;
+    background: var(--nav-hover);
+    color: var(--nav-ink);
+    cursor: pointer;
+  }
+
+  .nav__menu-bar {
+    position: absolute;
+    left: 50%;
+    width: 1.1rem;
+    height: 1.5px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nav__menu-bar:nth-child(1) { transform: translate(-50%, -3.5px); }
+  .nav__menu-bar:nth-child(2) { transform: translate(-50%, 3.5px); }
+  .nav[data-open] .nav__menu-bar:nth-child(1) { transform: translate(-50%, 0) rotate(45deg); }
+  .nav[data-open] .nav__menu-bar:nth-child(2) { transform: translate(-50%, 0) rotate(-45deg); }
+
+  /* Mobile sheet */
+  .nav__sheet {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    display: grid;
+    gap: 1.25rem;
+    padding: 1rem 1rem 1.25rem;
+    border: 1px solid var(--glass-edge);
+    border-radius: 1.75rem;
+    background: var(--glass-strong);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
+    color: var(--nav-ink);
+    box-shadow: inset 0 1px 0 var(--glass-lip), 0 24px 48px -20px rgb(0 0 0 / 0.5);
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+    transform-origin: top center;
+    transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1), transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nav__sheet[hidden] {
+    display: none;
+  }
+
+  .nav[data-open] .nav__sheet {
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav__sheet nav {
+    display: grid;
+  }
+
+  .nav__sheet-link {
+    padding: 0.9rem 0.5rem;
+    border-bottom: 1px solid var(--glass-edge);
+    color: var(--nav-ink);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav__sheet-link:last-child {
+    border-bottom: 0;
+  }
+
+  .nav__sheet :global(.nav__sheet-cta) {
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .nav__links {
+      display: none;
+    }
+
+    .nav__menu {
+      display: inline-block;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav {
+      width: calc(100% - 1.5rem);
+    }
+
+    .nav__pill {
+      padding-left: 1rem;
+    }
+
+    .nav__brand {
+      height: 1.5rem;
+    }
+
+    .nav__cta-long {
+      display: none;
+    }
+
+    .nav__cta-short {
+      display: inline;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav__pill,
+    .nav__sheet,
+    .nav__menu-bar {
+      transition: none;
+    }
+  }
+</style>

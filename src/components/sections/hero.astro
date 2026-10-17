@@ -1,196 +1,661 @@
 ---
-import Section from "@/components/frame/section.astro";
-import Cells from "@/components/frame/cells.astro";
-import ButtonLink from "@/components/ui/button-link.astro";
-import Phone from "@/components/ui/phone.astro";
-import Stub from "@/components/ui/stub.astro";
+import Button from "@/components/ui/button.astro";
 import { home } from "@/content/home";
 import { waLink } from "@/lib/site";
-import heroChatSvg from "../../../public/illustrations/hero-chat.svg?raw";
 
 const { hero } = home;
+const slides = hero.slides;
+const first = slides[0]!;
+
+/** Primary button colour follows the slide tone: orange on dark, black on light. */
+const variantFor = (tone: string) => (tone === "dark" ? "primary" : "dark");
+
+/**
+ * Resting layout of the deck. Cards span the full width and overlap.
+ * x = left edge (% of stage), rot = degrees, sink = % of the card hidden below the stage.
+ * Desktop / tablet use x; mobile uses xm.
+ */
+const deck = [
+  { x: "-3%", xm: "-14%", rot: -5, sink: 50 },
+  { x: "22%", xm: "12%", rot: 3, sink: 60 },
+  { x: "47%", xm: "38%", rot: -2, sink: 46 },
+  { x: "72%", xm: "62%", rot: 4, sink: 56 },
+];
+
+const slideData = slides.map((s) => ({
+  id: s.id,
+  tone: s.tone,
+  href: waLink(s.message),
+}));
 ---
-<Section id="top" marked={true} class="hero" aria-labelledby="hero-heading">
-  <div class="hero__main">
-    <div class="hero__copy">
-      <h1 id="hero-heading" class="hero__headline">
-        <span class="hero__headline-full" data-hero-headline>{hero.headline}</span>
-        <span class="hero__headline-short" data-hero-headline>{hero.headlineShort}</span>
-      </h1>
-      <p class="hero__subhead" data-hero-subhead>{hero.subhead}</p>
+
+<script is:inline>
+  // Hide the hero only until its intro timeline takes over (3s failsafe).
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("hero-pending");
+    setTimeout(() => document.documentElement.classList.remove("hero-pending"), 3000);
+  }
+</script>
+
+<section
+  class="hero"
+  id="top"
+  data-hero
+  data-hero-interval={hero.intervalSeconds}
+  data-hero-slides={JSON.stringify(slideData)}
+  aria-roledescription="carousel"
+  aria-label="Panda Pay services"
+>
+  <div class="hero__stage" data-hero-stage data-nav-surface data-tone={first.tone}>
+    <!-- Backgrounds: one layer per slide, crossfaded -->
+    <div class="hero__media" aria-hidden="true">
+      {
+        slides.map((s, i) => (
+          <div
+            class="hero__bg"
+            data-hero-bg
+            data-index={i}
+            data-tone={s.tone}
+            style={`--focal:${s.image.focal};--focal-m:${s.image.focalMobile}`}
+          >
+            <img
+              src={s.image.src}
+              alt=""
+              width={s.image.width}
+              height={s.image.height}
+              decoding="async"
+              loading="eager"
+              fetchpriority={i === 0 ? "high" : "low"}
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Copy -->
+    <div class="hero__content">
+      <!-- Brand tagline from the brief: the page's h1, kept for search and screen readers -->
+      <h1 class="hero__sr">{hero.tagline}</h1>
+
+      <div class="hero__slides" data-hero-slides-region aria-live="off">
+        {
+          slides.map((s, i) => (
+            <div
+              class="hero__slide"
+              data-hero-slide
+              data-index={i}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${slides.length}: ${s.service}`}
+              aria-hidden={i === 0 ? undefined : "true"}
+              inert={i === 0 ? undefined : true}
+            >
+              <h2 class="hero__title" data-split>{s.title}</h2>
+              <p class="hero__subhead" data-split>{s.subhead}</p>
+            </div>
+          ))
+        }
+      </div>
+
       <div class="hero__actions" data-hero-actions>
-        <ButtonLink
-          href={waLink(hero.primaryMessage)}
+        <Button
+          href={waLink(first.message)}
+          variant={variantFor(first.tone)}
+          size="lg"
           track="cta_primary"
           location="hero"
+          data-product={first.id}
+          data-hero-cta
           external
         >
-          {hero.primaryCta}
-        </ButtonLink>
+          {
+            slides.map((s, i) => (
+              <span
+                class="hero__cta-text"
+                data-hero-cta-text
+                data-index={i}
+                aria-hidden={i === 0 ? undefined : "true"}
+              >
+                {s.cta}
+              </span>
+            ))
+          }
+        </Button>
         <a class="hero__secondary" href="#how-it-works">{hero.secondaryCta}</a>
       </div>
     </div>
 
-    <div class="hero__device" data-hero-phone>
-      <Phone>
-        <div class="hero__chat" set:html={heroChatSvg} />
-      </Phone>
+    <!-- Sunk service cards: full width, overlapping, backs turned; the active one rises on top and flips -->
+    <div class="hero__deck" data-hero-deck aria-hidden="true">
+      {
+        slides.map((s, i) => (
+          <div
+            class="hero-card"
+            data-hero-card
+            data-index={i}
+            data-rot={deck[i]!.rot}
+            data-sink={deck[i]!.sink}
+            style={`--x:${deck[i]!.x};--x-m:${deck[i]!.xm};--rot:${deck[i]!.rot};--sink:${deck[i]!.sink};--z:${i + 1};--card-focal:${s.image.cardFocal}`}
+          >
+            <div class="hero-card__inner" data-hero-card-inner>
+              <div class="hero-card__face hero-card__back">
+                <span class="hero-card__mark-label">Panda Pay</span>
+                <img class="hero-card__mark" src="/brand/icon-orange.png" alt="" width="128" height="128" loading="lazy" decoding="async" />
+              </div>
+              <div class="hero-card__face hero-card__front">
+                <img src={s.image.card} alt="" width="640" height="360" loading="lazy" decoding="async" />
+                <span class="hero-card__label">
+                  {s.service}
+                  {s.status === "soon" && <span class="hero-card__soon">Soon</span>}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 
-  <Cells cols={3} tabletCols={3} class="hero__proof">
+  <!-- Progress pills: outside the stage -->
+  <div class="hero__pills" data-hero-pills role="group" aria-label="Choose a service">
     {
-      hero.proof.map((item) => (
-        <div class="hero__proof-cell" data-reveal>
-          <Stub id={item.icon} ratio="1 / 1" size="24×24" label={item.label} class="hero__proof-icon" />
-          <p>{item.label}</p>
-        </div>
+      slides.map((s, i) => (
+        <button
+          type="button"
+          class="hero-pill"
+          data-hero-pill
+          data-index={i}
+          aria-label={`Show ${s.service}${s.status === "soon" ? " (coming soon)" : ""}`}
+          aria-current={i === 0 ? "true" : undefined}
+        >
+          <span class="hero-pill__fill" data-hero-pill-fill></span>
+          <span class="hero-pill__label">{s.service}</span>
+        </button>
       ))
     }
-  </Cells>
-</Section>
+    <button
+      type="button"
+      class="hero-pill hero-pill--toggle"
+      data-hero-toggle
+      aria-label="Pause rotation"
+      aria-pressed="false"
+    >
+      <svg class="hero-pill__icon hero-pill__icon--pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor" /></svg>
+      <svg class="hero-pill__icon hero-pill__icon--play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor" /></svg>
+    </button>
+  </div>
+</section>
+
+<script>
+  import { initHero } from "@/lib/motion/hero";
+  document.querySelectorAll<HTMLElement>("[data-hero]").forEach(initHero);
+</script>
 
 <style>
   .hero {
-    padding-bottom: 0;
+    --hero-pad: clamp(0.5rem, 1.6vw, 1.5rem);
+    --pills-h: 3.75rem;
+    /* the nav pill lives in its own band above the stage */
+    padding: var(--nav-space, 5.25rem) var(--hero-pad) 0;
   }
 
-  .hero :global(.cells.hero__proof) {
-    border-block-end: 0;
+  .hero__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
-  .hero__main {
+  /* ---------- Stage ---------- */
+  .hero__stage {
+    --hero-ink: #ffffff;
+    --hero-muted: rgb(255 255 255 / 0.78);
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    /* stage + pills always fit the first screen */
+    height: max(30rem, calc(100svh - var(--nav-space, 5.25rem) - var(--pills-h)));
+    max-height: 62rem;
+    border-radius: clamp(1.5rem, 3.6vw, 3.5rem);
+    background: #0c0c0c;
+    color: var(--hero-ink);
+    transition: color 600ms cubic-bezier(0.65, 0, 0.35, 1), background-color 600ms;
+  }
+
+  .hero__stage[data-tone="light"] {
+    --hero-ink: #0c0c0c;
+    --hero-muted: rgb(12 12 12 / 0.74);
+    background: #f6f3ec;
+  }
+
+  /* ---------- Backgrounds ---------- */
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    will-change: opacity, transform;
+  }
+
+  .hero__bg:not([data-index="0"]) {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--focal);
+  }
+
+  /* Legibility scrim, per slide so it crossfades with its image */
+  .hero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgb(6 8 14 / 0.88) 0%, rgb(6 8 14 / 0.62) 40%, rgb(6 8 14 / 0) 72%),
+      linear-gradient(0deg, rgb(6 8 14 / 0.55) 0%, rgb(6 8 14 / 0) 34%);
+  }
+
+  .hero__bg[data-tone="light"]::after {
+    background:
+      linear-gradient(90deg, rgb(250 248 243 / 0.94) 0%, rgb(250 248 243 / 0.7) 42%, rgb(250 248 243 / 0) 72%),
+      linear-gradient(0deg, rgb(250 248 243 / 0.5) 0%, rgb(250 248 243 / 0) 30%);
+  }
+
+  /* ---------- Copy ---------- */
+  .hero__content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(1.25rem, 2.4vh, 2rem);
+    width: min(100%, 62rem);
+    padding: 0 clamp(1.25rem, 6vw, 6rem) clamp(7rem, 22vh, 14rem);
+    pointer-events: none;
+  }
+
+  .hero__content > :not(.hero__sr) {
+    pointer-events: auto;
+  }
+
+  .hero__slides {
     display: grid;
-    gap: var(--space-10);
-    margin-inline: calc(var(--frame-pad) * -1);
-    margin-bottom: 0;
-    border-block: 1px solid var(--color-line);
-    background: var(--color-line);
   }
 
-  .hero__copy,
-  .hero__device {
-    background: var(--color-surface);
-    padding: var(--space-10) var(--frame-pad);
-  }
-
-  .hero__copy {
+  .hero__slide {
+    grid-area: 1 / 1;
     display: grid;
-    gap: var(--space-6);
-    align-content: center;
+    gap: clamp(1rem, 2vh, 1.5rem);
+    align-content: start;
   }
 
-  .hero__headline {
+  .hero__slide:not([data-index="0"]) {
+    visibility: hidden;
+  }
+
+  .hero__title {
     margin: 0;
+    max-width: 20ch;
     font-family: var(--font-display);
-    font-size: var(--text-display);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-    letter-spacing: -0.04em;
-    max-width: 14ch;
-  }
-
-  .hero__headline-short {
-    display: none;
+    font-size: clamp(2.375rem, 1.2rem + 4.2vw, 5.75rem);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
   }
 
   .hero__subhead {
     margin: 0;
-    max-width: 46ch;
-    color: var(--color-text-muted);
-    font-size: var(--text-lg);
-    font-weight: var(--font-weight-light);
-    line-height: var(--line-height-body);
+    max-width: 52ch;
+    color: var(--hero-muted);
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 0.94rem + 0.4vw, 1.3rem);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  /* Masked lines produced by splitLines() */
+  .hero__content :global(.line) {
+    display: block;
+    overflow: clip;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  .hero__content :global(.line__inner) {
+    display: inline-block;
+    will-change: transform;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-4);
+    gap: 1rem 1.5rem;
+  }
+
+  .hero__cta-text {
+    grid-area: 1 / 1;
+    display: block;
+  }
+
+  .hero__cta-text:not([data-index="0"]) {
+    transform: translateY(140%);
   }
 
   .hero__secondary {
-    color: var(--color-text);
-    font-family: var(--font-display);
-    font-weight: var(--font-weight-medium);
-    text-decoration: none;
-    box-shadow: inset 0 -1px 0 var(--color-line-strong);
+    color: var(--hero-ink);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    transition: color 600ms cubic-bezier(0.65, 0, 0.35, 1), text-underline-offset 200ms;
   }
 
   .hero__secondary:hover {
-    color: var(--color-orange);
+    text-underline-offset: 0.45em;
   }
 
-  .hero__device {
-    display: grid;
-    place-items: center;
-    background: var(--color-wash);
+  /* ---------- Deck ---------- */
+  .hero__deck {
+    --card-w: 31%;
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
+    height: 0;
+    pointer-events: none;
   }
 
-  .hero__device :global(.phone) {
-    width: min(100%, 17.5rem);
+  .hero-card {
+    position: absolute;
+    bottom: 0;
+    left: var(--x);
+    z-index: var(--z);
+    width: var(--card-w);
+    aspect-ratio: 4 / 3;
+    perspective: 1400px;
+    transform: translateY(calc(var(--sink) * 1%)) rotate(calc(var(--rot) * 1deg));
+    transform-origin: 50% 100%;
+    pointer-events: auto;
+    cursor: pointer;
   }
 
-  .hero__chat,
-  .hero__chat :global(svg) {
-    display: block;
+  /* No-JS / pre-intro: first card already up, on top and face-on */
+  .hero-card[data-index="0"] {
+    z-index: 10;
+    transform: translateY(30%);
+  }
+
+  .hero-card__inner {
+    position: relative;
     width: 100%;
     height: 100%;
+    transform-style: preserve-3d;
+    transition: translate 300ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .hero__proof-cell {
-    display: flex;
+  .hero-card[data-index="0"] .hero-card__inner {
+    transform: rotateY(180deg);
+  }
+
+  .hero-card:not([data-active]):hover .hero-card__inner {
+    translate: 0 -12px;
+  }
+
+  .hero-card__face {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border: 1px solid #000;
+    border-radius: clamp(1rem, 2vw, 1.75rem);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.16),
+      inset 0 -12px 22px rgb(0 0 0 / 0.35),
+      0 -18px 40px -24px rgb(0 0 0 / 0.7);
+  }
+
+  .hero-card__back {
+    background:
+      radial-gradient(rgb(255 107 0 / 0.16) 1px, transparent 1.6px) 0 0 / 16px 16px,
+      linear-gradient(180deg, #262626 0%, #111 100%);
+  }
+
+  /* Everything on the back sits in the top band, the part that shows while sunk */
+  .hero-card__mark {
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    width: 18%;
+    height: auto;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.5));
+  }
+
+  .hero-card__mark-label {
+    position: absolute;
+    top: clamp(0.65rem, 1.2vw, 1rem);
+    left: clamp(0.75rem, 1.4vw, 1.2rem);
+    color: rgb(255 255 255 / 0.55);
+    font-family: var(--font-mono);
+    font-size: clamp(0.55rem, 0.5rem + 0.2vw, 0.7rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hero-card__front {
+    transform: rotateY(180deg);
+    background: #111;
+  }
+
+  .hero-card__front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--card-focal);
+  }
+
+  .hero-card__label {
+    position: absolute;
+    top: clamp(0.5rem, 1vw, 0.85rem);
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-3);
-    min-height: 4.5rem;
-    padding-block: var(--space-5) !important;
+    gap: 0.4rem;
+    max-width: calc(100% - 1.5rem);
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgb(12 12 12 / 0.6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: clamp(0.65rem, 0.6rem + 0.25vw, 0.8rem);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .hero__proof-cell p {
-    margin: 0;
-    font-size: var(--text-sm);
+  .hero-card__soon {
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    background: var(--color-orange, #ff6b00);
+    color: #0c0c0c;
+    font-size: 0.85em;
   }
 
-  .hero__proof-icon {
-    width: 24px;
-    height: 24px;
-    flex: none;
-    padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
+  /* ---------- Pills ---------- */
+  .hero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: var(--pills-h);
+    padding-block: 0.75rem;
   }
 
-  .hero__proof-icon :global(.stub__id),
-  .hero__proof-icon :global(.stub__label) {
+  .hero-pill {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.25rem;
+    min-width: 2.25rem;
+    padding: 0 0.95rem;
+    overflow: hidden;
+    border: 1px solid rgb(12 12 12 / 0.12);
+    border-radius: 999px;
+    background: #f2f2f2;
+    color: rgb(12 12 12 / 0.7);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 300ms, background-color 300ms, border-color 300ms, padding 300ms;
+  }
+
+  .hero-pill:hover {
+    color: #0c0c0c;
+  }
+
+  .hero-pill[aria-current="true"] {
+    border-color: rgb(255 107 0 / 0.45);
+    background: #ffe7d6;
+    color: #0c0c0c;
+  }
+
+  .hero-pill:focus-visible {
+    outline: 2px solid var(--color-orange, #ff6b00);
+    outline-offset: 2px;
+  }
+
+  .hero-pill__fill {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-orange, #ff6b00);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  .hero-pill__label {
+    position: relative;
+  }
+
+  .hero-pill--toggle {
+    width: 2.25rem;
+    padding: 0;
+  }
+
+  .hero-pill__icon--play,
+  .hero-pill--toggle[aria-pressed="true"] .hero-pill__icon--pause {
     display: none;
   }
 
-  .hero__proof-icon::before {
-    content: "";
-    width: 16px;
-    height: 16px;
-    border: 1px solid var(--color-line-strong);
-    border-radius: 2px;
+  .hero-pill--toggle[aria-pressed="true"] .hero-pill__icon--play {
+    display: block;
   }
 
-  @media (max-width: 479px) {
-    .hero__headline-full {
-      display: none;
-    }
-    .hero__headline-short {
-      display: inline;
+  /* ---------- Pre-intro hiding (only while the intro is pending) ---------- */
+  :global(html.hero-pending) .hero__media,
+  :global(html.hero-pending) .hero__content,
+  :global(html.hero-pending) .hero__deck,
+  :global(html.hero-pending) .hero__pills {
+    visibility: hidden;
+  }
+
+  /* ---------- Tablet ---------- */
+  @media (max-width: 1100px) {
+    .hero__deck {
+      --card-w: 34%;
     }
   }
 
-  @media (min-width: 1024px) {
-    .hero__main {
-      grid-template-columns: 7fr 5fr;
-      gap: 1px;
+  /* ---------- Mobile ---------- */
+  @media (max-width: 760px) {
+    .hero__stage {
+      height: max(32rem, calc(100svh - var(--nav-space, 5rem) - var(--pills-h)));
     }
 
-    .hero__device :global(.phone) {
-      width: min(100%, 22rem);
+    .hero__bg img {
+      object-position: var(--focal-m);
+    }
+
+    .hero__bg::after {
+      background: linear-gradient(180deg, rgb(6 8 14 / 0.9) 0%, rgb(6 8 14 / 0.72) 50%, rgb(6 8 14 / 0.15) 76%, rgb(6 8 14 / 0.5) 100%);
+    }
+
+    .hero__bg[data-tone="light"]::after {
+      background: linear-gradient(180deg, rgb(250 248 243 / 0.96) 0%, rgb(250 248 243 / 0.82) 50%, rgb(250 248 243 / 0.15) 76%, rgb(250 248 243 / 0.45) 100%);
+    }
+
+    .hero__content {
+      padding: 0 1.25rem clamp(6rem, 28vh, 11rem);
+    }
+
+    .hero__title {
+      font-size: clamp(2.125rem, 1.4rem + 3.6vw, 2.75rem);
+    }
+
+    .hero__deck {
+      --card-w: 52%;
+    }
+
+    .hero-card {
+      left: var(--x-m);
+    }
+
+    /* Inactive pills collapse to dots; the active one keeps its label */
+    .hero-pill:not([aria-current="true"]):not(.hero-pill--toggle) {
+      width: 2.25rem;
+      padding: 0;
+    }
+
+    .hero-pill:not([aria-current="true"]):not(.hero-pill--toggle) .hero-pill__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+  }
+
+  /* Short landscape screens: keep copy compact */
+  @media (max-height: 640px) and (min-width: 761px) {
+    .hero__content {
+      padding-bottom: clamp(5rem, 18vh, 9rem);
+    }
+
+    .hero__title {
+      font-size: clamp(2.25rem, 1rem + 3vw, 3.5rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__stage,
+    .hero__secondary,
+    .hero-card__inner,
+    .hero-pill {
+      transition: none;
     }
   }
 </style>
