@@ -1,5 +1,5 @@
 /**
- * Products section: a tab switch (Gift cards / Utilities) over two galleries.
+ * Products section: a tab switch (Gift cards / Lifestyle / Utilities) over three galleries.
  *
  * Every motion accounted for:
  *  0. Tabs: the black pill slides to the chosen tab; the title's lines swap
@@ -410,10 +410,12 @@ export function initPlatforms(root: HTMLElement) {
     return true;
   };
   document.addEventListener("click", (e) => {
-    const a = (e.target as Element | null)?.closest?.<HTMLAnchorElement>('a[href="#utilities"], a[href="#gift-cards"]');
+    const a = (e.target as Element | null)?.closest?.<HTMLAnchorElement>(
+      'a[href="#utilities"], a[href="#gift-cards"], a[href="#lifestyle"]',
+    );
     if (a && openFromLink(a.getAttribute("href")!.slice(1))) e.preventDefault();
   });
-  if (location.hash === "#utilities" || location.hash === "#gift-cards") {
+  if (["#utilities", "#gift-cards", "#lifestyle"].includes(location.hash)) {
     requestAnimationFrame(() => openFromLink(location.hash.slice(1)));
   }
 

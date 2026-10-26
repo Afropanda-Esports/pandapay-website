@@ -1,9 +1,11 @@
 ---
 /**
- * Products: gift cards and utilities, behind one tab switch.
+ * Products: gaming gift cards, lifestyle gift cards and utilities, behind one tab switch.
  *
  *   Gift cards – one card per platform, playing its five featured games one
  *                after another; "+ more games" bottom-right.
+ *   Lifestyle  – one card per category (movies & TV, music…), one graphic each;
+ *                example brands bottom-right.
  *   Utilities  – one card per utility, one graphic each; the providers bottom-right.
  *
  * Each tab is the same gallery: platform/utility name bottom-left, its own
@@ -18,14 +20,26 @@ import { home } from "@/content/home";
 import { waLink } from "@/lib/site";
 
 const { platforms } = home;
-const { utilities } = platforms;
+const { lifestyle, utilities } = platforms;
+
+/** Tabs after Gift cards: same single-graphic gallery, different content. */
+const singles = [
+  { id: "lifestyle", tab: platforms.tabs.lifestyle, label: "Lifestyle gift cards", track: "cta_lifestyle", data: lifestyle },
+  { id: "utilities", tab: platforms.tabs.utilities, label: "Utilities", track: "cta_utility", data: utilities },
+];
 ---
 
 <section class="platforms" id="products" data-platforms aria-labelledby="platforms-heading">
   <div class="platforms__head">
     <h2 class="platforms__heading" id="platforms-heading">
       <span class="platforms__title" data-title="gift-cards" data-active>{platforms.heading}</span>
-      <span class="platforms__title" data-title="utilities" aria-hidden="true">{utilities.heading}</span>
+      {
+        singles.map((g) => (
+          <span class="platforms__title" data-title={g.id} aria-hidden="true">
+            {g.data.heading}
+          </span>
+        ))
+      }
     </h2>
 
     <div class="platforms__tabs" role="tablist" aria-label="Products">
@@ -41,18 +55,22 @@ const { utilities } = platforms;
       >
         {platforms.tabs.giftCards}
       </button>
-      <button
-        type="button"
-        class="platforms__tab"
-        role="tab"
-        id="tab-utilities"
-        aria-selected="false"
-        aria-controls="panel-utilities"
-        tabindex="-1"
-        data-tab="utilities"
-      >
-        {platforms.tabs.utilities}
-      </button>
+      {
+        singles.map((g) => (
+          <button
+            type="button"
+            class="platforms__tab"
+            role="tab"
+            id={`tab-${g.id}`}
+            aria-selected="false"
+            aria-controls={`panel-${g.id}`}
+            tabindex="-1"
+            data-tab={g.id}
+          >
+            {g.tab}
+          </button>
+        ))
+      }
     </div>
   </div>
 
@@ -135,68 +153,68 @@ const { utilities } = platforms;
     </div>
   </div>
 
-  {/* ---------------- Utilities ---------------- */}
-  <div
-    class="platforms__panel"
-    role="tabpanel"
-    id="panel-utilities"
-    aria-labelledby="tab-utilities"
-    data-panel="utilities"
-    data-hold={utilities.seconds}
-    hidden
-  >
-    <ul class="platforms__track" data-gallery tabindex="0" aria-label="Utilities">
-      {
-        utilities.items.map((u, i) => (
-          <li class="platform" data-card data-index={i} aria-label={u.name}>
-            <div class="platform__card">
-              <div class="platform__games">
-                <div class="platform__game" data-game data-index="0">
-                  <img src={u.image} alt={u.alt} loading="lazy" decoding="async" />
+  {/* ---------------- Lifestyle + Utilities: one graphic per card ---------------- */}
+  {
+    singles.map((g) => (
+      <div
+        class="platforms__panel"
+        role="tabpanel"
+        id={`panel-${g.id}`}
+        aria-labelledby={`tab-${g.id}`}
+        data-panel={g.id}
+        data-hold={g.data.seconds}
+        hidden
+      >
+        <ul class="platforms__track" data-gallery tabindex="0" aria-label={g.label}>
+          {g.data.items.map((u, i) => (
+            <li class="platform" data-card data-index={i} aria-label={u.name}>
+              <div class="platform__card">
+                <div class="platform__games">
+                  <div class="platform__game" data-game data-index="0">
+                    <img src={u.image} alt={u.alt} loading="lazy" decoding="async" />
+                  </div>
                 </div>
+                <span class="platform__more">{u.more}</span>
               </div>
-              <span class="platform__more">{u.more}</span>
-            </div>
 
-            <div class="platform__foot">
-              <div class="platform__label">
-                <span>{u.name}</span>
+              <div class="platform__foot">
+                <div class="platform__label">
+                  <span>{u.name}</span>
+                </div>
+                <Button
+                  href={waLink(u.message)}
+                  size="sm"
+                  external
+                  track={g.track}
+                  location={`${g.id}-${u.id}`}
+                  aria-label={u.cta}
+                  class="platform__cta"
+                >
+                  <span class="platform__cta-long">{u.cta}</span>
+                  <span class="platform__cta-short" aria-hidden="true">{u.ctaShort}</span>
+                </Button>
               </div>
-              <Button
-                href={waLink(u.message)}
-                size="sm"
-                external
-                track="cta_utility"
-                location={`utilities-${u.id}`}
-                aria-label={u.cta}
-                class="platform__cta"
-              >
-                <span class="platform__cta-long">{u.cta}</span>
-                <span class="platform__cta-short" aria-hidden="true">{u.ctaShort}</span>
-              </Button>
-            </div>
-          </li>
-        ))
-      }
-      <li class="platforms__spacer" aria-hidden="true"></li>
-    </ul>
+            </li>
+          ))}
+          <li class="platforms__spacer" aria-hidden="true"></li>
+        </ul>
 
-    <div class="platforms__controls">
-      <button type="button" class="platforms__play" data-play aria-label="Pause" data-state="playing">
-        <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="2.6" height="10" rx="1" /><rect x="9.4" y="3" width="2.6" height="10" rx="1" /></svg>
-        <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.7.7 0 0 0 1.06.6l7.7-4.8a.7.7 0 0 0 0-1.2l-7.7-4.8A.7.7 0 0 0 5 3.2Z" /></svg>
-      </button>
-      <div class="platforms__segments">
-        {
-          utilities.items.map((u, i) => (
-            <button type="button" class="segment" data-segment data-index={i} aria-label={`Show ${u.name}`}>
-              <span class="segment__fill" data-fill />
-            </button>
-          ))
-        }
+        <div class="platforms__controls">
+          <button type="button" class="platforms__play" data-play aria-label="Pause" data-state="playing">
+            <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="2.6" height="10" rx="1" /><rect x="9.4" y="3" width="2.6" height="10" rx="1" /></svg>
+            <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.7.7 0 0 0 1.06.6l7.7-4.8a.7.7 0 0 0 0-1.2l-7.7-4.8A.7.7 0 0 0 5 3.2Z" /></svg>
+          </button>
+          <div class="platforms__segments">
+            {g.data.items.map((u, i) => (
+              <button type="button" class="segment" data-segment data-index={i} aria-label={`Show ${u.name}`}>
+                <span class="segment__fill" data-fill />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    ))
+  }
 </section>
 
 <script>
@@ -407,6 +425,16 @@ const { utilities } = platforms;
     object-position: 40% 50%;
     pointer-events: none;
     user-select: none;
+  }
+
+  /* light full-card veil over cycling art */
+  .platform__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgb(0 0 0 / 0.3);
+    pointer-events: none;
   }
 
   /* bottom black gradient */

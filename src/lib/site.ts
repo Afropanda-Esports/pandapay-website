@@ -1,12 +1,12 @@
 export const site = {
-  name: "Panda Pay",
+  name: "Panda Pay Africa",
   title:
-    "Panda Pay — PlayStation Gift Cards, Airtime & Data on WhatsApp | Nigeria",
+    "Panda Pay Africa — Gaming & Lifestyle Gift Cards on WhatsApp | Nigeria",
   description:
-    "Buy PlayStation gift cards, PlayStation Plus, airtime and data on WhatsApp. Pay by Naira bank transfer and get your code or top-up in the same chat.",
+    "Buy PlayStation, gaming and lifestyle gift cards on WhatsApp. Pay by Naira bank transfer and get your code in the same chat. Airtime, data and bills coming soon.",
   url: "https://www.pandapay.africa/",
   image: "https://www.pandapay.africa/og.png",
-  imageAlt: "Panda Pay brand mark on a clean white field",
+  imageAlt: "Panda Pay Africa brand mark on a clean white field",
   whatsapp: "2347043864368",
   email: "info@pandapay.africa",
   /** Support (24/7): its own WhatsApp line and inbox. */

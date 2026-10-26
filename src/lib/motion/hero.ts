@@ -3,7 +3,7 @@ import { splitLines } from "./split-lines";
 
 interface SlideData {
   id: string;
-  tone: "dark" | "light";
+  tone: "dark" | "light" | "orange";
   href: string;
 }
 

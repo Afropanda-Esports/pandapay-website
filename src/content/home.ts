@@ -1,18 +1,17 @@
 export type ServiceStatus = "live" | "soon";
-export type HeroTone = "dark" | "light";
+export type HeroTone = "dark" | "light" | "orange";
 
 export interface HeroSlide {
   id: string;
   /** Short name used on the card front and the progress pill. */
   service: string;
   status: ServiceStatus;
-  eyebrow: string;
   title: string;
   subhead: string;
   cta: string;
   /** Prefilled WhatsApp message for this slide's button. */
   message: string;
-  /** dark = light text + orange button; light = dark text + black button. */
+  /** dark = light text + orange button; light / orange = dark text + black button. */
   tone: HeroTone;
   image: {
     src: string;
@@ -133,18 +132,39 @@ export const home = {
     /** Brand tagline from the brief. Stays the page's h1 while the slides rotate. */
     tagline: "Your gaming and digital services store. On WhatsApp.",
     secondaryCta: "See how it works",
+    /** Shown under the hero buttons on every slide. */
+    trust: "No app. No dollar card. A real person checks flagged transfers.",
     intervalSeconds: 7,
     slides: [
+      {
+        id: "intro",
+        service: "Panda Pay Africa",
+        status: "live",
+        title: "Your gaming and digital services store. On WhatsApp.",
+        subhead:
+          "Gaming and lifestyle gift cards now, airtime and bills soon. Paid in Naira, delivered in your chat.",
+        cta: "Start on WhatsApp",
+        message: "Hi!",
+        tone: "orange",
+        image: {
+          src: "/images/hero/hero-intro-1280x720.webp",
+          card: "/images/hero/hero-intro-640w.webp",
+          width: 1280,
+          height: 720,
+          focal: "75% 50%",
+          focalMobile: "74% 50%",
+          cardFocal: "74% 50%",
+        },
+      },
       {
         id: "playstation-store",
         service: "PlayStation Store",
         status: "live",
-        eyebrow: "PlayStation gift cards · Available now",
         title: "Top up your PlayStation wallet in one chat.",
         subhead:
           "Region-matched PlayStation Store gift cards, paid by Naira bank transfer. Your code lands in the same WhatsApp thread.",
-        cta: "Buy a gift card",
-        message: "Hi! I'd like to buy a PlayStation Store gift card.",
+        cta: "Get a PSN card",
+        message: "Hi! I'd like a PlayStation Store gift card.",
         tone: "dark",
         image: {
           src: "/images/hero/hero-playstation-store-1280x720.webp",
@@ -157,15 +177,13 @@ export const home = {
         },
       },
       {
-        id: "airtime-data",
-        service: "Airtime & Data",
+        id: "airtime-bills",
+        service: "Airtime & Bills",
         status: "soon",
-        eyebrow: "Airtime & data · Coming soon",
-        title: "Airtime and data for every network.",
-        subhead:
-          "MTN, Airtel, Glo and 9mobile top-ups are coming to the same chat you already use.",
-        cta: "Ask on WhatsApp",
-        message: "Hi! When will airtime and data be available on Panda Pay?",
+        title: "Airtime, data and bills, coming to the chat.",
+        subhead: "Top-ups for every network, electricity tokens and TV renewals are on the way.",
+        cta: "Notify me",
+        message: "Hi! Let me know when airtime, data and bills are live.",
         tone: "light",
         image: {
           src: "/images/hero/hero-airtime-data-1280x720.webp",
@@ -178,45 +196,22 @@ export const home = {
         },
       },
       {
-        id: "playstation-plus",
-        service: "PlayStation Plus",
+        id: "lifestyle",
+        service: "Lifestyle",
         status: "live",
-        eyebrow: "PlayStation Plus · Available now",
-        title: "Keep your PlayStation Plus running.",
-        subhead:
-          "Essential, Extra and Premium memberships, paid in Naira and delivered in the chat.",
-        cta: "Get PlayStation Plus",
-        message: "Hi! I'd like to buy PlayStation Plus.",
-        tone: "dark",
+        title: "Gift cards for the things you love.",
+        subhead: "Apple, Amazon, Nike and more, paid by Naira bank transfer and delivered in the chat.",
+        cta: "Enquire lifestyle gift cards",
+        message: "Hi! What entertainment and lifestyle gift cards do you have in stock?",
+        tone: "light",
         image: {
-          src: "/images/hero/hero-playstation-plus-1280x720.webp",
-          card: "/images/hero/hero-playstation-plus-640w.webp",
+          src: "/images/hero/hero-lifestyle-1280x720.webp",
+          card: "/images/hero/hero-lifestyle-640w.webp",
           width: 1280,
           height: 720,
           focal: "68% 50%",
-          focalMobile: "70% 50%",
-          cardFocal: "68% 62%",
-        },
-      },
-      {
-        id: "bills",
-        service: "Bills",
-        status: "soon",
-        eyebrow: "Electricity & TV · Coming soon",
-        title: "Light and TV bills, sorted in chat.",
-        subhead:
-          "Electricity tokens and DStv, GOtv and StarTimes renewals are on the way.",
-        cta: "Ask on WhatsApp",
-        message: "Hi! When will bill payments be available on Panda Pay?",
-        tone: "light",
-        image: {
-          src: "/images/hero/hero-bills-1600x900.webp",
-          card: "/images/hero/hero-bills-640w.webp",
-          width: 1600,
-          height: 900,
-          focal: "70% 50%",
-          focalMobile: "66% 50%",
-          cardFocal: "66% 50%",
+          focalMobile: "68% 50%",
+          cardFocal: "68% 50%",
         },
       },
     ] satisfies HeroSlide[],
@@ -238,7 +233,7 @@ export const home = {
             icon: "wave",
             title: "Say hi. You're in.",
             line: "No app to download, no sign-up form. Your first message opens the store.",
-            media: { kind: "video", alt: "A single 'Hi' bubble opens into the Panda Pay store", src: "/videos/features/hi_shop_popup.mp4", stub: "A single 'Hi' bubble opens into the Panda Pay store", size: "1600×1000 · 5s loop" },
+            media: { kind: "video", alt: "A single 'Hi' bubble opens into the Panda Pay Africa store", src: "/videos/features/hi_shop_popup.mp4", stub: "A single 'Hi' bubble opens into the Panda Pay Africa store", size: "1600×1000 · 5s loop" },
           },
           {
             id: "discovery",
@@ -367,14 +362,14 @@ export const home = {
 
   flow: {
     heading: "How it works",
-    cta: { label: "Start on WhatsApp", message: "Hi! I'd like to shop on Panda Pay." },
+    cta: { label: "Start on WhatsApp", message: "Hi! I'd like to shop on Panda Pay Africa." },
     steps: [
       {
         id: "say-hi",
         icon: "wave",
         word: "Hi.",
         title: "Say hi",
-        you: "Send a message to Panda Pay on WhatsApp.",
+        you: "Send a message to Panda Pay Africa on WhatsApp.",
         we: "Welcome you and open the catalogue.",
         media: {
           kind: "image",
@@ -437,7 +432,7 @@ export const home = {
 
   platforms: {
     heading: "Gift cards for every platform.",
-    tabs: { giftCards: "Gift cards", utilities: "Utilities" },
+    tabs: { giftCards: "Gift cards", lifestyle: "Lifestyle", utilities: "Utilities" },
     more: "+ more games",
     /** Seconds each game holds inside the active card (5 games → one platform). */
     gameSeconds: 3,
@@ -447,7 +442,7 @@ export const home = {
         name: "Xbox",
         cta: "Buy Xbox gift cards",
         ctaShort: "Buy Xbox cards",
-        message: "Hi! I'd like to buy an Xbox gift card.",
+        message: "Hi! What Xbox gift cards do you have in stock?",
         games: [
           { id: "forza-horizon-5", title: "Forza Horizon 5", src: "https://i.redd.it/kogsuxbkkcj71.jpg", alt: "Forza Horizon 5 key art" },
           { id: "halo-infinite", title: "Halo Infinite", src: "https://content.halocdn.com/media/Default/community/blogs/fullres_halo_infinite_courage_keyart_horiz_notitle_1120-5249e58b6fcd4f42b772a5cffe881b22.jpg", alt: "Halo Infinite key art" },
@@ -461,7 +456,7 @@ export const home = {
         name: "PlayStation",
         cta: "Buy PlayStation gift cards",
         ctaShort: "Buy PlayStation cards",
-        message: "Hi! I'd like to buy a PlayStation gift card.",
+        message: "Hi! What PlayStation gift cards do you have in stock?",
         games: [
           { id: "ea-fc-26", title: "EA Sports FC 26", src: "https://wallpapercave.com/wp/wp15596315.jpg", alt: "EA Sports FC 26 key art" },
           { id: "spider-man-2", title: "Marvel's Spider-Man 2", src: "https://4kwallpapers.com/images/wallpapers/marvels-spider-man-3840x2160-11609.jpeg", alt: "Marvel's Spider-Man 2 key art" },
@@ -475,7 +470,7 @@ export const home = {
         name: "Nintendo",
         cta: "Buy Nintendo gift cards",
         ctaShort: "Buy Nintendo cards",
-        message: "Hi! I'd like to buy a Nintendo eShop gift card.",
+        message: "Hi! What Nintendo gift cards do you have in stock?",
         games: [
           { id: "mario-kart-world", title: "Mario Kart World", src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMEZizDlu-qXUyVjENbX-Rb9XZ4xk_-IuzAkoqqJrx617mZVTvboL7FPk&s=10", alt: "Mario Kart World key art" },
           { id: "zelda-totk", title: "The Legend of Zelda: Tears of the Kingdom", src: "https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale/ncom/en_US/merchandising/feature-banner/2026/Zelda%2040th%20Anniversary/Ocarina_of_Time", alt: "The Legend of Zelda: Tears of the Kingdom key art" },
@@ -489,7 +484,7 @@ export const home = {
         name: "Steam",
         cta: "Buy Steam gift cards",
         ctaShort: "Buy Steam cards",
-        message: "Hi! I'd like to buy a Steam gift card.",
+        message: "Hi! What Steam gift cards do you have in stock?",
         games: [
           { id: "counter-strike-2", title: "Counter-Strike 2", src: "https://images8.alphacoders.com/132/thumb-1920-1329760.jpeg", alt: "Counter-Strike 2 key art" },
           { id: "dota-2", title: "Dota 2", src: "https://images2.alphacoders.com/479/479565.jpg", alt: "Dota 2 key art" },
@@ -499,6 +494,64 @@ export const home = {
         ],
       },
     ] satisfies Platform[] as Platform[],
+    lifestyle: {
+      heading: "Gift cards for the things you love.",
+      /** Seconds each category card holds before the row moves on. */
+      seconds: 5,
+      /** One graphic per category: /images/lifestyle/{id}.webp (~1690×930) */
+      items: [
+        {
+          id: "movies-tv",
+          name: "Movies & TV",
+          image: "/images/lifestyle/movies-tv.webp",
+          alt: "A glowing screen with a play button, a clapperboard, a cinema ticket and popcorn",
+          more: "Netflix · Prime Video · Apple TV",
+          cta: "Enquire movies & TV gift cards",
+          ctaShort: "Enquire",
+          message: "Hi! What movies and TV gift cards do you have in stock?",
+        },
+        {
+          id: "music",
+          name: "Music",
+          image: "/images/lifestyle/music.webp",
+          alt: "White headphones around a vinyl record, with music notes and equaliser bars",
+          more: "Spotify · Apple Music · YouTube Music",
+          cta: "Enquire music gift cards",
+          ctaShort: "Enquire",
+          message: "Hi! What music gift cards do you have in stock?",
+        },
+        {
+          id: "sportswear",
+          name: "Sportswear",
+          image: "/images/lifestyle/sportswear.webp",
+          alt: "A football jersey, a ball, a water bottle and a sneaker",
+          more: "Nike · Adidas · Puma",
+          cta: "Enquire sportswear gift cards",
+          ctaShort: "Enquire",
+          message: "Hi! What sportswear gift cards do you have in stock?",
+        },
+        {
+          id: "fashion",
+          name: "Fashion",
+          image: "/images/lifestyle/fashion.webp",
+          alt: "Orange, white and black shopping bags with a hanger, a sweater and a price tag",
+          more: "Zara · H&M · ASOS",
+          cta: "Enquire fashion gift cards",
+          ctaShort: "Enquire",
+          message: "Hi! What fashion gift cards do you have in stock?",
+        },
+        {
+          id: "shopping-apps",
+          name: "Shopping & apps",
+          image: "/images/lifestyle/shopping-apps.webp",
+          alt: "A grid of app tiles, a gift card and a parcel",
+          more: "Amazon · Apple · Google Play",
+          cta: "Enquire shopping & apps gift cards",
+          ctaShort: "Enquire",
+          message: "Hi! What shopping and app store gift cards do you have in stock?",
+        },
+      ] satisfies Utility[],
+    },
     utilities: {
       heading: "Airtime, data and bills, sorted.",
       /** Seconds each utility card holds before the row moves on. */
@@ -557,9 +610,9 @@ export const home = {
     items: [
       {
         id: "what",
-        question: "What can I buy on Panda Pay?",
+        question: "What can I buy on Panda Pay Africa?",
         answer:
-          "Gift cards for PlayStation, Xbox, Nintendo and Steam, plus airtime, data, electricity bills and cable TV subscriptions. New products are added as the catalogue grows.",
+          "Gift cards for PlayStation, Xbox, Nintendo and Steam, entertainment and lifestyle gift cards like Apple, Amazon and Nike, plus airtime, data, electricity bills and cable TV subscriptions. New products are added as the catalogue grows.",
       },
       {
         id: "delivery",
@@ -577,13 +630,13 @@ export const home = {
         id: "assistant",
         question: "Who am I chatting with?",
         answer:
-          "A chat assistant helps you find what you want, understands everyday spelling and phrasing, and walks you through checkout. Whenever something needs a person, like checking a transfer, our team steps in.",
+          "No app. No dollar card. A real person checks flagged transfers. A chat assistant helps you find what you want, understands everyday spelling and phrasing, and walks you through checkout, and our team steps in whenever something needs a person.",
       },
       {
         id: "safe",
         question: "Is it safe?",
         answer:
-          "Yes. Everything happens in your own WhatsApp chat with Panda Pay's official account. Every order has its own order number and payment details, your codes are sent only to your chat, and receipts go to your email. We will never ask for your bank PIN, password or OTP.",
+          "Yes. Everything happens in your own WhatsApp chat with Panda Pay Africa's official account. Every order has its own order number and payment details, your codes are sent only to your chat, and receipts go to your email. We will never ask for your bank PIN, password or OTP.",
       },
       {
         id: "support",

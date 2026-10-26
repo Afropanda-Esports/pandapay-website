@@ -44,7 +44,7 @@ const slideData = slides.map((s) => ({
   data-hero-interval={hero.intervalSeconds}
   data-hero-slides={JSON.stringify(slideData)}
   aria-roledescription="carousel"
-  aria-label="Panda Pay services"
+  aria-label="Panda Pay Africa services"
 >
   <div class="hero__stage" data-hero-stage data-nav-surface data-tone={first.tone}>
     <!-- Backgrounds: one layer per slide, crossfaded -->
@@ -90,7 +90,9 @@ const slideData = slides.map((s) => ({
               aria-hidden={i === 0 ? undefined : "true"}
               inert={i === 0 ? undefined : true}
             >
-              <h2 class="hero__title" data-split>{s.title}</h2>
+              <h2 class="hero__title" data-split aria-hidden={s.title === hero.tagline ? "true" : undefined}>
+                {s.title}
+              </h2>
               <p class="hero__subhead" data-split>{s.subhead}</p>
             </div>
           ))
@@ -122,6 +124,7 @@ const slideData = slides.map((s) => ({
           }
         </Button>
         <a class="hero__secondary" href="#how-it-works">{hero.secondaryCta}</a>
+        <p class="hero__trust">{hero.trust}</p>
       </div>
     </div>
 
@@ -139,7 +142,7 @@ const slideData = slides.map((s) => ({
           >
             <div class="hero-card__inner" data-hero-card-inner>
               <div class="hero-card__face hero-card__back">
-                <span class="hero-card__mark-label">Panda Pay</span>
+                <span class="hero-card__mark-label">Panda Pay Africa</span>
                 <img class="hero-card__mark" src="/brand/icon-orange.png" alt="" width="128" height="128" loading="lazy" decoding="async" />
               </div>
               <div class="hero-card__face hero-card__front">
@@ -230,6 +233,13 @@ const slideData = slides.map((s) => ({
     background: #f6f3ec;
   }
 
+  /* orange = the brand slide: black type and button straight on orange */
+  .hero__stage[data-tone="orange"] {
+    --hero-ink: #0c0c0c;
+    --hero-muted: rgb(12 12 12 / 0.78);
+    background: var(--color-orange, #ff6b00);
+  }
+
   /* ---------- Backgrounds ---------- */
   .hero__media {
     position: absolute;
@@ -269,6 +279,11 @@ const slideData = slides.map((s) => ({
     background:
       linear-gradient(90deg, rgb(250 248 243 / 0.94) 0%, rgb(250 248 243 / 0.7) 42%, rgb(250 248 243 / 0) 72%),
       linear-gradient(0deg, rgb(250 248 243 / 0.5) 0%, rgb(250 248 243 / 0) 30%);
+  }
+
+  /* the orange image is already clean on the left; only even out the copy side */
+  .hero__bg[data-tone="orange"]::after {
+    background: linear-gradient(90deg, rgb(255 107 0 / 0.55) 0%, rgb(255 107 0 / 0.25) 40%, rgb(255 107 0 / 0) 64%);
   }
 
   /* ---------- Copy ---------- */
@@ -363,6 +378,16 @@ const slideData = slides.map((s) => ({
     text-decoration-thickness: 1px;
     text-underline-offset: 0.3em;
     transition: color 600ms cubic-bezier(0.65, 0, 0.35, 1), text-underline-offset 200ms;
+  }
+
+  .hero__trust {
+    flex-basis: 100%;
+    margin: 0;
+    color: var(--hero-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    transition: color 600ms cubic-bezier(0.65, 0, 0.35, 1);
   }
 
   .hero__secondary:hover {
@@ -606,6 +631,10 @@ const slideData = slides.map((s) => ({
 
     .hero__bg[data-tone="light"]::after {
       background: linear-gradient(180deg, rgb(250 248 243 / 0.96) 0%, rgb(250 248 243 / 0.82) 50%, rgb(250 248 243 / 0.15) 76%, rgb(250 248 243 / 0.45) 100%);
+    }
+
+    .hero__bg[data-tone="orange"]::after {
+      background: linear-gradient(180deg, rgb(255 107 0 / 0.92) 0%, rgb(255 107 0 / 0.75) 50%, rgb(255 107 0 / 0.1) 76%, rgb(255 107 0 / 0.35) 100%);
     }
 
     .hero__content {
