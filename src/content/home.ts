@@ -147,10 +147,10 @@ export const home = {
         message: "Hi!",
         tone: "orange",
         image: {
-          src: "/images/hero/hero-intro-1280x720.webp",
+          src: "/images/hero/hero-intro-2560x1440.webp",
           card: "/images/hero/hero-intro-640w.webp",
-          width: 1280,
-          height: 720,
+          width: 2560,
+          height: 1440,
           focal: "75% 50%",
           focalMobile: "74% 50%",
           cardFocal: "74% 50%",

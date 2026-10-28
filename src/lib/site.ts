@@ -16,7 +16,7 @@ export const site = {
   phone: "+234 704 386 4368",
   phoneTel: "+2347043864368",
   address: "12 Olu Adebayo Street, Isolo, Lagos, Nigeria",
-  parent: "AfroPanda Esports (Afro Panda Gaming Ltd)",
+  parent: "Afro Panda Gaming Ltd",
 };
 
 export const waLink = (text?: string) =>
