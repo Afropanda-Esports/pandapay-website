@@ -553,7 +553,7 @@ export const home = {
       ] satisfies Utility[],
     },
     utilities: {
-      heading: "Airtime, data and bills, sorted.",
+      heading: "Airtime, data and bills, coming soon.",
       /** Seconds each utility card holds before the row moves on. */
       seconds: 5,
       items: [
@@ -563,9 +563,9 @@ export const home = {
           image: "/images/utilities/airtime.webp",
           alt: "A phone with a Naira top-up and signal bars",
           more: "MTN · Airtel · Glo · 9mobile",
-          cta: "I want to buy airtime",
-          ctaShort: "Buy airtime",
-          message: "Hi! I want to buy airtime.",
+          cta: "Notify me when airtime is live",
+          ctaShort: "Notify me",
+          message: "Hi! Let me know when airtime is live.",
         },
         {
           id: "data",
@@ -573,9 +573,9 @@ export const home = {
           image: "/images/utilities/data.webp",
           alt: "Signal waves with data bundles",
           more: "MTN · Airtel · Glo · 9mobile",
-          cta: "I want to buy data",
-          ctaShort: "Buy data",
-          message: "Hi! I want to buy data.",
+          cta: "Notify me when data is live",
+          ctaShort: "Notify me",
+          message: "Hi! Let me know when data is live.",
         },
         {
           id: "electricity",
@@ -583,9 +583,9 @@ export const home = {
           image: "/images/utilities/electricity.webp",
           alt: "A prepaid meter with a lightning bolt and a token slip",
           more: "Prepaid & postpaid meters",
-          cta: "I want to pay an electricity bill",
-          ctaShort: "Pay electricity",
-          message: "Hi! I want to pay an electricity bill.",
+          cta: "Notify me when electricity is live",
+          ctaShort: "Notify me",
+          message: "Hi! Let me know when electricity bills are live.",
         },
         {
           id: "cable-tv",
@@ -593,9 +593,9 @@ export const home = {
           image: "/images/utilities/cable-tv.webp",
           alt: "A TV with a remote and a satellite dish",
           more: "DStv · GOtv · StarTimes",
-          cta: "I want to renew a cable TV subscription",
-          ctaShort: "Renew cable TV",
-          message: "Hi! I want to renew a cable TV subscription.",
+          cta: "Notify me when cable TV is live",
+          ctaShort: "Notify me",
+          message: "Hi! Let me know when cable TV is live.",
         },
       ] satisfies Utility[],
     },
@@ -612,7 +612,7 @@ export const home = {
         id: "what",
         question: "What can I buy on Panda Pay Africa?",
         answer:
-          "Gift cards for PlayStation, Xbox, Nintendo and Steam, entertainment and lifestyle gift cards like Apple, Amazon and Nike, plus airtime, data, electricity bills and cable TV subscriptions. New products are added as the catalogue grows.",
+          "Gift cards for PlayStation, Xbox, Nintendo and Steam, entertainment and lifestyle gift cards like Apple, Amazon and Nike. New products are added as the catalogue grows. Airtime, data, electricity bills and cable TV are coming soon.",
       },
       {
         id: "delivery",
