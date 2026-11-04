@@ -43,6 +43,15 @@ const pad = (n: number) => String(n).padStart(2, "0");
             <div class="faq-item__body" data-faq-body>
               <div class="faq-item__inner" data-faq-inner>
                 <p>{item.answer}</p>
+                {item.points && (
+                  <ul class="faq-item__points">
+                    {item.points.map((pt) => (
+                      <li>
+                        <strong>{pt.lead}</strong> {pt.text}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <a
                   class="faq-item__ask"
                   href={waLink(`Hi! ${item.question}`)}
@@ -247,6 +256,39 @@ const pad = (n: number) => String(n).padStart(2, "0");
     color: var(--muted);
     font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
     line-height: 1.65;
+  }
+
+  .faq-item__points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.7rem;
+    max-width: 56ch;
+  }
+
+  .faq-item__points li {
+    position: relative;
+    padding-left: 1.1rem;
+    color: var(--muted);
+    font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+    line-height: 1.6;
+  }
+
+  .faq-item__points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--orange, #ff6b00);
+  }
+
+  .faq-item__points strong {
+    color: var(--ink, #0c0c0c);
+    font-weight: 600;
   }
 
   .faq-item__ask {

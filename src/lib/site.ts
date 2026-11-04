@@ -9,9 +9,7 @@ export const site = {
   imageAlt: "Panda Pay Africa brand mark on a clean white field",
   whatsapp: "2347043864368",
   email: "info@pandapay.africa",
-  /** Support (24/7): its own WhatsApp line and inbox. */
-  supportWhatsapp: "2349135714518",
-  supportPhone: "+234 913 571 4518",
+  /** Support has an inbox, but no separate phone line: WhatsApp above is the only number. */
   supportEmail: "support@pandapay.africa",
   phone: "+234 704 386 4368",
   phoneTel: "+2347043864368",
@@ -38,10 +36,6 @@ export const site = {
 
 export const waLink = (text?: string) =>
   `https://wa.me/${site.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
-
-/** WhatsApp link to the support line. */
-export const supportLink = (text?: string) =>
-  `https://wa.me/${site.supportWhatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 
 export const websiteLd = {
   "@context": "https://schema.org",

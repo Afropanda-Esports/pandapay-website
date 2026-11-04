@@ -125,6 +125,8 @@ export interface FaqItem {
   id: string;
   question: string;
   answer: string;
+  /** Optional bullet points shown under the answer. */
+  points?: { lead: string; text: string }[];
 }
 
 export const home = {
@@ -635,8 +637,16 @@ export const home = {
       {
         id: "safe",
         question: "Is it safe?",
-        answer:
-          "Yes. Everything happens in your own WhatsApp chat with Panda Pay Africa's official account. Every order has its own order number and payment details, your codes are sent only to your chat, and receipts go to your email. We will never ask for your bank PIN, password or OTP.",
+        answer: "Yes, and here\u2019s how we protect every order.",
+        points: [
+          { lead: "A registered Nigerian business.", text: "Panda Pay Africa is run by Afropanda Gaming Ltd (RC 7087337)." },
+          { lead: "Payments go through Paystack.", text: "Each order gets its own one-time account number, never a personal account." },
+          { lead: "Code doesn\u2019t work? We fix it.", text: "We\u2019ll replace it or refund you in full within 24 hours." },
+          {
+            lead: "Only our official number.",
+            text: "We\u2019ll only message you from +234 704 386 4368. If anyone else claims to be Panda Pay Africa, it isn\u2019t us. We\u2019ll never ask for your bank PIN, password or OTP.",
+          },
+        ],
       },
       {
         id: "support",

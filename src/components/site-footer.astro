@@ -14,7 +14,7 @@
  */
 import Button from "@/components/ui/button.astro";
 import Logo from "@/components/ui/logo.astro";
-import { site, waLink, supportLink } from "@/lib/site";
+import { site, waLink } from "@/lib/site";
 
 const year = new Date().getFullYear();
 
@@ -36,7 +36,7 @@ const columns: FooterColumn[] = [
     title: "Support",
     wide: true,
     links: [
-      { label: `Order help on WhatsApp: ${site.supportPhone}`, href: supportLink("Hi! I need help with an order."), external: true },
+      { label: `WhatsApp: ${site.phone}`, href: waLink("Hi! I need help with an order."), external: true },
       { label: site.supportEmail, href: `mailto:${site.supportEmail}` },
     ],
   },
@@ -70,7 +70,9 @@ const columns: FooterColumn[] = [
       <Button href={waLink("Hi! I'd like to shop on Panda Pay Africa.")} external track="cta_primary" location="footer">
         Start shopping on WhatsApp
       </Button>
-      <nav class="footer__socials" aria-label="Social">
+      <div class="footer__follow">
+        <p class="footer__follow-label">Follow us on:</p>
+        <nav class="footer__socials" aria-label="Social">
         {
           site.socials.map((s) => (
             <a href={s.href} target="_blank" rel="noopener" aria-label={s.label}>
@@ -100,7 +102,8 @@ const columns: FooterColumn[] = [
             </a>
           ))
         }
-      </nav>
+        </nav>
+      </div>
     </div>
 
     <nav class="footer__cols" aria-label="Footer">
@@ -237,6 +240,20 @@ const columns: FooterColumn[] = [
     font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem);
     font-weight: 300;
     line-height: 1.5;
+  }
+
+  .footer__follow {
+    display: grid;
+    gap: 0.35rem;
+    justify-items: start;
+  }
+
+  .footer__follow-label {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    line-height: 1.4;
   }
 
   .footer__socials {
