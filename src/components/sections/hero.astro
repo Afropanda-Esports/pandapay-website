@@ -198,6 +198,8 @@ const slideData = slides.map((s) => ({
   .hero {
     --hero-pad: clamp(0.5rem, 1.6vw, 1.5rem);
     --pills-h: 3.75rem;
+    /* hero image colour strength: 1 = original, 0 = greyscale */
+    --hero-saturate: 0.4;
     /* the nav pill lives in its own band above the stage */
     padding: var(--nav-space, 5.25rem) var(--hero-pad) 0;
   }
@@ -264,6 +266,7 @@ const slideData = slides.map((s) => ({
     object-fit: cover;
     object-position: var(--focal);
     opacity: 0.72;
+    filter: saturate(var(--hero-saturate));
   }
 
   .hero__bg[data-tone="orange"] img {
@@ -501,6 +504,7 @@ const slideData = slides.map((s) => ({
     height: 100%;
     object-fit: cover;
     object-position: var(--card-focal);
+    filter: saturate(var(--hero-saturate));
   }
 
   .hero-card__label {
