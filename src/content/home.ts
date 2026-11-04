@@ -143,7 +143,7 @@ export const home = {
         title: "Tell it what you want. It handles the rest.",
         subhead:
           "Ask in plain English or Pidgin. Panda Pay Africa finds your gift card, prices it in Naira, confirms your transfer and delivers it in the same chat.",
-        cta: "Start on WhatsApp",
+        cta: "Start shopping on WhatsApp",
         message: "Hi!",
         tone: "orange",
         image: {
@@ -362,7 +362,7 @@ export const home = {
 
   flow: {
     heading: "How it works",
-    cta: { label: "Start on WhatsApp", message: "Hi! I'd like to shop on Panda Pay Africa." },
+    cta: { label: "Start shopping on WhatsApp", message: "Hi! I'd like to shop on Panda Pay Africa." },
     steps: [
       {
         id: "say-hi",

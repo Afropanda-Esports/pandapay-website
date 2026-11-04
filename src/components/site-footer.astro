@@ -49,14 +49,14 @@ const columns: FooterColumn[] = [
       { label: `Enquiries: ${site.email}`, href: `mailto:${site.email}` },
     ],
   },
-  // {
-  //   title: "Legal",
-  //   links: [
-  //     { label: "Terms", href: "/terms" },
-  //     { label: "Privacy", href: "/privacy" },
-  //     { label: "Refunds", href: "/refunds" },
-  //   ],
-  // },
+  {
+    title: "Legal",
+    links: [
+      { label: "Terms", href: "/terms" },
+      { label: "Privacy", href: "/privacy" },
+      { label: "Refunds", href: "/refunds" },
+    ],
+  },
 ];
 ---
 
@@ -68,8 +68,39 @@ const columns: FooterColumn[] = [
       </a>
       <p class="footer__line">Gift cards on WhatsApp. Airtime, data and bills coming soon.</p>
       <Button href={waLink("Hi! I'd like to shop on Panda Pay Africa.")} external track="cta_primary" location="footer">
-        Start on WhatsApp
+        Start shopping on WhatsApp
       </Button>
+      <nav class="footer__socials" aria-label="Social">
+        {
+          site.socials.map((s) => (
+            <a href={s.href} target="_blank" rel="noopener" aria-label={s.label}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                {s.name === "instagram" && (
+                  <>
+                    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+                  </>
+                )}
+                {s.name === "x" && (
+                  <path
+                    fill="currentColor"
+                    stroke="none"
+                    d="M4 3.5h4.1l3.7 5.1L16.2 3.5H20l-6.1 7.4L20.4 20.5h-4.1l-4.1-5.6-4.7 5.6H3.6l6.6-7.9L4 3.5Z"
+                  />
+                )}
+                {s.name === "linkedin" && (
+                  <path
+                    fill="currentColor"
+                    stroke="none"
+                    d="M5.1 3.4a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2ZM3.2 9.2h3.8V20.5H3.2V9.2Zm6.2 0h3.6v1.5h.1c.5-1 1.8-2 3.6-2 3.9 0 4.6 2.5 4.6 5.8v6h-3.8v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8v5.4H9.4V9.2Z"
+                  />
+                )}
+              </svg>
+            </a>
+          ))
+        }
+      </nav>
     </div>
 
     <nav class="footer__cols" aria-label="Footer">
@@ -206,6 +237,44 @@ const columns: FooterColumn[] = [
     font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem);
     font-weight: 300;
     line-height: 1.5;
+  }
+
+  .footer__socials {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .footer__socials a {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--muted);
+    border-radius: 999px;
+    transition: color 200ms;
+  }
+
+  .footer__socials a:hover {
+    color: var(--color-orange, #ff6b00);
+  }
+
+  .footer__socials svg {
+    display: block;
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .footer__socials rect,
+  .footer__socials circle {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+  }
+
+  .footer__socials circle[fill],
+  .footer__socials path {
+    fill: currentColor;
+    stroke: none;
   }
 
   /* ---------- Columns ---------- */

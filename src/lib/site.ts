@@ -17,6 +17,23 @@ export const site = {
   phoneTel: "+2347043864368",
   address: "12 Olu Adebayo Street, Isolo, Lagos, Nigeria",
   parent: "Afro Panda Gaming Ltd",
+  socials: [
+    {
+      name: "instagram",
+      href: "https://www.instagram.com/pandapay_afric",
+      label: "Panda Pay Africa on Instagram",
+    },
+    {
+      name: "x",
+      href: "https://x.com/PandapayAfrica",
+      label: "Panda Pay Africa on X",
+    },
+    {
+      name: "linkedin",
+      href: "https://www.linkedin.com/company/afropandaesports/",
+      label: "Afro Panda Gaming on LinkedIn",
+    },
+  ],
 };
 
 export const waLink = (text?: string) =>

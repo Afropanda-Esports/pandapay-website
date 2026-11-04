@@ -1,0 +1,105 @@
+---
+import BaseLayout from "@/layouts/base-layout.astro";
+import SiteNav from "@/components/site-nav.astro";
+import SiteFooter from "@/components/site-footer.astro";
+import { site } from "@/lib/site";
+
+interface Frontmatter {
+  title: string;
+  description: string;
+  effective: string;
+  updated: string;
+}
+
+const { frontmatter } = Astro.props as { frontmatter: Frontmatter };
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const title = `${frontmatter.title} · Panda Pay Africa`;
+---
+
+<BaseLayout title={title} description={frontmatter.description} canonical={canonical}>
+  <SiteNav />
+  <main class="legal" data-nav-surface data-tone="light">
+    <article class="legal__doc">
+      <header class="legal__header">
+        <h1>{frontmatter.title}</h1>
+        <p class="legal__meta">
+          Effective {frontmatter.effective}. Last updated {frontmatter.updated}.
+        </p>
+      </header>
+      <div class="legal__body">
+        <slot />
+      </div>
+    </article>
+  </main>
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .legal {
+    padding: calc(var(--nav-space) + clamp(2.5rem, 6vw, 4.5rem)) var(--page-gutter)
+      var(--space-section);
+  }
+
+  .legal__doc {
+    max-width: var(--container-md);
+    margin-inline: auto;
+  }
+
+  .legal__header {
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .legal__meta {
+    margin-top: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .legal__body :global(h2),
+  .legal__body :global(h3) {
+    scroll-margin-top: calc(var(--nav-space) + var(--space-4));
+  }
+
+  .legal__body :global(h2) {
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-xl);
+  }
+
+  .legal__body :global(h3) {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-2);
+    font-size: var(--text-lg);
+  }
+
+  .legal__body :global(strong) {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .legal__body :global(p),
+  .legal__body :global(ul) {
+    margin-bottom: var(--space-4);
+  }
+
+  .legal__body :global(ul) {
+    padding-left: 1.25rem;
+  }
+
+  .legal__body :global(li + li) {
+    margin-top: var(--space-2);
+  }
+
+  .legal__body :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .legal__body :global(a:hover) {
+    color: var(--color-text);
+  }
+</style>
