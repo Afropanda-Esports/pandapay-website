@@ -181,9 +181,9 @@ export const home = {
       {
         id: "airtime-bills",
         service: "Airtime & Bills",
-        status: "soon",
-        title: "Airtime, data and bills, coming to the chat.",
-        subhead: "Top-ups for every network, electricity tokens and TV renewals are on the way.",
+        status: "live",
+        title: "Airtime, data and bills, in the chat.",
+        subhead: "Top-ups for every network, electricity tokens and TV renewals, all in one chat.",
         cta: "Notify me",
         message: "Hi! Let me know when airtime, data and bills are live.",
         tone: "light",
@@ -555,7 +555,7 @@ export const home = {
       ] satisfies Utility[],
     },
     utilities: {
-      heading: "Airtime, data and bills, coming soon.",
+      heading: "Airtime, data and bills, sorted.",
       /** Seconds each utility card holds before the row moves on. */
       seconds: 5,
       items: [
@@ -614,7 +614,7 @@ export const home = {
         id: "what",
         question: "What can I buy on Panda Pay Africa?",
         answer:
-          "Gift cards for PlayStation, Xbox, Nintendo and Steam, entertainment and lifestyle gift cards like Apple, Amazon and Nike. New products are added as the catalogue grows. Airtime, data, electricity bills and cable TV are coming soon.",
+          "Gift cards for PlayStation, Xbox, Nintendo and Steam, entertainment and lifestyle gift cards like Apple, Amazon and Nike. New products are added as the catalogue grows. Airtime, data, electricity bills and cable TV subscriptions are on offer too.",
       },
       {
         id: "delivery",

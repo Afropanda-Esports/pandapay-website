@@ -3,7 +3,7 @@ export const site = {
   title:
     "Panda Pay Africa — Gaming & Lifestyle Gift Cards on WhatsApp | Nigeria",
   description:
-    "Panda Pay Africa is an AI payment agent on WhatsApp. Ask for gift cards in plain English or Pidgin, pay by Naira bank transfer and get it delivered in the same chat. Airtime and bills are coming soon.",
+    "Panda Pay Africa is an AI payment agent on WhatsApp. Ask for gift cards in plain English or Pidgin, pay by Naira bank transfer and get it delivered in the same chat. Airtime, data and bills too.",
   url: "https://www.pandapay.africa/",
   image: "https://www.pandapay.africa/og.png",
   imageAlt: "Panda Pay Africa brand mark on a clean white field",
