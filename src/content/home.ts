@@ -149,7 +149,7 @@ export const home = {
         message: "Hi!",
         tone: "orange",
         image: {
-          src: "/images/hero/hero-intro-2560x1440.webp",
+          src: "/images/hero/hero-intro-4k.webp",
           card: "/images/hero/hero-intro-640w.webp",
           width: 2560,
           height: 1440,
@@ -169,7 +169,7 @@ export const home = {
         message: "Hi! I'd like a PlayStation Store gift card.",
         tone: "dark",
         image: {
-          src: "/images/hero/hero-playstation-store-1280x720.webp",
+          src: "/images/hero/hero-playstation-store-4k.webp",
           card: "/images/hero/hero-playstation-store-640w.webp",
           width: 1280,
           height: 720,
@@ -188,7 +188,7 @@ export const home = {
         message: "Hi! Let me know when airtime, data and bills are live.",
         tone: "light",
         image: {
-          src: "/images/hero/hero-airtime-data-1280x720.webp",
+          src: "/images/hero/hero-airtime-data-4k.webp",
           card: "/images/hero/hero-airtime-data-640w.webp",
           width: 1280,
           height: 720,
@@ -207,7 +207,7 @@ export const home = {
         message: "Hi! What entertainment and lifestyle gift cards do you have in stock?",
         tone: "light",
         image: {
-          src: "/images/hero/hero-lifestyle-1280x720.webp",
+          src: "/images/hero/hero-lifestyle-4k.webp",
           card: "/images/hero/hero-lifestyle-640w.webp",
           width: 1280,
           height: 720,
