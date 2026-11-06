@@ -28,7 +28,7 @@ We are committed to handling personal information responsibly and in accordance 
 
 **Privacy and Customer Support Email:** [support@pandapay.africa](mailto:support@pandapay.africa)
 
-**Phone / WhatsApp:** [+234 913 571 4518](tel:+2349135714518)
+**Phone / WhatsApp:** [+234 704 386 4368](tel:+2347043864368)
 
 AFRO PANDA GAMING LTD determines the purposes and means of processing personal information collected through PandaPay Africa, where it acts as the data controller.
 
@@ -197,7 +197,7 @@ To submit a privacy request or raise a concern about how your information is han
 
 **Email:** [support@pandapay.africa](mailto:support@pandapay.africa)
 
-**Phone / WhatsApp:** [+234 913 571 4518](tel:+2349135714518)
+**Phone / WhatsApp:** [+234 704 386 4368](tel:+2347043864368)
 
 We may need to verify your identity before processing a request.
 
@@ -257,6 +257,6 @@ Trading as PandaPay Africa
 
 **Email:** [support@pandapay.africa](mailto:support@pandapay.africa)
 
-**Phone / WhatsApp:** [+234 913 571 4518](tel:+2349135714518)
+**Phone / WhatsApp:** [+234 704 386 4368](tel:+2347043864368)
 
 End of Privacy Policy

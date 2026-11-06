@@ -116,6 +116,7 @@ const singles = [
             <div class="platform__foot">
               <div class="platform__label">
                 {p.logo ? <img src={p.logo} alt={p.name} /> : <span>{p.name}</span>}
+                <em class="platform__status">Available</em>
               </div>
               <Button
                 href={waLink(p.message)}
@@ -135,6 +136,8 @@ const singles = [
       }
       <li class="platforms__spacer" aria-hidden="true"></li>
     </ul>
+
+    <p class="platforms__region">{platforms.regionNote}</p>
 
     <div class="platforms__controls">
       <button type="button" class="platforms__play" data-play aria-label="Pause" data-state="playing">
@@ -180,6 +183,7 @@ const singles = [
               <div class="platform__foot">
                 <div class="platform__label">
                   <span>{u.name}</span>
+                  <em class="platform__status">Available</em>
                 </div>
                 <Button
                   href={waLink(u.message)}
@@ -522,6 +526,41 @@ const singles = [
 
   .platform__cta-short {
     display: none;
+  }
+
+  /* availability tag next to the platform / service name */
+  .platform__status {
+    flex: none;
+    margin-left: 0.7rem;
+    padding: 0.18rem 0.55rem 0.18rem 0.45rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .platform__status::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-orange, #ff6b00);
+  }
+
+  .platforms__region {
+    margin: 0.9rem 0 0;
+    padding-inline: var(--gutter);
+    color: var(--color-text-muted, inherit);
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 
   .platform__label {
