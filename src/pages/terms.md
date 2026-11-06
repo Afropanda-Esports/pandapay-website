@@ -28,7 +28,7 @@ By accessing our website, using our WhatsApp shopping platform, placing an order
 
 **Website:** [https://pandapay.africa](https://pandapay.africa)
 
-**Customer Support:** [+234 913 571 4518](tel:+2349135714518)
+**Customer Support:** [+234 704 386 4368](tel:+2347043864368)
 
 **Customer Support Email:** [support@pandapay.africa](mailto:support@pandapay.africa)
 
@@ -261,6 +261,6 @@ Trading as PandaPay Africa
 
 **Email:** [support@pandapay.africa](mailto:support@pandapay.africa)
 
-**Phone / WhatsApp:** [+234 913 571 4518](tel:+2349135714518)
+**Phone / WhatsApp:** [+234 704 386 4368](tel:+2347043864368)
 
 End of Terms & Conditions

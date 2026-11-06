@@ -409,15 +409,22 @@ export function initPlatforms(root: HTMLElement) {
     root.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     return true;
   };
+  const tabHashes = ["#utilities", "#gift-cards", "#lifestyle"];
+  const samePage = (a: HTMLAnchorElement) =>
+    a.origin === location.origin && a.pathname.replace(/\/$/, "") === location.pathname.replace(/\/$/, "");
   document.addEventListener("click", (e) => {
-    const a = (e.target as Element | null)?.closest?.<HTMLAnchorElement>(
-      'a[href="#utilities"], a[href="#gift-cards"], a[href="#lifestyle"]',
-    );
-    if (a && openFromLink(a.getAttribute("href")!.slice(1))) e.preventDefault();
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = (e.target as Element | null)?.closest?.<HTMLAnchorElement>('a[href*="#"]');
+    if (!a || !samePage(a) || !tabHashes.includes(a.hash)) return;
+    if (openFromLink(a.hash.slice(1))) e.preventDefault();
   });
-  if (["#utilities", "#gift-cards", "#lifestyle"].includes(location.hash)) {
+  // opening the homepage from another page (e.g. /refunds -> /#lifestyle), or back/forward
+  if (tabHashes.includes(location.hash)) {
     requestAnimationFrame(() => openFromLink(location.hash.slice(1)));
   }
+  window.addEventListener("hashchange", () => {
+    if (tabHashes.includes(location.hash)) openFromLink(location.hash.slice(1));
+  });
 
   // heading entry, once, when the section comes into view
   new IntersectionObserver(
