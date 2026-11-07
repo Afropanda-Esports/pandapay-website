@@ -1,0 +1,712 @@
+---
+/**
+ * Products: gaming gift cards, lifestyle gift cards and utilities, behind one tab switch.
+ *
+ *   Gift cards – one card per platform, playing its five featured games one
+ *                after another; "+ more games" bottom-right.
+ *   Lifestyle  – one card per category (movies & TV, music…), one graphic each;
+ *                example brands bottom-right.
+ *   Utilities  – one card per utility, one graphic each; the providers bottom-right.
+ *
+ * Each tab is the same gallery: platform/utility name bottom-left, its own
+ * WhatsApp button bottom-right, play/pause + one segment per card. A segment
+ * fills while its card plays; when full, the row moves on.
+ * Native horizontal scroll (trackpad, touch, drag); only the pause button stops it.
+ *
+ * Images: games `src` + platform `logo`, and utility `image`, in content/home.ts.
+ */
+import Button from "@/components/ui/button.astro";
+import { home } from "@/content/home";
+import { waLink } from "@/lib/site";
+
+const { platforms } = home;
+const { lifestyle, utilities } = platforms;
+
+/** Tabs after Gift cards: same single-graphic gallery, different content. */
+const singles = [
+  { id: "lifestyle", tab: platforms.tabs.lifestyle, label: "Lifestyle gift cards", track: "cta_lifestyle", data: lifestyle },
+  { id: "utilities", tab: platforms.tabs.utilities, label: "Utilities", track: "cta_utility", data: utilities },
+];
+---
+
+<section class="platforms" id="products" data-platforms aria-labelledby="platforms-heading">
+  <div class="platforms__head">
+    <h2 class="platforms__heading" id="platforms-heading">
+      <span class="platforms__title" data-title="gift-cards" data-active>{platforms.heading}</span>
+      {
+        singles.map((g) => (
+          <span class="platforms__title" data-title={g.id} aria-hidden="true">
+            {g.data.heading}
+          </span>
+        ))
+      }
+    </h2>
+
+    <div class="platforms__tabs" role="tablist" aria-label="Products">
+      <span class="platforms__tab-pill" data-tab-pill aria-hidden="true"></span>
+      <button
+        type="button"
+        class="platforms__tab"
+        role="tab"
+        id="tab-gift-cards"
+        aria-selected="true"
+        aria-controls="panel-gift-cards"
+        data-tab="gift-cards"
+      >
+        {platforms.tabs.giftCards}
+      </button>
+      {
+        singles.map((g) => (
+          <button
+            type="button"
+            class="platforms__tab"
+            role="tab"
+            id={`tab-${g.id}`}
+            aria-selected="false"
+            aria-controls={`panel-${g.id}`}
+            tabindex="-1"
+            data-tab={g.id}
+          >
+            {g.tab}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  {/* ---------------- Gift cards ---------------- */}
+  <div
+    class="platforms__panel"
+    role="tabpanel"
+    id="panel-gift-cards"
+    aria-labelledby="tab-gift-cards"
+    data-panel="gift-cards"
+    data-hold={platforms.gameSeconds}
+  >
+    <ul class="platforms__track" data-gallery tabindex="0" aria-label="Gift card platforms">
+      {
+        platforms.items.map((p, i) => (
+          <li class="platform" data-card data-index={i} aria-label={p.name}>
+            <div class="platform__card">
+              <p class="sr-only">
+                {p.name} games: {p.games.map((g) => g.title).join(", ")}, and more.
+              </p>
+              <div class="platform__games" aria-hidden="true">
+                {p.games.map((g, k) => (
+                  <div class="platform__game" data-game data-index={k}>
+                    {g.src ? (
+                      <img src={g.src} alt="" loading="lazy" decoding="async" />
+                    ) : (
+                      <div class="game-stub">
+                        <span class="game-stub__meta">
+                          {p.name} · {k + 1}/{p.games.length}
+                        </span>
+                        <span class="game-stub__title">{g.title}</span>
+                        <span class="game-stub__meta">Key art · 1920×1080 · {p.id}-{g.id}.webp</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <span class="platform__more" aria-hidden="true">
+                {platforms.more}
+              </span>
+            </div>
+
+            <div class="platform__foot">
+              <div class="platform__label">
+                {p.logo ? <img src={p.logo} alt={p.name} /> : <span>{p.name}</span>}
+                <em class="platform__status">Available</em>
+              </div>
+              <Button
+                href={waLink(p.message)}
+                size="sm"
+                external
+                track="cta_platform"
+                location={`platforms-${p.id}`}
+                aria-label={p.cta}
+                class="platform__cta"
+              >
+                <span class="platform__cta-long">{p.cta}</span>
+                <span class="platform__cta-short" aria-hidden="true">{p.ctaShort}</span>
+              </Button>
+            </div>
+          </li>
+        ))
+      }
+      <li class="platforms__spacer" aria-hidden="true"></li>
+    </ul>
+
+    <p class="platforms__region">{platforms.regionNote}</p>
+
+    <div class="platforms__controls">
+      <button type="button" class="platforms__play" data-play aria-label="Pause" data-state="playing">
+        <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="2.6" height="10" rx="1" /><rect x="9.4" y="3" width="2.6" height="10" rx="1" /></svg>
+        <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.7.7 0 0 0 1.06.6l7.7-4.8a.7.7 0 0 0 0-1.2l-7.7-4.8A.7.7 0 0 0 5 3.2Z" /></svg>
+      </button>
+      <div class="platforms__segments">
+        {
+          platforms.items.map((p, i) => (
+            <button type="button" class="segment" data-segment data-index={i} aria-label={`Show ${p.name}`}>
+              <span class="segment__fill" data-fill />
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  {/* ---------------- Lifestyle + Utilities: one graphic per card ---------------- */}
+  {
+    singles.map((g) => (
+      <div
+        class="platforms__panel"
+        role="tabpanel"
+        id={`panel-${g.id}`}
+        aria-labelledby={`tab-${g.id}`}
+        data-panel={g.id}
+        data-hold={g.data.seconds}
+        hidden
+      >
+        <ul class="platforms__track" data-gallery tabindex="0" aria-label={g.label}>
+          {g.data.items.map((u, i) => (
+            <li class="platform" data-card data-index={i} aria-label={u.name}>
+              <div class="platform__card">
+                <div class="platform__games">
+                  <div class="platform__game" data-game data-index="0">
+                    <img src={u.image} alt={u.alt} loading="lazy" decoding="async" />
+                  </div>
+                </div>
+                <span class="platform__more">{u.more}</span>
+              </div>
+
+              <div class="platform__foot">
+                <div class="platform__label">
+                  <span>{u.name}</span>
+                  <em class="platform__status">Available</em>
+                </div>
+                <Button
+                  href={waLink(u.message)}
+                  size="sm"
+                  external
+                  track={g.track}
+                  location={`${g.id}-${u.id}`}
+                  aria-label={u.cta}
+                  class="platform__cta"
+                >
+                  <span class="platform__cta-long">{u.cta}</span>
+                  <span class="platform__cta-short" aria-hidden="true">{u.ctaShort}</span>
+                </Button>
+              </div>
+            </li>
+          ))}
+          <li class="platforms__spacer" aria-hidden="true"></li>
+        </ul>
+
+        <div class="platforms__controls">
+          <button type="button" class="platforms__play" data-play aria-label="Pause" data-state="playing">
+            <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="2.6" height="10" rx="1" /><rect x="9.4" y="3" width="2.6" height="10" rx="1" /></svg>
+            <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.7.7 0 0 0 1.06.6l7.7-4.8a.7.7 0 0 0 0-1.2l-7.7-4.8A.7.7 0 0 0 5 3.2Z" /></svg>
+          </button>
+          <div class="platforms__segments">
+            {g.data.items.map((u, i) => (
+              <button type="button" class="segment" data-segment data-index={i} aria-label={`Show ${u.name}`}>
+                <span class="segment__fill" data-fill />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  import { initPlatforms } from "@/lib/motion/platforms";
+  document.querySelectorAll<HTMLElement>("[data-platforms]").forEach(initPlatforms);
+</script>
+
+<style>
+  .platforms {
+    --gutter: max(clamp(1rem, 5vw, 4.5rem), calc((100vw - 90rem) / 2));
+    /* wireframe proportions; also capped so heading, card and controls fit one screen */
+    --card-ratio: 1.82;
+    --card-w: min(62vw, 58rem, calc((100svh - 27.5rem) * var(--card-ratio)));
+    --gap: clamp(0.625rem, 1vw, 0.875rem);
+    padding: clamp(4rem, 9vw, 8rem) 0;
+    overflow: clip;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .platforms__heading {
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 1.3rem + 3.6vw, 4.5rem);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+
+  .platforms :global(.line) {
+    display: block;
+    overflow: clip;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  .platforms :global(.line__inner) {
+    display: inline-block;
+  }
+
+
+  /* ---------- Head: title + tabs ---------- */
+  .platforms__head {
+    display: grid;
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+    margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+    padding-inline: var(--gutter);
+  }
+
+  .platforms__head .platforms__heading {
+    display: grid;
+    margin: 0;
+    padding: 0;
+  }
+
+  .platforms__title {
+    grid-area: 1 / 1;
+  }
+
+  .platforms__title:not([data-active]) {
+    visibility: hidden;
+  }
+
+  .platforms__tabs {
+    position: relative;
+    display: inline-flex;
+    justify-self: start;
+    padding: 0.25rem;
+    border-radius: 999px;
+    background: #efede9;
+  }
+
+  .platforms__tab-pill {
+    position: absolute;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    left: 0;
+    width: 0;
+    border-radius: 999px;
+    background: #0c0c0c;
+    box-shadow: 0 6px 14px -8px rgb(0 0 0 / 0.6);
+  }
+
+  .platforms__tab {
+    position: relative;
+    z-index: 1;
+    padding: 0.625rem 1.25rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: rgb(12 12 12 / 0.62);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .platforms__tab:hover {
+    color: #0c0c0c;
+  }
+
+  .platforms__tab[aria-selected="true"] {
+    color: #ffffff;
+  }
+
+  /* no-JS: the pill isn't positioned, so colour the selected tab itself */
+  .platforms:not([data-ready]) .platforms__tab[aria-selected="true"] {
+    background: #0c0c0c;
+  }
+
+  .platforms__tab:focus-visible {
+    outline: 2px solid var(--color-orange, #ff6b00);
+    outline-offset: 2px;
+  }
+
+  .platforms__panel[hidden] {
+    display: none;
+  }
+
+  .platform__game img[alt]:not([alt=""]) {
+    object-position: 50% 40%;
+  }
+
+  /* ---------- Track ---------- */
+  .platforms__track {
+    display: flex;
+    gap: var(--gap);
+    margin: 0;
+    padding: 0 var(--gutter) 0.5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    list-style: none;
+    cursor: grab;
+  }
+
+  .platforms__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .platforms__track[data-dragging] {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+  }
+
+  .platforms__track[data-auto] {
+    scroll-snap-type: none;
+  }
+
+  .platforms__track:focus-visible {
+    outline: 2px solid var(--color-orange, #ff6b00);
+    outline-offset: 4px;
+  }
+
+  .platform {
+    display: grid;
+    flex: 0 0 var(--card-w);
+    gap: 0.875rem;
+    scroll-snap-align: start;
+  }
+
+  /* lets the last card snap to the left edge like the others */
+  .platforms__spacer {
+    flex: 0 0 max(0px, calc(100vw - var(--card-w) - 2 * var(--gutter) - var(--gap)));
+  }
+
+  /* ---------- Card ---------- */
+  .platform__card {
+    position: relative;
+    aspect-ratio: var(--card-ratio);
+    overflow: hidden;
+    border-radius: clamp(1.25rem, 2.2vw, 1.75rem);
+    background: #161616;
+    isolation: isolate;
+    transition: filter 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .platform:not([data-active]) .platform__card {
+    filter: brightness(0.82) saturate(0.85);
+  }
+
+  .platform__games,
+  .platform__game {
+    position: absolute;
+    inset: 0;
+  }
+
+  .platform__game:not([data-index="0"]) {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .platform__game img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 40% 50%;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* light full-card veil over cycling art */
+  .platform__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgb(0 0 0 / 0.3);
+    pointer-events: none;
+  }
+
+  /* bottom black gradient */
+  .platform__card::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 1;
+    height: 45%;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.35) 45%, transparent);
+    pointer-events: none;
+  }
+
+  .platform__more {
+    position: absolute;
+    right: clamp(1rem, 2vw, 1.75rem);
+    bottom: clamp(0.875rem, 1.8vw, 1.5rem);
+    z-index: 2;
+    color: #ffffff;
+    font-size: clamp(0.85rem, 0.8rem + 0.25vw, 1rem);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .game-stub {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 0.625rem;
+    height: 100%;
+    padding: 1.5rem;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 12px, rgb(255 255 255 / 0.035) 12px 13px),
+      radial-gradient(120% 90% at 30% 20%, #2a2a2a, #121212);
+    color: rgb(255 255 255 / 0.62);
+    text-align: center;
+  }
+
+  .platform__game:nth-child(2n) .game-stub {
+    background:
+      repeating-linear-gradient(45deg, transparent 0 12px, rgb(255 107 0 / 0.06) 12px 13px),
+      radial-gradient(120% 90% at 70% 30%, #2e2016, #121212);
+  }
+
+  .game-stub__title {
+    max-width: 22ch;
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 0.9rem + 1.4vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .game-stub__meta {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Footer row: platform (left) + button (right) ---------- */
+  .platform__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 2.75rem;
+  }
+
+  .platform__foot :global(.platform__cta) {
+    flex: none;
+    transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* the waiting cards' buttons stay usable, just quieter */
+  .platform:not([data-active]) .platform__foot :global(.platform__cta) {
+    opacity: 0.45;
+  }
+
+  .platform:not([data-active]) .platform__foot :global(.platform__cta:hover),
+  .platform:not([data-active]) .platform__foot :global(.platform__cta:focus-visible) {
+    opacity: 1;
+  }
+
+  .platform__cta-short {
+    display: none;
+  }
+
+  /* availability tag next to the platform / service name */
+  .platform__status {
+    flex: none;
+    margin-left: 0.7rem;
+    padding: 0.18rem 0.55rem 0.18rem 0.45rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .platform__status::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-orange, #ff6b00);
+  }
+
+  .platforms__region {
+    margin: 0.9rem 0 0;
+    padding-inline: var(--gutter);
+    color: var(--color-text-muted, inherit);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .platform__label {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    height: 2.75rem;
+  }
+
+  .platform__label img {
+    height: 1.75rem;
+    width: auto;
+    max-width: 10rem;
+    object-fit: contain;
+  }
+
+  .platform__label span {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .platform:not([data-active]) .platform__label {
+    opacity: 0.4;
+  }
+
+  .platform__label {
+    transition: opacity 500ms;
+  }
+
+  /* ---------- Controls ---------- */
+  .platforms__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.875rem;
+    margin-top: clamp(1.25rem, 2.5vw, 2rem);
+    padding-inline: var(--gutter);
+  }
+
+  .platforms__play {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #e8e6e1;
+    color: #0c0c0c;
+    cursor: pointer;
+    transition: background-color 200ms, transform 140ms;
+  }
+
+  .platforms__play:hover {
+    background: #dcd9d2;
+  }
+
+  .platforms__play:active {
+    transform: scale(0.94);
+  }
+
+  .platforms__play svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    fill: currentColor;
+  }
+
+  .platforms__play[data-state="playing"] .icon-play,
+  .platforms__play[data-state="paused"] .icon-pause {
+    display: none;
+  }
+
+  .platforms__segments {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .segment {
+    position: relative;
+    width: clamp(2.75rem, 6vw, 4.75rem);
+    height: 1.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .segment::before,
+  .segment__fill {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 999px;
+    translate: 0 -50%;
+  }
+
+  .segment::before {
+    background: #e2dfd9;
+  }
+
+  .segment__fill {
+    background: #0c0c0c;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  .platforms__play:focus-visible,
+  .segment:focus-visible {
+    outline: 2px solid var(--color-orange, #ff6b00);
+    outline-offset: 2px;
+    border-radius: 999px;
+  }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 760px) {
+    .platforms {
+      --card-w: 84vw;
+      --card-ratio: 4 / 3;
+    }
+
+    .platform {
+      gap: 0.625rem;
+    }
+
+    .platform__label span {
+      font-size: 1.125rem;
+    }
+
+    .platform__label img {
+      height: 1.375rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .platform__cta-long {
+      display: none;
+    }
+
+    .platform__cta-short {
+      display: inline;
+    }
+  }
+</style>

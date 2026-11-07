@@ -1,7 +1,43 @@
-# PandaPay Website
+# Astro Starter Kit: Minimal
 
-Marketing and landing site for PandaPay — a WhatsApp-native, AI-powered gaming payments platform for West African users.
+```sh
+bun create astro@latest -- --template minimal
+```
 
-## What PandaPay Is
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-PandaPay lets users buy gaming gift cards and subscriptions by chatting with an AI assistant on WhatsApp. No app install. No checkout flow. Just a conversation. Payment is accepted in Naira (bank transfer), USDC, or cNGN stablecoin. The AI handles product selection, live pricing, payment verification, and instant code delivery end to end.
+## 🚀 Project Structure
+
+Inside of your Astro project, you'll see the following folders and files:
+
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
+
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+
+Any static assets, like images, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `bun install`             | Installs dependencies                            |
+| `bun dev`             | Starts local dev server at `localhost:4321`      |
+| `bun build`           | Build your production site to `./dist/`          |
+| `bun preview`         | Preview your build locally, before deploying     |
+| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `bun astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

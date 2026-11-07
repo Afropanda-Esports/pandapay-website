@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/base-layout.astro";
+import SiteNav from "@/components/site-nav.astro";
+import Hero from "@/components/sections/hero.astro";
+import Features from "@/components/sections/features.astro";
+import Platforms from "@/components/sections/platforms.astro";
+import Flow from "@/components/sections/flow.astro";
+import Faq from "@/components/sections/faq.astro";
+import SiteFooter from "@/components/site-footer.astro";
+---
+
+<BaseLayout>
+  <SiteNav />
+  <main>
+    <Hero />
+    <Features />
+    <Platforms />
+    <Flow />
+    <Faq />
+  </main>
+  <SiteFooter />
+</BaseLayout>

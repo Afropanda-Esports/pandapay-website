@@ -1,0 +1,128 @@
+---
+import "@/styles/global.css";
+import { site, websiteLd } from "@/lib/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  image = site.image,
+  canonical = site.url,
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link
+      rel="preload"
+      href="/fonts/poppins-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/clash-grotesk-medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={site.imageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={site.imageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // UTM attribution
+      (() => {
+        const params = new URLSearchParams(window.location.search);
+        const utm: Record<string, string> = {};
+        for (const key of [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "utm_term",
+          "utm_content",
+        ]) {
+          const value = params.get(key);
+          if (value) utm[key] = value;
+        }
+        if (Object.keys(utm).length) {
+          sessionStorage.setItem("panda_utm", JSON.stringify(utm));
+        }
+      })();
+
+      const getUtm = (): Record<string, string> => {
+        try {
+          return JSON.parse(sessionStorage.getItem("panda_utm") || "{}");
+        } catch {
+          return {};
+        }
+      };
+
+      const push = (payload: Record<string, unknown>) => {
+        const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({ ...payload, ...getUtm() });
+      };
+
+      document.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement | null;
+        const trackEl = target?.closest<HTMLElement>("[data-track]");
+        const waEl = target?.closest<HTMLAnchorElement>('a[href*="wa.me"]');
+
+        if (trackEl) {
+          const { track, ...rest } = trackEl.dataset;
+          push({ event: track, ...rest });
+        }
+
+        if (waEl) {
+          push({
+            event: "checkout_handoff",
+            href: waEl.href,
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

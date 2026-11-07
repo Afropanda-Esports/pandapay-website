@@ -1,0 +1,95 @@
+/* Panda Pay design tokens. */
+:root {
+  /* Primitive colors (from the Panda Pay logo) */
+  --color-orange: #ff6b00;
+  --color-black: #0c0c0c;
+  --color-white: #ffffff;
+
+  /* Semantic colors */
+  --color-text: var(--color-black);
+  --color-surface: var(--color-white);
+  --color-accent: var(--color-orange);
+  --color-focus-ring: var(--color-black);
+
+  /* Lines and tints: black mixed with transparency, so only three colours exist */
+  --color-line: color-mix(in srgb, var(--color-black) 10%, transparent);
+  --color-line-strong: color-mix(in srgb, var(--color-black) 20%, transparent);
+  --color-text-muted: color-mix(in srgb, var(--color-black) 62%, var(--color-white)); /* ≈ 5.4:1 on white */
+  --color-wash: color-mix(in srgb, var(--color-black) 3%, transparent);              /* hover fill */
+  --color-on-accent: var(--color-black);                                             /* text on orange: 6.85:1 */
+
+  /* Inverted (dark) section */
+  --color-line-inverse: color-mix(in srgb, var(--color-white) 14%, transparent);
+  --color-text-muted-inverse: color-mix(in srgb, var(--color-white) 68%, var(--color-black));
+
+  /* Typography */
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Clash Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --text-xs: clamp(0.72rem, 0.69rem + 0.12vw, 0.78rem);
+  --text-sm: clamp(0.82rem, 0.79rem + 0.14vw, 0.9rem);
+  --text-base: clamp(0.96rem, 0.92rem + 0.18vw, 1.05rem);
+  --text-lg: clamp(1.12rem, 1.04rem + 0.35vw, 1.3rem);
+  --text-xl: clamp(1.3rem, 1.18rem + 0.55vw, 1.6rem);
+  --text-2xl: clamp(1.55rem, 1.32rem + 1vw, 2.1rem);
+  --text-3xl: clamp(1.9rem, 1.52rem + 1.65vw, 2.8rem);
+  --text-display: clamp(2.4rem, 1.5rem + 4vw, 5.5rem);
+  --line-height-tight: 1.08;
+  --line-height-heading: 1.2;
+  --line-height-body: 1.6;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-section: clamp(3.5rem, 7vw, 7.5rem);
+
+  /* Layout */
+  --container-sm: 40rem;
+  --container-md: 48rem;
+  --container-lg: 64rem;
+  --container-xl: 80rem;
+  --container-wide: 90rem;
+  --page-gutter: clamp(1rem, 4vw, 3rem);
+  --frame-max: 80rem;                         /* 1280px content column between the rails */
+  --frame-pad: clamp(1.25rem, 4vw, 3rem);     /* inner padding from the rails */
+  --header-h: 4.75rem;                        /* 76px — room around the CTA pill */
+
+  /* Radius and elevation */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgb(12 12 12 / 0.06);
+  --shadow-card: 0 8px 28px rgb(12 12 12 / 0.08);
+  --shadow-popover: 0 16px 48px rgb(12 12 12 / 0.14);
+  --border-btn: 3px solid var(--color-black);
+  --radius-btn: var(--radius-pill); /* fully rounded */
+  --shadow-btn: 4px 4px 0 0 var(--color-black);
+  --shadow-btn-hover: 7px 7px 0 0 var(--color-black);
+  --shadow-btn-active: 2px 2px 0 0 var(--color-black);
+
+  /* Motion */
+  --duration-instant: 100ms;
+  --duration-fast: 160ms;
+  --duration-normal: 260ms;
+  --duration-slow: 420ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+}
