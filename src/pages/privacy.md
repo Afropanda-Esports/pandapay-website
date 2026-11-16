@@ -209,6 +209,8 @@ Our website may use cookies and similar technologies to support functionality, i
 
 Where required, we will request consent before using non-essential cookies or similar technologies.
 
+We use PostHog, hosted in the European Union, for website analytics. Before you make a choice, and if you decline, we only count visits anonymously and without cookies or similar storage on your device. This tells us how many people visit, which pages they view, where they came from and roughly which country they visit from. If you accept, PostHog may also use cookies or similar technologies to measure how you use the site, such as which buttons you select. You can change your choice at any time with "Cookie settings" at the bottom of every page.
+
 You may be able to manage cookies through your browser settings. Disabling certain cookies may affect website functionality.
 
 ## 14. Marketing Communications

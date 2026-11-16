@@ -1,4 +1,5 @@
 ---
+import ConsentBanner from "@/components/consent-banner.astro";
 import "@/styles/global.css";
 import { site, websiteLd } from "@/lib/site";
 
@@ -72,57 +73,11 @@ const {
   <body>
     <slot />
 
+    <ConsentBanner />
+
     <script>
-      // UTM attribution
-      (() => {
-        const params = new URLSearchParams(window.location.search);
-        const utm: Record<string, string> = {};
-        for (const key of [
-          "utm_source",
-          "utm_medium",
-          "utm_campaign",
-          "utm_term",
-          "utm_content",
-        ]) {
-          const value = params.get(key);
-          if (value) utm[key] = value;
-        }
-        if (Object.keys(utm).length) {
-          sessionStorage.setItem("panda_utm", JSON.stringify(utm));
-        }
-      })();
-
-      const getUtm = (): Record<string, string> => {
-        try {
-          return JSON.parse(sessionStorage.getItem("panda_utm") || "{}");
-        } catch {
-          return {};
-        }
-      };
-
-      const push = (payload: Record<string, unknown>) => {
-        const w = window as Window & { dataLayer?: Record<string, unknown>[] };
-        w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({ ...payload, ...getUtm() });
-      };
-
-      document.addEventListener("click", (event) => {
-        const target = event.target as HTMLElement | null;
-        const trackEl = target?.closest<HTMLElement>("[data-track]");
-        const waEl = target?.closest<HTMLAnchorElement>('a[href*="wa.me"]');
-
-        if (trackEl) {
-          const { track, ...rest } = trackEl.dataset;
-          push({ event: track, ...rest });
-        }
-
-        if (waEl) {
-          push({
-            event: "checkout_handoff",
-            href: waEl.href,
-          });
-        }
-      });
+      import { startAnalytics } from "@/lib/analytics/client";
+      startAnalytics();
     </script>
   </body>
 </html>
