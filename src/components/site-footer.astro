@@ -18,7 +18,7 @@ import { site, waLink } from "@/lib/site";
 
 const year = new Date().getFullYear();
 
-type FooterLink = { label: string; href: string; external?: boolean };
+type FooterLink = { label: string; href: string; external?: boolean; consent?: boolean };
 type FooterColumn = { title: string; wide?: boolean; links: FooterLink[] };
 
 const columns: FooterColumn[] = [
@@ -55,6 +55,7 @@ const columns: FooterColumn[] = [
       { label: "Terms", href: "/terms" },
       { label: "Privacy", href: "/privacy" },
       { label: "Refunds", href: "/refunds" },
+      { label: "Cookie settings", href: "/privacy#13-cookies-and-similar-technologies", consent: true },
     ],
   },
 ];
@@ -118,6 +119,7 @@ const columns: FooterColumn[] = [
                     href={l.href}
                     target={l.external ? "_blank" : undefined}
                     rel={l.external ? "noopener" : undefined}
+                    data-consent-open={l.consent ? "" : undefined}
                   >
                     {l.label}
                   </a>

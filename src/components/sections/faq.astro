@@ -28,7 +28,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
     <div class="faq__list">
       {
         faq.items.map((item, i) => (
-          <details class="faq-item" data-faq-item open={i === 0} data-open={i === 0 ? "" : undefined}>
+          <details class="faq-item" data-faq-item data-question={item.id} open={i === 0} data-open={i === 0 ? "" : undefined}>
             <summary class="faq-item__q">
               <span class="faq-item__num" aria-hidden="true">
                 {pad(i + 1)}
