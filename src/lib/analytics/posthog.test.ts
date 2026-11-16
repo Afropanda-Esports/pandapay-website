@@ -6,6 +6,7 @@ describe("posthog config", () => {
     const cfg = posthogConfig("https://eu.i.posthog.com", () => null);
     expect(cfg.api_host).toBe("https://eu.i.posthog.com");
     expect(cfg.cookieless_mode).toBe("on_reject");
+    expect(cfg.opt_out_capturing_by_default).toBe(true);
     expect(cfg.autocapture).toBe(false);
     expect(cfg.disable_session_recording).toBe(true);
     expect(cfg.person_profiles).toBe("identified_only");

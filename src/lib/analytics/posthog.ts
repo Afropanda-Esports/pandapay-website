@@ -11,8 +11,9 @@ type CaptureResult = { event: string } & Record<string, unknown>;
 
 /**
  * PostHog init options.
- * cookieless_mode "on_reject": no cookies or browser storage until opt_in_capturing(); visitors are
- * counted with a hash computed on PostHog's servers. Requires "cookieless tracking" enabled in the
+ * cookieless_mode "on_reject" + opt_out_capturing_by_default: no cookies or browser storage until
+ * opt_in_capturing(); before a choice and after Decline, visitors are counted with a hash computed on
+ * PostHog's servers. Requires "cookieless tracking" enabled in the
  * PostHog project (Settings → Project → Web analytics), otherwise cookieless events are dropped.
  */
 export function posthogConfig(apiHost: string, consent: () => Consent) {
@@ -20,6 +21,9 @@ export function posthogConfig(apiHost: string, consent: () => Consent) {
     api_host: apiHost,
     defaults: "2025-11-30",
     cookieless_mode: "on_reject" as const,
+    // Required for pre-choice counting: with "on_reject" alone, consent stays "pending" and the SDK
+    // sends nothing until Accept/Decline. Opting out by default makes pending visits cookieless.
+    opt_out_capturing_by_default: true,
     person_profiles: "identified_only" as const,
     autocapture: false,
     disable_session_recording: true,
