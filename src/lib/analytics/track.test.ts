@@ -21,15 +21,31 @@ describe("track", () => {
     expect(dataLayer).toEqual([{ event: "cta_primary", location: "hero", utm_source: "linkedin" }]);
   });
 
-  test("named events reach PostHog only when consent is granted", () => {
+  test("before a choice or after decline, anonymous events reach PostHog with anonymous props only", () => {
     for (const c of [null, "denied"] as Consent[]) {
       const { capture, tracker } = setup(c);
-      tracker.track("cta_primary", { location: "hero" });
-      expect(capture).not.toHaveBeenCalled();
+      tracker.track("checkout_handoff", { location: "hero", destination: "whatsapp", ref: "PP-ABC123", email: "a@b.c" });
+      expect(capture).toHaveBeenCalledWith("checkout_handoff", {
+        location: "hero",
+        destination: "whatsapp",
+        utm_source: "linkedin",
+      });
     }
+  });
+
+  test("before a choice or after decline, events off the anonymous list never reach PostHog", () => {
+    for (const c of [null, "denied"] as Consent[]) {
+      const { capture, dataLayer, tracker } = setup(c);
+      tracker.track("x", { location: "hero" });
+      expect(capture).not.toHaveBeenCalled();
+      expect(dataLayer).toHaveLength(1);
+    }
+  });
+
+  test("after accept every event reaches PostHog with all props", () => {
     const { capture, tracker } = setup("granted");
-    tracker.track("cta_primary", { location: "hero" });
-    expect(capture).toHaveBeenCalledWith("cta_primary", { location: "hero", utm_source: "linkedin" });
+    tracker.track("cta_primary", { location: "hero", ref: "PP-ABC123" });
+    expect(capture).toHaveBeenCalledWith("cta_primary", { location: "hero", ref: "PP-ABC123", utm_source: "linkedin" });
   });
 
   test("PostHog missing (blocked) never throws", () => {

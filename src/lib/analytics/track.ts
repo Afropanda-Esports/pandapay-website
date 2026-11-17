@@ -1,4 +1,5 @@
 import type { Consent } from "./consent";
+import { ANONYMOUS_EVENTS, anonymousProps } from "./posthog";
 import type { Utm } from "./utm";
 
 type Props = Record<string, unknown>;
@@ -16,16 +17,19 @@ interface TrackerDeps {
 
 /**
  * One call site for every named event (landing-page-spec §8).
- * `dataLayer` stays vendor-neutral and always receives the event; PostHog only after consent.
+ * `dataLayer` stays vendor-neutral and always receives the event. PostHog gets every event after consent;
+ * before a choice or after Decline, only ANONYMOUS_EVENTS with anonymousProps().
  */
 export function createTracker(deps: TrackerDeps) {
   return {
     track(event: string, props: Props = {}) {
       const payload = { ...props, ...deps.utm() };
       deps.dataLayer().push({ event, ...payload });
-      if (deps.consent() !== "granted") return;
+      const granted = deps.consent() === "granted";
+      if (!granted && !ANONYMOUS_EVENTS.has(event)) return;
       try {
-        deps.posthog()?.capture(event, payload);
+        // Without consent: cookieless count with page context only (MKT-010); no ref or identifiers.
+        deps.posthog()?.capture(event, granted ? payload : anonymousProps(payload));
       } catch {
         // PostHog blocked or failed: never break the page.
       }

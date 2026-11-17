@@ -1,9 +1,10 @@
 /**
  * Browser entry for analytics. Imported once from base-layout.astro.
  *
- * Two tiers (MKT-007):
- *  - before a choice / after Decline: PostHog cookieless page views only (visitor + country counts);
- *  - after Accept: cookies allowed and named events (data-track, checkout_handoff, faq_open) sent.
+ * Two tiers (MKT-007, MKT-009, MKT-010):
+ *  - before a choice / after Decline: PostHog cookieless page views and anonymous named-event counts
+ *    (ANONYMOUS_EVENTS, page-context props only; no ref, no identify);
+ *  - after Accept: cookies allowed and every named event sent with full props.
  * dataLayer always receives named events (vendor-neutral, landing-page-spec §8).
  */
 import { readConsent, safeStorage, shouldShowBanner, writeConsent, type Consent } from "./consent";
