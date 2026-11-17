@@ -1,10 +1,35 @@
 import type { Consent } from "./consent";
 
-/** Events PostHog may send before a choice or after Decline: anonymous, cookieless visit counts only. */
-const COOKIELESS_EVENTS = new Set(["$pageview", "$pageleave"]);
+/**
+ * Events PostHog may send before a choice or after Decline (MKT-010): anonymous, cookieless counts of
+ * visits and of which buttons are selected. A new event is consent-only until it is added here.
+ */
+export const ANONYMOUS_EVENTS: ReadonlySet<string> = new Set([
+  "$pageview",
+  "$pageleave",
+  "cta_primary",
+  "cta_faq",
+  "cta_platform",
+  "cta_lifestyle",
+  "cta_utility",
+  "faq_ask",
+  "faq_open",
+  "checkout_handoff",
+]);
+
+/** Properties an anonymous event may carry: page context and campaign tags, nothing about the person. */
+const ANONYMOUS_PROPS = new Set(["location", "question", "destination", "href"]);
+
+export function anonymousProps(props: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(props)) {
+    if (ANONYMOUS_PROPS.has(key) || key.startsWith("utm_")) out[key] = value;
+  }
+  return out;
+}
 
 export function allowEvent(event: string, consent: Consent): boolean {
-  return consent === "granted" || COOKIELESS_EVENTS.has(event);
+  return consent === "granted" || ANONYMOUS_EVENTS.has(event);
 }
 
 type CaptureResult = { event: string } & Record<string, unknown>;
