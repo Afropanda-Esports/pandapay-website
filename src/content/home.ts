@@ -130,6 +130,15 @@ export interface FaqItem {
 }
 
 export const home = {
+  gotyPromo: {
+    pillLabel: "GTA VI",
+    ariaOpen: "Show Game of the Year offer",
+    ariaClose: "Close Game of the Year offer",
+    cardAlt:
+      "Get your Game of the Year — GTA VI with PSN and Xbox gift cards on Panda Pay Africa",
+    message: "Hi! I'd like a PSN or Xbox gift card for GTA VI.",
+  },
+
   hero: {
     /** Brand tagline from the brief. Stays the page's h1 while the slides rotate. */
     tagline: "Tell it what you want. It handles the rest.",
@@ -138,6 +147,25 @@ export const home = {
     trust: "No app. No dollar card. A real person reviews anything flagged.",
     intervalSeconds: 7,
     slides: [
+      {
+        id: "gta-vi",
+        service: "GTA VI",
+        status: "live",
+        title: "Get your Game of the Year!",
+        subhead: "Grab GTA VI with PSN and Xbox gift cards on Panda Pay Africa.",
+        cta: "Get GTA VI PSN & Xbox cards",
+        message: "Hi! I'd like a PSN or Xbox gift card for GTA VI.",
+        tone: "dark",
+        image: {
+          src: "/images/hero/hero-gta-vi-4k.webp",
+          card: "/images/hero/hero-gta-vi-640w.webp",
+          width: 3840,
+          height: 2160,
+          focal: "50% 50%",
+          focalMobile: "50% 45%",
+          cardFocal: "50% 28%",
+        },
+      },
       {
         id: "intro",
         service: "Panda Pay Africa",
