@@ -8,6 +8,14 @@ interface SlideData {
 }
 
 const MOBILE = "(max-width: 760px)";
+const SHORT_MOBILE = "(max-width: 760px) and (max-height: 700px)";
+const SHORT_DESKTOP = "(max-height: 800px) and (min-width: 761px)";
+const VERY_SHORT_DESKTOP = "(max-height: 640px) and (min-width: 761px)";
+/** Extra yPercent on resting/active cards (matches CSS --sink-boost). */
+const MOBILE_SINK_BOOST = 8;
+const SHORT_MOBILE_SINK_BOOST = 10;
+const SHORT_SINK_BOOST = 10;
+const VERY_SHORT_SINK_BOOST = 14;
 
 /**
  * Hero service carousel.
@@ -62,11 +70,24 @@ export function initHero(root: HTMLElement) {
 
   // ---------- card geometry ----------
   const tablet = window.matchMedia("(max-width: 1100px)");
-  const activeSink = () => (mobile.matches ? 34 : tablet.matches ? 34 : 36);
+  const shortMobile = window.matchMedia(SHORT_MOBILE);
+  const shortDesktop = window.matchMedia(SHORT_DESKTOP);
+  const veryShortDesktop = window.matchMedia(VERY_SHORT_DESKTOP);
+  const sinkBoost = () => {
+    if (veryShortDesktop.matches) return VERY_SHORT_SINK_BOOST;
+    if (shortDesktop.matches) return SHORT_SINK_BOOST;
+    if (shortMobile.matches) return SHORT_MOBILE_SINK_BOOST;
+    if (mobile.matches) return MOBILE_SINK_BOOST;
+    return 0;
+  };
+  const activeSink = () => {
+    const base = mobile.matches || tablet.matches ? 34 : 36;
+    return base + sinkBoost();
+  };
   const restZ = (i: number) => i + 1; // left-to-right overlap
   const ACTIVE_Z = 10;
   const restOf = (i: number) => ({
-    yPercent: Number(cards[i]!.dataset.sink ?? 55),
+    yPercent: Number(cards[i]!.dataset.sink ?? 55) + sinkBoost(),
     rotation: Number(cards[i]!.dataset.rot ?? 0),
   });
 
@@ -319,6 +340,9 @@ export function initHero(root: HTMLElement) {
   };
   mobile.addEventListener("change", replaceCards);
   tablet.addEventListener("change", replaceCards);
+  shortMobile.addEventListener("change", replaceCards);
+  shortDesktop.addEventListener("change", replaceCards);
+  veryShortDesktop.addEventListener("change", replaceCards);
 
   // ---------- go ----------
   fontsReady().then(() => {
