@@ -16,10 +16,11 @@ const variantFor = (tone: string) => (tone === "dark" ? "primary" : "dark");
  * Desktop / tablet use x; mobile uses xm.
  */
 const deck = [
-  { x: "-3%", xm: "-14%", rot: -5, sink: 50 },
-  { x: "22%", xm: "12%", rot: 3, sink: 60 },
-  { x: "47%", xm: "38%", rot: -2, sink: 46 },
-  { x: "72%", xm: "62%", rot: 4, sink: 56 },
+  { x: "-6%", xm: "-18%", rot: -6, sink: 52 },
+  { x: "14%", xm: "2%", rot: 3, sink: 58 },
+  { x: "34%", xm: "22%", rot: -3, sink: 48 },
+  { x: "54%", xm: "42%", rot: 4, sink: 55 },
+  { x: "74%", xm: "62%", rot: -2, sink: 50 },
 ];
 
 const slideData = slides.map((s) => ({
@@ -58,15 +59,37 @@ const slideData = slides.map((s) => ({
             data-tone={s.tone}
             style={`--focal:${s.image.focal};--focal-m:${s.image.focalMobile}`}
           >
-            <img
-              src={s.image.src}
-              alt=""
-              width={s.image.width}
-              height={s.image.height}
-              decoding="async"
-              loading="eager"
-              fetchpriority={i === 0 ? "high" : "low"}
-            />
+            {
+              s.image.srcMobile ? (
+                <picture>
+                  <source
+                    media="(max-width: 760px)"
+                    srcset={s.image.srcMobile}
+                    width={s.image.widthMobile ?? s.image.width}
+                    height={s.image.heightMobile ?? s.image.height}
+                  />
+                  <img
+                    src={s.image.src}
+                    alt=""
+                    width={s.image.width}
+                    height={s.image.height}
+                    decoding="async"
+                    loading="eager"
+                    fetchpriority={i === 0 ? "high" : "low"}
+                  />
+                </picture>
+              ) : (
+                <img
+                  src={s.image.src}
+                  alt=""
+                  width={s.image.width}
+                  height={s.image.height}
+                  decoding="async"
+                  loading="eager"
+                  fetchpriority={i === 0 ? "high" : "low"}
+                />
+              )
+            }
           </div>
         ))
       }
@@ -260,6 +283,12 @@ const slideData = slides.map((s) => ({
     visibility: hidden;
   }
 
+  .hero__bg picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   .hero__bg img {
     width: 100%;
     height: 100%;
@@ -308,7 +337,8 @@ const slideData = slides.map((s) => ({
     justify-content: center;
     gap: clamp(1.25rem, 2.4vh, 2rem);
     width: min(100%, 62rem);
-    padding: 0 clamp(1.25rem, 6vw, 6rem) clamp(7rem, 22vh, 14rem);
+    /* Balanced vertical padding so justify-content:center lands mid-stage */
+    padding: clamp(1.5rem, 4vh, 3rem) clamp(1.25rem, 6vw, 6rem) clamp(2.5rem, 6vh, 4.5rem);
     pointer-events: none;
   }
 
@@ -317,6 +347,7 @@ const slideData = slides.map((s) => ({
   }
 
   .hero__slides {
+    position: relative;
     display: grid;
   }
 
@@ -327,8 +358,18 @@ const slideData = slides.map((s) => ({
     align-content: start;
   }
 
-  .hero__slide:not([data-index="0"]) {
+  /*
+   * Only the active slide sizes the stack. Hidden slides are taken out of flow so
+   * shorter titles re-center mid-stage when the carousel advances.
+   * Markup sets aria-hidden on every non-first slide before JS runs.
+   */
+  .hero__slide[aria-hidden="true"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     visibility: hidden;
+    pointer-events: none;
   }
 
   .hero__title {
@@ -417,6 +458,7 @@ const slideData = slides.map((s) => ({
   }
 
   .hero-card {
+    --sink-boost: 0;
     position: absolute;
     bottom: 0;
     left: var(--x);
@@ -424,7 +466,7 @@ const slideData = slides.map((s) => ({
     width: var(--card-w);
     aspect-ratio: 4 / 3;
     perspective: 1400px;
-    transform: translateY(calc(var(--sink) * 1%)) rotate(calc(var(--rot) * 1deg));
+    transform: translateY(calc((var(--sink) + var(--sink-boost)) * 1%)) rotate(calc(var(--rot) * 1deg));
     transform-origin: 50% 100%;
     pointer-events: auto;
     cursor: pointer;
@@ -433,7 +475,7 @@ const slideData = slides.map((s) => ({
   /* No-JS / pre-intro: first card already up, on top and face-on */
   .hero-card[data-index="0"] {
     z-index: 10;
-    transform: translateY(30%);
+    transform: translateY(calc(30% + var(--sink-boost) * 1%));
   }
 
   .hero-card__inner {
@@ -651,11 +693,21 @@ const slideData = slides.map((s) => ({
     }
 
     .hero__content {
-      padding: 0 1.25rem clamp(6rem, 28vh, 11rem);
+      gap: clamp(0.85rem, 1.6vh + 0.4rem, 1.75rem);
+      /* Top clears GOTY pill; bottom stays modest so the block sits mid-stage */
+      padding: clamp(2.5rem, 6vh, 4rem) 1.25rem clamp(3rem, 8vh, 5rem);
+    }
+
+    .hero__slide {
+      gap: clamp(0.75rem, 1.4vh + 0.35rem, 1.25rem);
     }
 
     .hero__title {
-      font-size: clamp(2.125rem, 1.4rem + 3.6vw, 2.75rem);
+      font-size: clamp(1.85rem, 0.55rem + 5.2vw + 1.2vh, 2.75rem);
+    }
+
+    .hero__subhead {
+      font-size: clamp(0.9375rem, 0.85rem + 0.35vw + 0.2vh, 1.15rem);
     }
 
     .hero__deck {
@@ -663,6 +715,7 @@ const slideData = slides.map((s) => ({
     }
 
     .hero-card {
+      --sink-boost: 8;
       left: var(--x-m);
     }
 
@@ -681,14 +734,67 @@ const slideData = slides.map((s) => ({
     }
   }
 
-  /* Short landscape screens: keep copy compact */
-  @media (max-height: 640px) and (min-width: 761px) {
+  /* Short mobile: shrink copy; keep vertical padding balanced for mid-stage */
+  @media (max-width: 760px) and (max-height: 700px) {
     .hero__content {
-      padding-bottom: clamp(5rem, 18vh, 9rem);
+      gap: clamp(0.65rem, 1.2vh + 0.25rem, 1.1rem);
+      padding: clamp(2rem, 5vh, 3rem) 1.25rem clamp(2.25rem, 6vh, 3.5rem);
+    }
+
+    .hero__slide {
+      gap: clamp(0.55rem, 1vh + 0.2rem, 0.9rem);
     }
 
     .hero__title {
-      font-size: clamp(2.25rem, 1rem + 3vw, 3.5rem);
+      font-size: clamp(1.625rem, 0.7rem + 3.8vw + 0.8vh, 2.25rem);
+    }
+
+    .hero__subhead {
+      font-size: clamp(0.875rem, 0.8rem + 0.25vw + 0.15vh, 1.05rem);
+      line-height: 1.45;
+    }
+
+    .hero__trust {
+      font-size: 0.8125rem;
+    }
+
+    .hero-card {
+      --sink-boost: 10;
+    }
+  }
+
+  /* Short desktop: compact copy and sink cards lower */
+  @media (max-height: 800px) and (min-width: 761px) {
+    .hero__content {
+      gap: clamp(0.9rem, 1.8vh, 1.6rem);
+      padding: clamp(1.25rem, 3vh, 2.25rem) clamp(1.25rem, 6vw, 6rem) clamp(2rem, 5vh, 3.5rem);
+    }
+
+    .hero__title {
+      font-size: clamp(2.125rem, 0.85rem + 2.8vw + 1.2vh, 4.25rem);
+    }
+
+    .hero__subhead {
+      font-size: clamp(0.95rem, 0.88rem + 0.3vw + 0.15vh, 1.2rem);
+    }
+
+    .hero-card {
+      --sink-boost: 10;
+    }
+  }
+
+  /* Very short landscape desktop: tighter still */
+  @media (max-height: 640px) and (min-width: 761px) {
+    .hero__content {
+      padding: clamp(1rem, 2.5vh, 1.75rem) clamp(1.25rem, 6vw, 6rem) clamp(1.5rem, 4vh, 2.75rem);
+    }
+
+    .hero__title {
+      font-size: clamp(2rem, 0.75rem + 2.5vw + 1vh, 3.25rem);
+    }
+
+    .hero-card {
+      --sink-boost: 14;
     }
   }
 
