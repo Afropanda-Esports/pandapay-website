@@ -15,9 +15,13 @@ export interface HeroSlide {
   tone: HeroTone;
   image: {
     src: string;
+    /** Optional portrait/mobile background; used under max-width 760px via <picture>. */
+    srcMobile?: string;
     card: string;
     width: number;
     height: number;
+    widthMobile?: number;
+    heightMobile?: number;
     /** object-position for the full-bleed background (desktop / mobile). */
     focal: string;
     focalMobile: string;
@@ -158,11 +162,14 @@ export const home = {
         tone: "dark",
         image: {
           src: "/images/hero/hero-gta-vi-4k.webp",
+          srcMobile: "/images/hero/hero-gta-vi-portrait.webp",
           card: "/images/hero/hero-gta-vi-640w.webp",
           width: 3840,
           height: 2160,
+          widthMobile: 1080,
+          heightMobile: 1920,
           focal: "50% 50%",
-          focalMobile: "50% 45%",
+          focalMobile: "50% 70%",
           cardFocal: "50% 28%",
         },
       },
